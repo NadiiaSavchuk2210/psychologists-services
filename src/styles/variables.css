@@ -1,0 +1,41 @@
+:root {
+  --color-bg: #fbfbfb;
+  --color-text-primary: #191a15;
+  --color-text-secondary: rgba(25, 26, 21, 0.5);
+
+  --color-primary: #54be96;
+  --color-secondary: rgba(84, 190, 150, 0.2);
+
+  --color-gray: #8a8a89;
+  --color-gray-light: rgba(25, 26, 21, 0.5);
+
+  --color-accent: #38cd3e;
+  --color-badges: #f3f3f3;
+  --color-rating: #ffc531;
+
+  --transition-base: 0.5s ease;
+}
+
+[data-theme='green'] {
+  --color-bg: #fbfbfb;
+  --color-text-primary: #191a15;
+  --color-text-secondary: rgba(25, 26, 21, 0.5);
+  --color-primary: #54be96;
+  --color-secondary: rgba(84, 190, 150, 0.2);
+}
+
+[data-theme='blue'] {
+  --color-bg: #fbfbfb;
+  --color-text-primary: #191a15;
+  --color-text-secondary: rgba(25, 26, 21, 0.5);
+  --color-primary: #3470ff;
+  --color-secondary: rgba(52, 112, 255, 0.2);
+}
+
+[data-theme='orange'] {
+  --color-bg: #fbfbfb;
+  --color-text-primary: #191a15;
+  --color-text-secondary: rgba(25, 26, 21, 0.5);
+  --color-primary: #fc832c;
+  --color-secondary: rgba(252, 131, 44, 0.2);
+}
