@@ -1,11 +1,11 @@
-import ThemeSwitcher from '../features/theme-switcher/ui/ThemeSwitcher';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 
 function App() {
   return (
-    <div>
-      <h1>App</h1>
-      <ThemeSwitcher />
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
