@@ -1,11 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './theme';
+import { queryClient } from './queryClient/queryClient';
 
 interface Props {
   children: React.ReactNode;
 }
-
-const queryClient = new QueryClient();
 
 const Providers = ({ children }: Props) => {
   return (

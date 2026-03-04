@@ -1,4 +1,5 @@
-import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/constants';
+import PsychologistsList from '../../entities/psychologist/ui/PsychologistsList/PsychologistsList';
+import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 
 const PsychologistsPage = () => {
   return (
@@ -19,6 +20,7 @@ const PsychologistsPage = () => {
 
       <main>
         <h1>PsychologistsPage</h1>
+        <PsychologistsList />
       </main>
     </>
   );

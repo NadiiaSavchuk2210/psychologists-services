@@ -1,4 +1,4 @@
-import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/constants';
+import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 
 const HomePage = () => {
   return (

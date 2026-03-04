@@ -1,4 +1,3 @@
-//* SITE METADATA =================================================
 export const SITE_NAME = 'Psychologists-Services';
 export const HOME_PAGE_URL = 'http://localhost:5173';
 
