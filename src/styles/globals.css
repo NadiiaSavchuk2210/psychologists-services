@@ -1,6 +1,5 @@
 html {
-  transition:
-    background-color var(--transition-base),
+  transition: background-color var(--transition-base),
     color var(--transition-base);
 }
 
@@ -42,6 +41,22 @@ button {
   overflow: hidden;
 }
 
-a.active {
-  color: var(--color-primary);
+/* Container */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media screen and (min-width: 1158px) {
+  .container {
+    max-width: 1184px;
+  }
 }

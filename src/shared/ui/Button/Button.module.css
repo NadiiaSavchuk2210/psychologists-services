@@ -1,0 +1,38 @@
+.button {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  border-radius: 30px;
+  transition: background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.primary:hover,
+.primary:focus {
+  background-color: var(--color-tertiary);
+  color: var(--color-bg);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-gray-light-primary);
+}
+
+.outline:hover,
+.outline:focus {
+  border: 1px solid var(--color-tertiary);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

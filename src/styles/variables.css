@@ -1,18 +1,33 @@
 :root {
+  --font-primary: 'Inter', sans-serif;
   --color-bg: #fbfbfb;
   --color-text-primary: #191a15;
   --color-text-secondary: rgba(25, 26, 21, 0.5);
 
   --color-primary: #54be96;
   --color-secondary: rgba(84, 190, 150, 0.2);
+  --color-tertiary: #36a379;
 
   --color-gray: #8a8a89;
-  --color-gray-light: rgba(25, 26, 21, 0.5);
-
+  --color-gray-light-primary: rgba(25, 26, 21, 0.1);
+  --color-gray-light-secondary: rgba(25, 26, 21, 0.1);
   --color-accent: #38cd3e;
   --color-badges: #f3f3f3;
   --color-rating: #ffc531;
   --color-error: #dc3545;
+
+  /* Font size */
+  --font-xs: 0.75rem; /* 12px */
+  --font-sm: 0.875rem; /* 14px */
+  --font-base: 1rem; /* 16px */
+  --font-md: 1.125rem; /* 18px */
+  --font-lg: 1.25rem; /* 20px */
+  --font-xl: 1.5rem; /* 24px */
+  --font-2xl: 2rem; /* 32px */
+  --font-3xl: 2.5rem; /* 40px */
+  --font-4xl: 3rem; /* 48px */
+  --font-5xl: 4rem; /* 64px */
+  --font-6xl: 5rem; /* 80px */
 
   --transition-base: 0.5s ease;
 }
@@ -23,6 +38,7 @@
   --color-text-secondary: rgba(25, 26, 21, 0.5);
   --color-primary: #54be96;
   --color-secondary: rgba(84, 190, 150, 0.2);
+  --color-tertiary: #36a379;
 }
 
 [data-theme='blue'] {
@@ -31,6 +47,7 @@
   --color-text-secondary: rgba(25, 26, 21, 0.5);
   --color-primary: #3470ff;
   --color-secondary: rgba(52, 112, 255, 0.2);
+  --color-tertiary: #255ee8;
 }
 
 [data-theme='orange'] {
@@ -39,4 +56,5 @@
   --color-text-secondary: rgba(25, 26, 21, 0.5);
   --color-primary: #fc832c;
   --color-secondary: rgba(252, 131, 44, 0.2);
+  --color-tertiary: #f37113;
 }

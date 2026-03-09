@@ -10,7 +10,6 @@ import {
   endAt,
   startAt,
 } from 'firebase/database';
-import { db } from '../../../shared/lib/firebase/database';
 import type {
   Psychologist,
   PsychologistDTO,
@@ -25,6 +24,7 @@ import {
   SORT_FIELD_MAP,
   DB_PATHS,
 } from '../../../shared/constants/psychologist';
+import { db } from '../../../shared/lib/config/firebase/database';
 
 export const fetchPsychologists = async ({
   sort,

@@ -1,0 +1,44 @@
+.auth-btns,
+.auth-user {
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.auth-btns {
+  gap: 8px;
+}
+
+.auth-user {
+  gap: 10px;
+}
+
+.btn-login,
+.btn-logout {
+  min-width: 90px;
+  padding: 14px;
+}
+
+.btn-registration {
+  min-width: 111px;
+  padding: 14px;
+}
+
+@media screen and (min-width: 1158px) {
+  .header-logo {
+    margin-right: 130px;
+  }
+
+  .btn-login,
+  .btn-logout {
+    min-width: 124px;
+  }
+
+  .btn-registration {
+    min-width: 171px;
+  }
+
+  .auth-user {
+    gap: 28px;
+  }
+}
