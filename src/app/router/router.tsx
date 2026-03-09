@@ -3,7 +3,7 @@ import { ROUTES } from './routesConfig';
 import publicRoutes from './routes/publicRoutes';
 import privateRoutes from './routes/privateRoutes';
 import ErrorPage from '../../pages/ErrorPage/ErrorPage';
-import MainLayout from '../../layouts/MainLayout/MainLayout';
+import { MainLayout } from '../../shared/ui';
 
 export const routes: RouteObject[] = [
   {
