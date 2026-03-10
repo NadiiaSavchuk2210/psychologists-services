@@ -3,6 +3,7 @@
   --color-bg: #fbfbfb;
   --color-text-primary: #191a15;
   --color-text-secondary: rgba(25, 26, 21, 0.5);
+  --color-text-tertiary: rgba(251, 251, 251, 0.5);
 
   --color-primary: #54be96;
   --color-secondary: rgba(84, 190, 150, 0.2);
@@ -39,6 +40,9 @@
   --color-primary: #54be96;
   --color-secondary: rgba(84, 190, 150, 0.2);
   --color-tertiary: #36a379;
+
+  --color-icon-primary: #4535af;
+  --color-icon-secondary: #fbc75e;
 }
 
 [data-theme='blue'] {
@@ -48,6 +52,9 @@
   --color-primary: #3470ff;
   --color-secondary: rgba(52, 112, 255, 0.2);
   --color-tertiary: #255ee8;
+
+  --color-icon-primary: #54be96;
+  --color-icon-secondary: #fbc75e;
 }
 
 [data-theme='orange'] {
@@ -57,4 +64,7 @@
   --color-primary: #fc832c;
   --color-secondary: rgba(252, 131, 44, 0.2);
   --color-tertiary: #f37113;
+
+  --color-icon-primary: #54be96;
+  --color-icon-secondary: #fbc75e;
 }
