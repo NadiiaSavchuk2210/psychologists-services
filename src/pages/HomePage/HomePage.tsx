@@ -1,4 +1,5 @@
 import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
+import HomeHero from '../../widgets/home-hero/ui/HomeHero';
 
 const HomePage = () => {
   return (
@@ -21,7 +22,7 @@ const HomePage = () => {
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <main>
-        <h1>HomePage</h1>
+        <HomeHero />
       </main>
     </>
   );

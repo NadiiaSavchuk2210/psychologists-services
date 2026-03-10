@@ -1,0 +1,249 @@
+.hero {
+  padding: 50px 0 70px;
+  overflow: hidden;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hero-title {
+  margin-bottom: 20px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: var(--font-3xl);
+  line-height: 1.025;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.hero-title-accent {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.hero-text {
+  margin-bottom: 40px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-md);
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.hero-btn-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  min-width: 235px;
+  height: 60px;
+
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-lg);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-bg);
+}
+
+.hero-btn-link:hover {
+  background-color: var(--color-tertiary);
+}
+
+.hero-btn-icon {
+  width: 14px;
+  height: 16px;
+  fill: var(--color-bg);
+}
+
+.hero-picture-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-img {
+  border-radius: 10px;
+}
+
+.icon-item:first-child {
+  position: absolute;
+  top: 35%;
+  left: -8px;
+}
+.icon-item:last-child {
+  position: absolute;
+  top: 14px;
+  right: -3px;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.icon-wrapper-first {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-icon-primary);
+  transform: rotate(-15deg);
+}
+
+.icon-wrapper-first .icon {
+  width: 10px;
+  height: 17px;
+}
+.icon-wrapper-second {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-icon-secondary);
+  transform: rotate(15deg);
+}
+
+.icon-wrapper-second .icon {
+  width: 25px;
+  height: 25px;
+}
+
+.icon {
+  fill: var(--color-bg);
+}
+
+.hero-stat {
+  padding-left: 32px;
+  position: absolute;
+  bottom: 15px;
+  left: -8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 255px;
+  min-height: 118px;
+  background-color: var(--color-primary);
+  border-radius: 20px;
+}
+
+.hero-stat-icon-wrap {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  background-color: var(--color-bg);
+  border-radius: 13px;
+}
+
+.hero-stat-icon {
+  width: 30px;
+  height: 30px;
+  fill: var(--color-primary);
+}
+
+.hero-stat-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-stat-label {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--font-sm);
+  color: var(--color-text-tertiary);
+}
+
+.hero-stat-value {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--font-xl);
+  color: var(--color-bg);
+}
+
+.hero-decoration {
+  position: fixed;
+  bottom: -5px;
+  right: 0;
+  z-index: -1;
+  border-radius: 100%;
+}
+
+.hero-decoration-icon {
+  width: 1431px;
+  height: 800px;
+  color: var(--color-primary);
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    padding: 78px 0 100px;
+  }
+  .hero-title {
+    font-size: var(--font-5xl);
+  }
+
+  .hero-text {
+    max-width: 578px;
+  }
+
+  .hero-img {
+    min-width: 464px;
+  }
+
+  .icon-item:first-child {
+    top: 35%;
+    left: 103px;
+  }
+
+  .icon-item:last-child {
+    top: 40px;
+    right: 100px;
+  }
+
+  .hero-stat {
+    bottom: 75px;
+    left: 100px;
+    width: 311px;
+  }
+}
+
+@media screen and (min-width: 1158px) {
+  .hero-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 125px;
+  }
+
+  .hero-text-wrap {
+    padding-top: 48px;
+    max-width: 595px;
+  }
+
+  .hero-title {
+    font-size: var(--font-6xl);
+  }
+  .hero-text {
+    max-width: 510px;
+  }
+
+  .icon-item:first-child {
+    top: 30%;
+    left: -34px;
+  }
+
+  .icon-item:last-child {
+    top: 42px;
+    right: -38px;
+  }
+
+  .hero-stat {
+    bottom: 75px;
+    left: -100px;
+  }
+}
