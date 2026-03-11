@@ -116,15 +116,13 @@
 }
 
 .hero-stat {
-  padding-left: 32px;
+  padding: 25px;
   position: absolute;
   bottom: 15px;
   left: -8px;
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 255px;
-  min-height: 118px;
   background-color: var(--color-primary);
   border-radius: 20px;
 }
@@ -207,9 +205,9 @@
   }
 
   .hero-stat {
+    padding: 32px;
     bottom: 75px;
     left: 100px;
-    width: 311px;
   }
 }
 

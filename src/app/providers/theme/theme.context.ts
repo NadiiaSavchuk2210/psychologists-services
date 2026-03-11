@@ -1,5 +1,5 @@
+import { type Theme } from '@features/theme-switcher';
 import { createContext } from 'react';
-import type { Theme } from '../../../features/theme-switcher/model/theme.config';
 
 export interface ThemeContextType {
   theme: Theme;

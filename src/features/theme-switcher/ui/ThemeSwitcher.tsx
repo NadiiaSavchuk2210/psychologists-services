@@ -1,7 +1,7 @@
-import { useTheme } from '../../../app/providers/theme';
-import { THEMES, type Theme } from '../model/theme.config';
+import { useTheme } from '@app/providers/theme';
 import css from './ThemeSwitcher.module.css';
 import clsx from 'clsx';
+import { THEMES, type Theme } from '../model/theme.config';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();

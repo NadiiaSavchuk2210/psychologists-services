@@ -3,13 +3,18 @@ import css from './Header.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
-import { Navbar } from '../../../widgets/navbar';
-
-import { MobileMenu } from '../../../widgets/mobile-menu';
-import { AuthNavigation } from '../../../features/auth-navigation';
-import { Icon } from '../../../shared/ui';
+import { Navbar } from '@widgets/navbar';
+import { Icon } from '@shared/ui';
+import { AuthNavigation } from '@features/auth-navigation';
+import { MobileMenu } from '@widgets/mobile-menu';
+import { useDisclosure } from '@shared/hooks/useToggle';
+import { LoginModal } from '@features/auth/login';
+import { RegisterModal } from '@features/auth/register';
 
 const Header = () => {
+  const loginModal = useDisclosure();
+  const registerModal = useDisclosure();
+
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -32,7 +37,10 @@ const Header = () => {
         {!isMobile && (
           <>
             <Navbar />
-            <AuthNavigation />
+            <AuthNavigation
+              openLogin={loginModal.onOpen}
+              openRegister={registerModal.onOpen}
+            />
           </>
         )}
 
@@ -52,7 +60,23 @@ const Header = () => {
         )}
       </div>
 
-      {isMobile && <MobileMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />}
+      {isMobile && (
+        <MobileMenu
+          isMenuOpen={isMenuOpen}
+          closeMenu={closeMenu}
+          openLogin={loginModal.onOpen}
+          openRegister={registerModal.onOpen}
+        />
+      )}
+
+      <LoginModal
+        isOpen={loginModal.isOpen}
+        onOpenChange={loginModal.onClose}
+      />
+      <RegisterModal
+        isOpen={registerModal.isOpen}
+        onOpenChange={registerModal.onClose}
+      />
     </header>
   );
 };

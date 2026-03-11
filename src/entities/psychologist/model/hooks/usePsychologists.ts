@@ -3,14 +3,15 @@ import {
   useInfiniteQuery,
   type InfiniteData,
 } from '@tanstack/react-query';
-import type {
-  SortOption,
-  FetchResponse,
-  CursorData,
-} from '../types/psychologist';
+import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist';
 import { fetchPsychologists } from '../api';
-import { TIME } from '../../../../shared/constants/time';
-import { PSYCHOLOGISTS_PER_PAGE } from '../../../../shared/constants/psychologist';
+
+import { TIME } from '@shared/constants/time';
+import type {
+  CursorData,
+  FetchResponse,
+  SortOption,
+} from '../types/psychologist';
 
 export function usePsychologistsInfinite(
   sort: SortOption,
