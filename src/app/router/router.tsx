@@ -1,9 +1,9 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 import { ROUTES } from './routesConfig';
+import { MainLayout } from '@shared/ui';
+import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import publicRoutes from './routes/publicRoutes';
 import privateRoutes from './routes/privateRoutes';
-import ErrorPage from '../../pages/ErrorPage/ErrorPage';
-import { MainLayout } from '../../shared/ui';
 
 export const routes: RouteObject[] = [
   {

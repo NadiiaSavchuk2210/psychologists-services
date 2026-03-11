@@ -1,18 +1,16 @@
 import type { RouteObject } from 'react-router-dom';
-import SuspenseWrapper from '../../../shared/ui/SuspenseWrapper/SuspenseWrapper';
-import { ROUTES } from '../routesConfig';
+import SuspenseWrapper from '@shared/ui/SuspenseWrapper/SuspenseWrapper';
 import { lazy } from 'react';
+import { ROUTES } from '../routesConfig';
 
-const HomePage = lazy(() => import('../../../pages/HomePage/HomePage'));
+const HomePage = lazy(() => import('@pages/HomePage/HomePage'));
 const PsychologistsPage = lazy(
-  () => import('../../../pages/PsychologistsPage/PsychologistsPage')
+  () => import('@pages/PsychologistsPage/PsychologistsPage')
 );
 const PsychologistDetailsPage = lazy(
-  () => import('../../../pages/PsychologistDetailsPage/PsychologistDetailsPage')
+  () => import('@pages/PsychologistDetailsPage/PsychologistDetailsPage')
 );
-const NotFoundPage = lazy(
-  () => import('../../../pages/NotFoundPage/NotFoundPage')
-);
+const NotFoundPage = lazy(() => import('@pages/NotFoundPage/NotFoundPage'));
 
 const publicRoutes: RouteObject[] = [
   { index: true, element: SuspenseWrapper(<HomePage />) },

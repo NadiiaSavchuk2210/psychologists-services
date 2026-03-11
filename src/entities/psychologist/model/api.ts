@@ -10,21 +10,22 @@ import {
   endAt,
   startAt,
 } from 'firebase/database';
-import type {
-  Psychologist,
-  PsychologistDTO,
-  SortOption,
-  CursorData,
-  SortableKeys,
-} from './types/psychologist';
+
 import {
   DB_FIELDS,
-  PRICE_LIMITS,
-  SORT_OPTIONS,
-  SORT_FIELD_MAP,
   DB_PATHS,
-} from '../../../shared/constants/psychologist';
-import { db } from '../../../shared/lib/config/firebase/database';
+  PRICE_LIMITS,
+  SORT_FIELD_MAP,
+  SORT_OPTIONS,
+} from '@shared/constants/psychologist';
+import { db } from '@shared/lib/config/firebase/database';
+import type {
+  CursorData,
+  Psychologist,
+  PsychologistDTO,
+  SortableKeys,
+  SortOption,
+} from './types/psychologist';
 
 export const fetchPsychologists = async ({
   sort,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { Theme } from '../../../features/theme-switcher/model/theme.config';
 import { ThemeContext } from './theme.context';
+import type { Theme } from '@features/theme-switcher';
 
 const STORAGE_KEY = 'app-theme';
 

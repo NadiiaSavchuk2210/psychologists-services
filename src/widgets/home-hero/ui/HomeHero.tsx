@@ -1,36 +1,38 @@
-import { Button } from '../../../shared/ui';
 import css from './HomeHero.module.css';
-import { ROUTES } from '../../../app/router/routesConfig';
-import Icon from '../../../shared/ui/Icon/Icon';
-
+import clsx from 'clsx';
+import { Icon, Button } from '@shared/ui';
+import { ROUTES } from '@app/router/routesConfig';
 import heroJpg1x from '../../../assets/images/hero/hero-psychologist.jpg';
 import heroJpg2x from '../../../assets/images/hero/hero-psychologist@2x.jpg';
 import heroWebp1x from '../../../assets/images/hero/hero-psychologist.webp';
 import heroWebp2x from '../../../assets/images/hero/hero-psychologist@2x.webp';
-import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 const HomeHero = () => {
+  const { t } = useTranslation('home');
+
   return (
     <section className={css.hero}>
       <div className={clsx('container', css['hero-container'])}>
         <div className={css['hero-text-wrap']}>
           <h1 className={css['hero-title']}>
-            The road to the
-            <span className={css['hero-title-accent']}> depths</span> of the
-            human soul
+            <span>
+              {t('heroTitlePrefix')}{' '}
+              <span className={css['hero-title-accent']}>
+                {t('heroTitleAccent')}
+              </span>{' '}
+              {t('heroTitleSuffix')}
+            </span>
           </h1>
-          <p className={css['hero-text']}>
-            We help you to reveal your potential, overcome challenges and find a
-            guide in your own life with the help of our experienced
-            psychologists.
-          </p>
+
+          <p className={css['hero-text']}>{t('heroText')}</p>
 
           <Button
             className={css['hero-btn-link']}
             as="link"
             href={ROUTES.PSYCHOLOGISTS}
           >
-            Get started
+            {t('btnLinkGetStarted')}
             <Icon
               className={css['hero-btn-icon']}
               name="icon-arrow"
@@ -97,7 +99,7 @@ const HomeHero = () => {
             </div>
             <div className={css['hero-stat-wrap']}>
               <span className={css['hero-stat-label']}>
-                Experienced psychologists
+                {t('heroStatLabel')}
               </span>
               <span className={css['hero-stat-value']}>15,000</span>
             </div>

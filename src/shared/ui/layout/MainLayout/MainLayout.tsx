@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../../../../widgets/header';
-import { ThemeSwitcher } from '../../../../features/theme-switcher';
+
+import { LanguageSwitcher } from '@shared/ui/LanguageSwitcher/LanguageSwitcher';
+import { Header } from '@widgets/header';
+import { ThemeSwitcher } from '@features/theme-switcher';
 
 const MainLayout = () => {
   return (
@@ -9,6 +11,7 @@ const MainLayout = () => {
       <Outlet />
 
       <ThemeSwitcher />
+      <LanguageSwitcher />
     </>
   );
 };
