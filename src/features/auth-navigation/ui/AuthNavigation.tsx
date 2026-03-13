@@ -2,7 +2,10 @@ import { Button } from '@shared/ui';
 import { useAuthStore } from '@shared/lib/store/authStore';
 import UserProfile from '@entities/user/ui/UserProfile/UserProfile';
 import css from './AuthNavigation.module.css';
-import { useTranslation } from 'react-i18next';
+import { useAuthTranslation, useCommonTranslation } from '@shared/hooks';
+import { useLogoutMutation } from '@features/auth/model/queries';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@app/router/routesConfig';
 
 interface Props {
   openLogin: () => void;
@@ -10,33 +13,58 @@ interface Props {
 }
 
 const AuthNavigation = ({ openLogin, openRegister }: Props) => {
-  const { t } = useTranslation('auth');
-  const { isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
+  const { t: tA } = useAuthTranslation();
+  const { t: tCommon } = useCommonTranslation();
+  const { isAuthenticated, loading } = useAuthStore();
+  const logoutMutation = useLogoutMutation();
+
+  const handleLogout = () => {
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        navigate(ROUTES.HOME, { replace: true });
+      },
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className={css['auth-skeleton']}>
+        <div className={css['skeleton-avatar']} />
+        <div className={css['skeleton-btn']} />
+      </div>
+    );
+  }
 
   return (
     <>
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
         <div className={css['auth-btns']}>
           <Button
             variant="outline"
             className={css['btn-login']}
             onClick={openLogin}
           >
-            {t('login')}
+            {tA('login')}
           </Button>
           <Button
             variant="primary"
             className={css['btn-registration']}
             onClick={openRegister}
           >
-            {t('register')}
+            {tA('register')}
           </Button>
         </div>
       ) : (
         <div className={css['auth-user']}>
           <UserProfile />
-          <Button variant="outline" className={css['btn-logout']}>
-            {t('logout')}
+          <Button
+            onClick={handleLogout}
+            disabled={logoutMutation.isPending}
+            variant="outline"
+            className={css['btn-logout']}
+          >
+            {logoutMutation.isPending ? tCommon('loading') : tA('logout')}
           </Button>
         </div>
       )}

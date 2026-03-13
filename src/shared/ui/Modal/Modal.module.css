@@ -9,13 +9,14 @@
 }
 
 .modal {
-  padding: 64px;
+  padding: 34px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.95);
   background-color: var(--color-bg);
-  max-width: 565px;
+  width: 90%;
+  max-width: 375px;
   border-radius: 30px;
   z-index: var(--z-modal);
 
@@ -83,6 +84,12 @@
 }
 
 @media screen and (min-width: 768px) {
+  .modal {
+    padding: 64px;
+    width: 100%;
+    max-width: 565px;
+  }
+
   .closeIcon {
     width: 32px;
     height: 32px;

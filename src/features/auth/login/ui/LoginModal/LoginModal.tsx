@@ -1,5 +1,6 @@
 import Modal from '@shared/ui/Modal/Modal';
-import { useTranslation } from 'react-i18next';
+import LoginForm from '../LoginForm/LoginForm';
+import { useAuthTranslation } from '@shared/hooks';
 
 interface Props {
   isOpen: boolean;
@@ -7,24 +8,18 @@ interface Props {
 }
 
 const LoginModal = ({ isOpen, onOpenChange }: Props) => {
-  const { t } = useTranslation('auth');
+  const { t } = useAuthTranslation();
 
   return (
     <Modal
       open={isOpen}
-      onOpenChange={isOpen => !isOpen && onOpenChange(false)}
+      onOpenChange={onOpenChange}
       title={t('loginTitle')}
       description={t('loginDescription')}
     >
       <Modal.Body>
-        <form>
-          <input placeholder={t('loginEmailPlaceholder')} type="email" />
-          <input placeholder={t('loginPasswordPlaceholder')} type="password" />
-        </form>
+        <LoginForm onOpenChange={onOpenChange} />
       </Modal.Body>
-      <Modal.Footer>
-        <button>{t('login')}</button>
-      </Modal.Footer>
     </Modal>
   );
 };

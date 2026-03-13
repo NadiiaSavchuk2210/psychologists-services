@@ -34,5 +34,5 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": ["src", "src/shared/lib/i18n/i18next.d.ts"]
 }

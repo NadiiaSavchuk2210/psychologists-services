@@ -2,20 +2,14 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { useTranslation } from 'react-i18next';
 import css from './LanguageSwitcher.module.css';
 
-export function LanguageSwitcher() {
+const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
-
-  const handleChange = (value: string) => {
-    if (value) {
-      i18n.changeLanguage(value);
-    }
-  };
 
   return (
     <ToggleGroup.Root
       type="single"
-      value={i18n.language}
-      onValueChange={handleChange}
+      value={i18n.resolvedLanguage}
+      onValueChange={value => value && i18n.changeLanguage(value)}
       className={css.switcher}
     >
       <ToggleGroup.Item value="en" className={css.item}>
@@ -27,4 +21,6 @@ export function LanguageSwitcher() {
       </ToggleGroup.Item>
     </ToggleGroup.Root>
   );
-}
+};
+
+export default LanguageSwitcher;

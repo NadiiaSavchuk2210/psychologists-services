@@ -1,5 +1,16 @@
 {
   "loading": "Loading...",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "error": "Something went wrong",
+  "success": "successful",
+  "auth": {
+    "email_exists": "User with this email already exists",
+    "weak_password": "Password is too weak (min 6 characters)",
+    "invalid_email": "Invalid email format",
+    "user_not_found": "User not found",
+    "wrong_password": "Wrong password",
+    "too_many_requests": "Too many attempts. Try again later",
+    "network_error": "Network error. Check your connection"
+  }
 }

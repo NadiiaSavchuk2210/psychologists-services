@@ -8,7 +8,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './styles/index.css';
-import './shared/i18n/i18n.ts';
+import './shared/lib/i18n/i18n.ts';
 import App from '@app/App';
 
 createRoot(document.getElementById('root')!).render(

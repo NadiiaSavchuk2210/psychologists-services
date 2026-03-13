@@ -1,0 +1,88 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-sm);
+}
+
+.inputWrapper {
+  padding-left: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-gray-light-secondary);
+  border-radius: 12px;
+  transition: border-color var(--transition-base);
+}
+
+.inputWrapper:hover {
+  border-color: var(--color-tertiary);
+}
+
+.inputWrapper:focus-within {
+  border-color: var(--color-tertiary);
+}
+
+.input {
+  padding: 16px 18px;
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.input::placeholder {
+  color: var(--color-tertiary);
+  opacity: 1;
+}
+
+.input:-webkit-autofill::placeholder {
+  color: var(--color-tertiary);
+}
+
+.input:-ms-input-placeholder {
+  color: var(--color-tertiary);
+}
+
+.input::-moz-placeholder {
+  color: var(--color-tertiary);
+  opacity: 1;
+}
+
+.password .input {
+  padding-right: 56px;
+}
+
+.eyeButton {
+  padding: 0;
+  position: absolute;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-base);
+}
+
+.eyeButton:hover {
+  color: var(--color-primary);
+}
+
+.inputError {
+  border-color: var(--color-error);
+}

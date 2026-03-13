@@ -1,8 +1,9 @@
 import { redirect } from 'react-router-dom';
 import { ROUTES } from '../routesConfig';
+import { useAuthStore } from '@shared/lib/store/authStore';
 
 export async function requireAuth() {
-  const isAuthenticated = false; // TODO: ⏳ Temporary hardcoded value for testing. Replace with real auth check (localStorage/token/API)
+  const { isAuthenticated } = useAuthStore.getState();
 
   if (!isAuthenticated) {
     throw redirect(ROUTES.HOME);

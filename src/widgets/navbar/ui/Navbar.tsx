@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import css from './Navbar.module.css';
 import clsx from 'clsx';
 import { ROUTES } from '@app/router/routesConfig';
-import { useTranslation } from 'react-i18next';
+import { useNavbarTranslation } from '@shared/hooks';
 
 interface Props {
   closeMenu?: () => void;
@@ -16,7 +16,7 @@ const navLinks = [
 ];
 
 const Navbar = ({ closeMenu, isMobileMenu }: Props) => {
-  const { t } = useTranslation('navbar');
+  const { t } = useNavbarTranslation();
 
   return (
     <nav className={clsx(css['nav'], isMobileMenu && css['mobile-menu-nav'])}>

@@ -6,10 +6,10 @@ import heroJpg1x from '../../../assets/images/hero/hero-psychologist.jpg';
 import heroJpg2x from '../../../assets/images/hero/hero-psychologist@2x.jpg';
 import heroWebp1x from '../../../assets/images/hero/hero-psychologist.webp';
 import heroWebp2x from '../../../assets/images/hero/hero-psychologist@2x.webp';
-import { useTranslation } from 'react-i18next';
+import { useHomeTranslation } from '@shared/hooks';
 
 const HomeHero = () => {
-  const { t } = useTranslation('home');
+  const { t } = useHomeTranslation();
 
   return (
     <section className={css.hero}>
