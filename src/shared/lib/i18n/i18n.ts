@@ -9,12 +9,20 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    ns: ['common', 'auth', 'navbar'],
+    supportedLngs: ['en', 'uk'],
+    load: 'languageOnly',
+    ns: ['common', 'auth', 'navbar', 'validation', 'home'],
     defaultNS: 'common',
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    interpolation: { escapeValue: false },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
+    },
+    interpolation: {
+      escapeValue: false,
+    },
   });
 
 export default i18n;

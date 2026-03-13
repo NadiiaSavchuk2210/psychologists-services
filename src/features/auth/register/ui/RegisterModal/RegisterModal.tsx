@@ -1,5 +1,6 @@
 import Modal from '@shared/ui/Modal/Modal';
-import { useTranslation } from 'react-i18next';
+import RegisterForm from '../RegisterForm/RegisterForm';
+import { useAuthTranslation } from '@shared/hooks';
 
 interface Props {
   isOpen: boolean;
@@ -7,27 +8,18 @@ interface Props {
 }
 
 const RegisterModal = ({ isOpen, onOpenChange }: Props) => {
-  const { t } = useTranslation('auth');
+  const { t } = useAuthTranslation();
 
   return (
     <Modal
       open={isOpen}
-      onOpenChange={isOpen => !isOpen && onOpenChange(false)}
+      onOpenChange={onOpenChange}
       title={t('registerTitle')}
       description={t('registerDescription')}
     >
       <Modal.Body>
-        <form>
-          <input placeholder={t('registerEmailPlaceholder')} type="email" />
-          <input
-            placeholder={t('registerPasswordPlaceholder')}
-            type="password"
-          />
-        </form>
+        <RegisterForm onOpenChange={onOpenChange} />
       </Modal.Body>
-      <Modal.Footer>
-        <button>{t('registerButton')}</button>
-      </Modal.Footer>
     </Modal>
   );
 };

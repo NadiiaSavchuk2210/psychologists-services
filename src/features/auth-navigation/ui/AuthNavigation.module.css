@@ -24,6 +24,39 @@
   padding: 14px;
 }
 
+.auth-skeleton {
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-gray-light-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-btn {
+  min-width: 90px;
+  height: 52px;
+  border-radius: 30px;
+  background: var(--color-gray-light-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 @media screen and (min-width: 1158px) {
   .header-logo {
     margin-right: 130px;
@@ -39,6 +72,14 @@
   }
 
   .auth-user {
+    gap: 28px;
+  }
+
+  .skeleton-btn {
+    min-width: 124px;
+  }
+
+  .auth-skeleton {
     gap: 28px;
   }
 }

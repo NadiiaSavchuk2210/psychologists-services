@@ -1,15 +1,25 @@
-import css from './UserProfile.module.css'
-import Icon from '../../../../shared/ui/Icon/Icon';
+import { Icon } from '@shared/ui';
+import css from './UserProfile.module.css';
+import { useAuthStore } from '@shared/lib/store/authStore';
+import { getUserName } from '@entities/user/utils/getUserName';
 
 const UserProfile = () => {
-    return (
-        <div className={css.user}>
-            <div className={css["user-avatar"]}>
-                <Icon name='icon-user' className={css["user-avatar-icon"]} width={24} height={24} />
-            </div>
-            <p className={css["user-name"]}>UserName</p>
-        </div>
-    )
-}
+  const { user } = useAuthStore();
+  const userName = getUserName(user);
 
-export default UserProfile
+  return (
+    <div className={css.user}>
+      <div className={css['user-avatar']}>
+        <Icon
+          name="icon-user"
+          className={css['user-avatar-icon']}
+          width={24}
+          height={24}
+        />
+      </div>
+      <p className={css['user-name']}>{userName}</p>
+    </div>
+  );
+};
+
+export default UserProfile;

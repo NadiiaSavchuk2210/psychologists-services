@@ -6,7 +6,7 @@ type AuthStore = {
   user: User | null;
   loading: boolean;
   setUser: (user: User | null) => void;
-  clearIsAuthenticated: () => void;
+  clearAuth: () => void;
   setLoading: (value: boolean) => void;
 };
 
@@ -14,11 +14,21 @@ export const useAuthStore = create<AuthStore>()(set => ({
   isAuthenticated: false,
   user: null,
   loading: true,
-  setUser: (user: User | null) => {
-    set(() => ({ user, isAuthenticated: true }));
+
+  setUser: user => {
+    set({
+      user,
+      isAuthenticated: !!user,
+      loading: false,
+    });
   },
-  clearIsAuthenticated: () => {
-    set(() => ({ user: null, isAuthenticated: false }));
+
+  clearAuth: () => {
+    set({
+      user: null,
+      isAuthenticated: false,
+      loading: false,
+    });
   },
   setLoading: loading => set({ loading }),
 }));

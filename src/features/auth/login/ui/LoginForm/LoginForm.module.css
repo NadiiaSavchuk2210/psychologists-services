@@ -1,0 +1,24 @@
+.login-form__inputs {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-form__input {
+  width: 100%;
+}
+.login-form__input,
+.login-form__input::placeholder {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.login-form__btn {
+  padding: 16px;
+  width: 100%;
+}

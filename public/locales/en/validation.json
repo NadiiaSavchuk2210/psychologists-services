@@ -1,0 +1,10 @@
+{
+  "fields": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password"
+  },
+  "required": "{{field}} is required",
+  "min": "{{field}} must be at least {{min}} characters",
+  "invalid_email": "Invalid email"
+}
