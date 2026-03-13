@@ -19,7 +19,7 @@ export const useRegisterMutation = () => {
       setUser(data.user);
       toast.success(tA('toastRegisterSuccess'), {
         icon: '✅',
-        duration: TIME.MINUTE * 4,
+        duration: TIME.SECOND * 4,
       });
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
@@ -45,7 +45,7 @@ export const useLoginMutation = () => {
       setUser(data.user);
       toast.success(tA('toastLoginSuccess'), {
         icon: '🔓',
-        duration: TIME.MINUTE * 4,
+        duration: TIME.SECOND * 4,
       });
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
@@ -68,7 +68,7 @@ export const useLogoutMutation = () => {
       clearAuth();
       toast.success(tA('toastLogoutSuccess'), {
         icon: '👋',
-        duration: TIME.MINUTE * 4,
+        duration: TIME.SECOND * 4,
       });
       queryClient.clear();
     },
