@@ -1,0 +1,8 @@
+.card {
+  padding: 24px;
+  border-radius: 24px;
+  background: var(--color-bg);
+  overflow: hidden;
+
+  width: 100%;
+}

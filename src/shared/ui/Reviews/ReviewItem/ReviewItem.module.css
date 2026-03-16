@@ -1,0 +1,23 @@
+.reviewHeader {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewerName {
+  margin-bottom: 4px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.reviewText {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-secondary);
+}

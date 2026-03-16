@@ -1,0 +1,17 @@
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-secondary);
+  border-radius: 100px;
+}
+
+.avatarLetter {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-lg);
+  line-height: 1;
+  color: var(--color-primary);
+}

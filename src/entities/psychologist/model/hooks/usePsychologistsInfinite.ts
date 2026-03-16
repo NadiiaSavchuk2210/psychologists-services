@@ -1,15 +1,17 @@
 import {
-  keepPreviousData,
   useInfiniteQuery,
+  keepPreviousData,
   type InfiniteData,
 } from '@tanstack/react-query';
-import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist';
-import { fetchPsychologists } from '../api';
 
+import { fetchPsychologists } from '../api/fetchPsychologists';
+
+import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist';
 import { TIME } from '@shared/constants/time';
+
 import type {
   CursorData,
-  FetchResponse,
+  FetchResponseDTO,
   SortOption,
 } from '../types/psychologist';
 
@@ -18,22 +20,27 @@ export function usePsychologistsInfinite(
   pageSize: number = PSYCHOLOGISTS_PER_PAGE
 ) {
   return useInfiniteQuery<
-    FetchResponse,
+    FetchResponseDTO,
     Error,
-    InfiniteData<FetchResponse>,
+    InfiniteData<FetchResponseDTO>,
     [string, SortOption, number],
     CursorData | null
   >({
     queryKey: ['psychologists', sort, pageSize],
+
     queryFn: ({ pageParam }) =>
       fetchPsychologists({
         sort,
         pageSize,
         cursor: pageParam,
       }),
+
     initialPageParam: null,
+
     getNextPageParam: lastPage => lastPage.nextCursor ?? undefined,
+
     placeholderData: keepPreviousData,
+
     staleTime: TIME.MINUTE * 5,
   });
 }

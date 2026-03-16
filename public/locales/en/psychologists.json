@@ -1,0 +1,20 @@
+{
+  "psychologist": "Psychologist",
+  "rating": "Rating: {{rating}}",
+  "reviews": "Reviews",
+  "readMore": "Read more",
+  "collapse": "Collapse",
+  "makeAppointment": "Make an appointment",
+  "loadMore": "Load more",
+  "loadingMore": "Loading...",
+  "noReviews": "No reviews yet",
+  "experience": "<label>Experience:</label> <value>{{experience}}</value>",
+  "license": "<label>License:</label> <value>{{license}}</value>",
+  "specialization": "<label>Specialization:</label> <value>{{specialization}}</value>",
+  "initialConsultation": "<label>Initial consultation:</label> <value>{{consultation}}</value>",
+  "pricePerHour": "Price / 1 hour: <price>{{price}}$</price>",
+  "title": "Psychologists",
+  "listTitle": "Psychologists list",
+  "emptyTitle": "No psychologists found",
+  "emptyDescription": "Try changing the filters or come back later"
+}

@@ -1,0 +1,38 @@
+.avatarContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--color-secondary);
+  border-radius: 30px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 15px;
+}
+
+.avatarOnlineIndicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-bg);
+  border-radius: 100%;
+}
+
+.avatarOnlineIndicator::before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: var(--color-accent);
+}

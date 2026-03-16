@@ -7,58 +7,39 @@ import {
   limitToFirst,
   endBefore,
   limitToLast,
-  endAt,
-  startAt,
 } from 'firebase/database';
 
+import { db } from '@shared/lib/config/firebase/database';
+
 import {
-  DB_FIELDS,
   DB_PATHS,
-  PRICE_LIMITS,
   SORT_FIELD_MAP,
   SORT_OPTIONS,
 } from '@shared/constants/psychologist';
-import { db } from '@shared/lib/config/firebase/database';
 import type {
   CursorData,
-  Psychologist,
+  FetchResponseDTO,
   PsychologistDTO,
-  SortableKeys,
-  SortOption,
-} from './types/psychologist';
+} from '../types/psychologist';
 
 export const fetchPsychologists = async ({
   sort,
   pageSize,
   cursor,
 }: {
-  sort: SortOption;
+  sort: string;
   pageSize: number;
   cursor: CursorData | null;
-}) => {
+}): Promise<FetchResponseDTO> => {
   const dbRef = ref(db, DB_PATHS.PSYCHOLOGISTS);
-  const sortField = SORT_FIELD_MAP[sort] as SortableKeys;
+  const sortField = SORT_FIELD_MAP[sort];
 
   const isDescending =
     sort === SORT_OPTIONS.Z_A || sort === SORT_OPTIONS.POPULAR;
-  const isPriceFilter =
-    sort === SORT_OPTIONS.CHEAP || sort === SORT_OPTIONS.EXPENSIVE;
 
   let apiQuery;
 
-  if (isPriceFilter) {
-    const isCheap = sort === SORT_OPTIONS.CHEAP;
-    apiQuery = query(
-      dbRef,
-      orderByChild(DB_FIELDS.PRICE),
-      cursor
-        ? startAfter(cursor.value, cursor.id)
-        : isCheap
-          ? endAt(PRICE_LIMITS.CHEAP_MAX)
-          : startAt(PRICE_LIMITS.EXPENSIVE_MIN),
-      limitToFirst(pageSize)
-    );
-  } else if (isDescending) {
+  if (isDescending) {
     apiQuery = query(
       dbRef,
       orderByChild(sortField),
@@ -75,26 +56,32 @@ export const fetchPsychologists = async ({
   }
 
   const snapshot = await get(apiQuery);
-  const items: Psychologist[] = [];
+
+  const items: PsychologistDTO[] = [];
 
   snapshot.forEach(child => {
-    items.push({ ...(child.val() as PsychologistDTO), id: child.key! });
+    items.push({
+      ...(child.val() as PsychologistDTO),
+      id: child.key!,
+    });
   });
 
-  if (isDescending) {
-    items.reverse();
-  }
+  if (isDescending) items.reverse();
 
   let nextCursor: CursorData | null = null;
+
   if (items.length === pageSize) {
     const lastItem = items[items.length - 1];
-    const currentSortField = isPriceFilter ? DB_FIELDS.PRICE : sortField;
-    const value = lastItem[currentSortField as keyof Psychologist];
+    const value = lastItem[sortField as keyof PsychologistDTO];
 
     if (typeof value === 'string' || typeof value === 'number') {
-      nextCursor = { value, id: lastItem.id };
+      nextCursor = { value, id: lastItem.id! };
     }
   }
 
-  return { items, nextCursor, hasMore: !!nextCursor };
+  return {
+    items,
+    nextCursor,
+    hasMore: !!nextCursor,
+  };
 };

@@ -1,0 +1,55 @@
+.badge.primary {
+  background-color: var(--color-badges);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 240px;
+  overflow: hidden;
+  height: 40px;
+}
+
+.badgeContent {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.badgeContent::-webkit-scrollbar {
+  height: 2px;
+}
+
+.badgeContent::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.badgeContent:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+  fill: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+.badgeText {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--color-gray);
+
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .badge.primary {
+    max-width: 447px;
+  }
+}

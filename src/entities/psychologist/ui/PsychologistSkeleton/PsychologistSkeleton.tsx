@@ -1,48 +1,53 @@
-const PsychologistSkeleton = () => (
-  <div
-    style={{
-      padding: '25px',
-      border: '1px solid #e9ecef',
-      borderRadius: '16px',
-      background: 'white',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-      marginBottom: '20px',
-    }}
-  >
-    <div
-      className="skeleton-line"
-      style={{ width: '60%', height: '24px', marginBottom: '15px' }}
-    />
+import { motion, type Variants } from 'framer-motion';
+import clsx from 'clsx';
+import css from './PsychologistSkeleton.module.css';
 
-    <div style={{ display: 'flex', gap: '20px' }}>
-      <div
-        className="skeleton-line"
-        style={{ width: '80px', height: '18px' }}
-      />
-      <div
-        className="skeleton-line"
-        style={{ width: '60px', height: '18px' }}
-      />
-      <div
-        className="skeleton-line"
-        style={{ width: '120px', height: '18px' }}
-      />
-    </div>
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: 'easeOut' },
+  },
+};
 
-    <style>{`
-      .skeleton-line {
-        background: #eee;
-        background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-        border-radius: 4px;
-        background-size: 200% 100%;
-        animation: shimmer 1.5s linear infinite;
-      }
+const PsychologistSkeleton = () => {
+  return (
+    <motion.div
+      className={clsx(css.skeletonCard, 'container')}
+      variants={itemVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className={clsx(css.avatar, css.shimmer)} />
 
-      @keyframes shimmer {
-        to { background-position-x: -200%; }
-      }
-    `}</style>
-  </div>
-);
+      <div className={css.content}>
+        <div className={css.topRow}>
+          <div className={css.nameRow}>
+            <div className={clsx(css.shimmer, css.nameLine)} />
+            <div className={clsx(css.shimmer, css.titleLine)} />
+          </div>
+
+          <div className={css.ratingRow}>
+            <div className={clsx(css.shimmer, css.ratingBadge)} />
+            <div className={clsx(css.shimmer, css.priceBadge)} />
+          </div>
+        </div>
+
+        <div className={css.metaRow}>
+          <div className={clsx(css.shimmer, css.specialtyLine)} />
+          <div className={clsx(css.shimmer, css.consultLine)} />
+        </div>
+
+        <div className={css.description}>
+          <div className={clsx(css.shimmer, css.descLine1)} />
+          <div className={clsx(css.shimmer, css.descLine2)} />
+        </div>
+
+        <div className={clsx(css.shimmer, css.readMoreButton)} />
+      </div>
+    </motion.div>
+  );
+};
 
 export default PsychologistSkeleton;

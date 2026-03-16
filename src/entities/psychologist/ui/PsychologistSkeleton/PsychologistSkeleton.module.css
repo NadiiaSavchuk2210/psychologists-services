@@ -1,0 +1,155 @@
+.skeletonCard {
+  padding: 24px;
+  border-radius: 24px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nameRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nameLine {
+  width: 200px;
+  height: 20px;
+}
+
+.titleLine {
+  width: 160px;
+  height: 16px;
+}
+
+.ratingBadge {
+  width: 80px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+.priceBadge {
+  width: 100px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+.specialtyLine {
+  width: 100%;
+  height: 18px;
+}
+
+.consultLine {
+  width: 85%;
+  height: 18px;
+}
+
+.descLine1 {
+  width: 100%;
+  height: 16px;
+}
+
+.descLine2 {
+  width: 90%;
+  height: 16px;
+}
+
+.readMoreButton {
+  width: 120px;
+  height: 20px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+.shimmer {
+  background: linear-gradient(110deg, #f0f0f0 8%, #f8f8f8 18%, #f0f0f0 33%);
+  background-size: 200% 100%;
+  animation: shimmerAnim 1.6s linear infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmerAnim {
+  0% {
+    background-position-x: 200%;
+  }
+  100% {
+    background-position-x: -200%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .skeletonCard {
+    flex-direction: row;
+    padding: 28px;
+    gap: 20px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+
+  .content {
+    gap: 12px;
+  }
+
+  .topRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .nameRow {
+    flex: 1;
+  }
+
+  .ratingRow {
+    flex-shrink: 0;
+  }
+}

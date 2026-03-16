@@ -11,7 +11,15 @@ i18n
     fallbackLng: 'en',
     supportedLngs: ['en', 'uk'],
     load: 'languageOnly',
-    ns: ['common', 'auth', 'navbar', 'validation', 'home'],
+    ns: [
+      'common',
+      'a11y',
+      'auth',
+      'navbar',
+      'validation',
+      'home',
+      'psychologists',
+    ],
     defaultNS: 'common',
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',

@@ -1,0 +1,21 @@
+.badgesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 4px;
+}
+
+.badgeTitle {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--color-gray);
+}
+
+.badgeValue {
+  color: var(--color-text-primary);
+}
+
+.badgeItem {
+  max-width: 100%;
+}

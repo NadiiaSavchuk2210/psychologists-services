@@ -10,7 +10,12 @@ const privateRoutes: RouteObject[] = [
   {
     path: ROUTES.FAVORITES,
     loader: requireAuth,
-    element: SuspenseWrapper(<FavoritesPage />),
+    children: [
+      {
+        path: ROUTES.FAVORITES,
+        element: SuspenseWrapper(<FavoritesPage />),
+      },
+    ],
   },
 ];
 
