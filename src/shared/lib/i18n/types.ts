@@ -43,6 +43,16 @@ export interface ICommonTranslations {
     too_many_requests: string;
     network_error: string;
   };
+  homeLink: string;
+  openMenu: string;
+  closeMenu: string;
+}
+
+export interface IA11yTranslations {
+  favoriteAdd: string;
+  favoriteRemove: string;
+  modalClose: string;
+  expand: string;
 }
 
 export interface INavbarTranslations {
@@ -60,10 +70,33 @@ export interface IHomeTranslations {
   btnLinkGetStarted: string;
 }
 
+export interface IPsychologistsTranslations {
+  psychologist: string;
+  rating: string;
+  reviews: string;
+  readMore: string;
+  collapse: string;
+  pricePerHour: string;
+  noReviews: string;
+  experience: string;
+  license: string;
+  specialization: string;
+  initialConsultation: string;
+  title: string;
+  listTitle: string;
+  makeAppointment: string;
+  loadMore: 'Load more';
+  loadingMore: 'Loading...';
+  emptyTitle: 'No psychologists found';
+  emptyDescription: 'Try changing the filters or come back later';
+}
+
 export interface ILocales {
+  common: ICommonTranslations;
+  a11y: IA11yTranslations;
   auth: IAuthTranslations;
   validation: IValidationTranslations;
-  common: ICommonTranslations;
   navbar: INavbarTranslations;
   home: IHomeTranslations;
+  psychologists: IPsychologistsTranslations;
 }

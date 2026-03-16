@@ -3,15 +3,18 @@ import css from './ErrorMessage.module.css';
 
 interface Props {
   error?: FieldError;
+  message?: string;
   id?: string;
 }
 
-const ErrorMessage = ({ error, id }: Props) => {
-  if (!error) return null;
+const ErrorMessage = ({ error, message, id }: Props) => {
+  const text = error?.message || message;
+
+  if (!text) return null;
 
   return (
     <p id={id} role="alert" className={css.error}>
-      {error.message}
+      {text}
     </p>
   );
 };

@@ -1,0 +1,9 @@
+.trigger {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--color-text-primary);
+}

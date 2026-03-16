@@ -7,15 +7,18 @@ import { Navbar } from '@widgets/navbar';
 import { Icon } from '@shared/ui';
 import { AuthNavigation } from '@features/auth-navigation';
 import { MobileMenu } from '@widgets/mobile-menu';
-import { useDisclosure } from '@shared/hooks/useToggle';
+import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { LoginModal } from '@features/auth/login';
 import { RegisterModal } from '@features/auth/register';
+import { useCommonTranslation } from '@shared/hooks';
 
 const Header = () => {
+  const { t } = useCommonTranslation();
+
   const loginModal = useDisclosure();
   const registerModal = useDisclosure();
 
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const openMenu = () => setIsMenuOpen(true);
@@ -27,7 +30,7 @@ const Header = () => {
         <Link
           className={css['header-logo']}
           to="/"
-          aria-label="Psychologists Services Home"
+          aria-label={t('homeLink')}
           onClick={closeMenu}
         >
           <span className={css['header-logo-accent']}>psychologists.</span>
@@ -55,6 +58,7 @@ const Header = () => {
               className={css['burger-icon']}
               width={24}
               height={24}
+              aria-label={t('openMenu')}
             />
           </button>
         )}

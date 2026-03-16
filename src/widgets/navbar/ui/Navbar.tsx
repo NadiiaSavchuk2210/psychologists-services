@@ -3,6 +3,7 @@ import css from './Navbar.module.css';
 import clsx from 'clsx';
 import { ROUTES } from '@app/router/routesConfig';
 import { useNavbarTranslation } from '@shared/hooks';
+import { useAuthStore } from '@shared/lib/store/authStore';
 
 interface Props {
   closeMenu?: () => void;
@@ -10,13 +11,18 @@ interface Props {
 }
 
 const navLinks = [
-  { to: ROUTES.HOME, label: 'home' },
-  { to: ROUTES.PSYCHOLOGISTS, label: 'psychologists' },
-  { to: ROUTES.FAVORITES, label: 'favorites' },
+  { to: ROUTES.HOME, label: 'home', isPrivate: false },
+  { to: ROUTES.PSYCHOLOGISTS, label: 'psychologists', isPrivate: false },
+  { to: ROUTES.FAVORITES, label: 'favorites', isPrivate: true },
 ];
 
 const Navbar = ({ closeMenu, isMobileMenu }: Props) => {
   const { t } = useNavbarTranslation();
+  const { isAuthenticated } = useAuthStore();
+
+  const filteredLinks = navLinks.filter(
+    ({ isPrivate }) => !isPrivate || isAuthenticated
+  );
 
   return (
     <nav className={clsx(css['nav'], isMobileMenu && css['mobile-menu-nav'])}>
@@ -26,7 +32,7 @@ const Navbar = ({ closeMenu, isMobileMenu }: Props) => {
           isMobileMenu && css['mobile-menu-nav-list']
         )}
       >
-        {navLinks.map(({ to, label }) => (
+        {filteredLinks.map(({ to, label }) => (
           <li
             key={to}
             className={clsx(

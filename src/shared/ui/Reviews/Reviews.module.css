@@ -1,0 +1,13 @@
+.reviewsList {
+  padding-top: 48px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+@media screen and (min-width: 768px) {
+  .reviewsList {
+    margin-bottom: 40px;
+  }
+}

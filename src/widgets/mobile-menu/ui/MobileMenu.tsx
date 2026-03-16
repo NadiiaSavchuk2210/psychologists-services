@@ -3,6 +3,7 @@ import css from './MobileMenu.module.css';
 import { Icon } from '@shared/ui';
 import { Navbar } from '@widgets/navbar';
 import { AuthNavigation } from '@features/auth-navigation';
+import { useCommonTranslation } from '@shared/hooks';
 
 interface Props {
   isMenuOpen: boolean;
@@ -17,10 +18,20 @@ const MobileMenu = ({
   openLogin,
   openRegister,
 }: Props) => {
+  const { t } = useCommonTranslation();
+
   return (
-    <div className={clsx(css['mobile-menu'], isMenuOpen && css.open)} data-menu>
+    <div
+      className={clsx(css['mobile-menu'], isMenuOpen && css.open)}
+      role="dialog"
+      aria-modal="true"
+    >
       <div className={clsx('container', css['mobile-menu-container'])}>
-        <button className={css['mobile-menu-close']} onClick={closeMenu}>
+        <button
+          className={css['mobile-menu-close']}
+          onClick={closeMenu}
+          aria-label={t('closeMenu')}
+        >
           <Icon
             className={css['mobile-menu-close-icon']}
             name="icon-close"

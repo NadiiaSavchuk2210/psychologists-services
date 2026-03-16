@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import css from './Modal.module.css';
 import Icon from '../Icon/Icon';
+import { useTranslation } from 'react-i18next';
 
 interface ModalProps {
   open: boolean;
@@ -19,12 +20,17 @@ const Modal = ({
   description = 'Modal dialog',
   header,
 }: ModalProps) => {
+  const { t } = useTranslation('a11y');
+
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className={css.overlay} />
         <Dialog.Content className={css.modal}>
-          <Dialog.Close className={css.closeButton} aria-label="Close modal">
+          <Dialog.Close
+            className={css.closeButton}
+            aria-label={t('modalClose')}
+          >
             <Icon
               name="icon-close"
               className={css.closeIcon}

@@ -12,5 +12,8 @@
     "wrong_password": "Wrong password",
     "too_many_requests": "Too many attempts. Try again later",
     "network_error": "Network error. Check your connection"
-  }
+  },
+  "homeLink": "Go to Psychologists Services homepage",
+  "openMenu": "Open navigation menu",
+  "closeMenu": "Close navigation menu"
 }
