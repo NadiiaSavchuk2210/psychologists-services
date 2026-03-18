@@ -12,7 +12,7 @@ interface Props {
 
 const PsychologistCard = memo(
   ({ psychologist, isExpanded, onToggle }: Props) => {
-    const ref = useRef<HTMLLIElement>(null);
+    const ref = useRef<HTMLElement>(null);
 
     console.log(psychologist);
 

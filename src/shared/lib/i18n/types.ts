@@ -1,3 +1,15 @@
+export type Lang = 'en' | 'ua';
+
+export interface IFiltersTranslations {
+  all: string;
+  a_z: string;
+  z_a: string;
+  popular: string;
+  not_popular: string;
+  cheap: string;
+  expensive: string;
+  title: string;
+}
 export interface IAuthTranslations {
   login: string;
   logout: string;
@@ -85,10 +97,10 @@ export interface IPsychologistsTranslations {
   title: string;
   listTitle: string;
   makeAppointment: string;
-  loadMore: 'Load more';
-  loadingMore: 'Loading...';
-  emptyTitle: 'No psychologists found';
-  emptyDescription: 'Try changing the filters or come back later';
+  loadMore: string;
+  loadingMore: string;
+  emptyTitle: string;
+  emptyDescription: string;
 }
 
 export interface ILocales {
@@ -99,4 +111,5 @@ export interface ILocales {
   navbar: INavbarTranslations;
   home: IHomeTranslations;
   psychologists: IPsychologistsTranslations;
+  filters: IFiltersTranslations;
 }

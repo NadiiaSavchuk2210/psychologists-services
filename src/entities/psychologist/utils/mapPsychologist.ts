@@ -1,5 +1,5 @@
+import type { Lang } from '@shared/lib/i18n';
 import type {
-  Lang,
   Psychologist,
   PsychologistDTO,
 } from '../model/types/psychologist';

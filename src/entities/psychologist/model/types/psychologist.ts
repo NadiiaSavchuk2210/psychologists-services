@@ -1,17 +1,4 @@
-export type Lang = 'en' | 'ua';
-
-export interface ReviewDTO {
-  reviewer: string;
-  reviewer_ua: string;
-  rating: number;
-  comment: Record<Lang, string>;
-}
-
-export interface Review {
-  reviewer: string;
-  rating: number;
-  comment: string;
-}
+import type { Review, ReviewDTO } from './psychologist-review';
 
 export interface PsychologistDTO {
   id: string;
@@ -43,34 +30,3 @@ export interface Psychologist {
   initial_consultation: string;
   reviews: Review[];
 }
-
-// API & Sorting
-
-export type CursorValue = string | number;
-
-export interface CursorData {
-  value: CursorValue;
-  id: string;
-}
-
-export interface FetchResponseDTO {
-  items: PsychologistDTO[];
-  nextCursor: CursorData | null;
-  hasMore: boolean;
-}
-
-export interface FetchResponse {
-  items: Psychologist[];
-  nextCursor: CursorData | null;
-}
-
-export type SortOption =
-  | 'A to Z'
-  | 'Z to A'
-  | 'Less than 10$'
-  | 'Greater than 10$'
-  | 'Popular'
-  | 'Not popular'
-  | 'Show all';
-
-export type SortableKeys = 'name' | 'name_ua' | 'rating' | 'price_per_hour';
