@@ -1,17 +1,16 @@
 import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
-import { useState } from 'react';
-import {
-  PSYCHOLOGISTS_PER_PAGE,
-  SORT_OPTIONS,
-} from '@shared/constants/psychologist';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
 import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
 import { useLocalizedPsychologists } from '@entities/psychologist/model/hooks/useLocalizedPsychologists';
 import css from './PsychologistsPage.module.css';
 import { usePsychologistsTranslation } from '@shared/hooks';
 import { Button, ErrorMessage } from '@shared/ui';
-import SortFilter from '@features/psychologists-sort/SortFilter';
 import EmptyState from '@shared/EmptyState/EmptyState';
+import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
+import FilterSelect from '@features/psychologists-sort/FilterSelect';
+import clsx from 'clsx';
 
 const PsychologistsPage = () => {
   const [activeSort, setActiveSort] = useState<SortOption>(
@@ -25,11 +24,24 @@ const PsychologistsPage = () => {
 
   const psychologists = data?.pages.flatMap(p => p.items) ?? [];
 
-  if (!psychologists.length && !isFetching) {
-    return (
-      <EmptyState title={t('emptyTitle')} description={t('emptyDescription')} />
-    );
-  }
+  const prevLengthRef = useRef(0);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (psychologists.length > prevLengthRef.current && listRef.current) {
+      const firstNewIndex = prevLengthRef.current;
+      const element = listRef.current.children[firstNewIndex] as HTMLElement;
+      element?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+    prevLengthRef.current = psychologists.length;
+  }, [psychologists]);
+
+  const handleLoadMore = useCallback(() => {
+    fetchNextPage();
+  }, [fetchNextPage]);
 
   return (
     <>
@@ -50,7 +62,7 @@ const PsychologistsPage = () => {
         <h1 className="visually-hidden">{t('title')}</h1>
 
         {/* FILTERS */}
-        <SortFilter activeSort={activeSort} onChange={setActiveSort} />
+        <FilterSelect activeSort={activeSort} onChange={setActiveSort} />
 
         {/* LOADING */}
         {isLoading && (
@@ -65,19 +77,29 @@ const PsychologistsPage = () => {
         {error && <ErrorMessage message={error.message} />}
 
         {/* CONTENT */}
-        {!isLoading && !error && (
-          <>
-            <PsychologistsList psychologists={psychologists} />
+        {!isLoading && !error && psychologists.length > 0 && (
+          <section className={clsx(css.psychologists, 'container')}>
+            <h2 className="visually-hidden">{t('listTitle')}</h2>
+            <ul className={css.psychologistsList} ref={listRef}>
+              <PsychologistsList psychologists={psychologists} />
+              {hasNextPage && (
+                <Button
+                  className={css.btnLoadMore}
+                  onClick={() => handleLoadMore()}
+                >
+                  {isFetching ? t('loadingMore') : t('loadMore')}
+                </Button>
+              )}
+            </ul>
+          </section>
+        )}
 
-            {hasNextPage && (
-              <Button
-                className={css.btnLoadMore}
-                onClick={() => fetchNextPage()}
-              >
-                {isFetching ? t('loadingMore') : t('loadMore')}
-              </Button>
-            )}
-          </>
+        {/* EMPTY STATE */}
+        {!psychologists.length && !isFetching && (
+          <EmptyState
+            title={t('emptyTitle')}
+            description={t('emptyDescription')}
+          />
         )}
       </main>
     </>

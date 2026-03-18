@@ -5,7 +5,9 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+  /* min-height: 100vh; */
   font-family: var(--font-primary);
   font-size: 16px;
   font-weight: 400;
@@ -22,6 +24,10 @@ body::before {
   z-index: -1;
   background-color: var(--color-bg);
   transition: background-color var(--transition-base);
+}
+
+main {
+  min-height: calc(100vh - 96px);
 }
 
 button {

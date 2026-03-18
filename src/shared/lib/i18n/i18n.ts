@@ -19,6 +19,7 @@ i18n
       'validation',
       'home',
       'psychologists',
+      'filters',
     ],
     defaultNS: 'common',
     backend: {

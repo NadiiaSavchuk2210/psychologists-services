@@ -17,8 +17,28 @@
   gap: 32px;
 }
 
+.psychologists {
+  margin-bottom: 40px;
+}
+
+.psychologistsList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  padding: 20px 0;
+}
+
 @media screen and (min-width: 768px) {
   .main {
     padding: 64px 0 100px;
+  }
+  .psychologists {
+    margin-bottom: 64px;
   }
 }

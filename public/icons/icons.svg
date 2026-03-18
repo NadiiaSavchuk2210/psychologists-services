@@ -81,5 +81,8 @@
                 </filter>
             </defs>
         </symbol>
+        <symbol id="icon-arrow-down" fill="none" viewBox="0 0 12 7">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 1L6 6L11 1"></path>
+        </symbol>
     </defs>
 </svg>
