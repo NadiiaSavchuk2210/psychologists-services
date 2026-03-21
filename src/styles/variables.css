@@ -15,7 +15,9 @@
   --color-gray-light-primary: rgba(25, 26, 21, 0.2);
   --color-gray-light-secondary: rgba(25, 26, 21, 0.1);
   --color-white: #fff;
-  --color-shadow: rgba(0, 0, 0, 0.07);
+  --color-shadow-primary: rgba(0, 0, 0, 0.07);
+  --color-shadow-secondary: rgba(0, 0, 0, 0.06);
+  --color-shadow-tertiary: rgba(0, 0, 0, 0.03);
   --color-accent: #38cd3e;
   --color-badges: #f3f3f3;
   --color-rating: #ffc531;

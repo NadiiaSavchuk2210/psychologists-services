@@ -4,4 +4,16 @@
   background: var(--color-bg);
   overflow: hidden;
   width: 100%;
+
+  transition:
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms ease;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 10px 24px var(--color-shadow-secondary),
+    0 4px 12px var(--color-shadow-tertiary);
 }
