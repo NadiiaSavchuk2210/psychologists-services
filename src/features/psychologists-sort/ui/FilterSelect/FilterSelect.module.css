@@ -71,7 +71,7 @@
   overflow: hidden;
   background-color: var(--color-white);
   border-radius: 14px;
-  box-shadow: 0 20px 69px 0 var(--color-shadow);
+  box-shadow: 0 20px 69px 0 var(--color-shadow-primary);
   z-index: var(--z-filter);
 }
 
@@ -92,7 +92,7 @@
 
 .item:hover,
 .item:focus {
-  background-color: var(--color-shadow);
+  background-color: var(--color-shadow-primary);
   color: var(--color-text-primary);
   outline: transparent;
 }

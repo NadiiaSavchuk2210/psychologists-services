@@ -25,7 +25,7 @@ const PsychologistsPage = () => {
   );
 
   const { t, i18n } = usePsychologistsTranslation();
-  const TOP_OFFSET = 205;
+  const TOP_OFFSET = 220;
 
   useMetaTags({
     t,

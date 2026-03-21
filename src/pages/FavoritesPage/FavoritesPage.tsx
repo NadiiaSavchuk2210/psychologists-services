@@ -25,7 +25,7 @@ const FavoritesPage = () => {
   );
   const [page, setPage] = useState(1);
   const { t, i18n } = useFavoritesTranslation();
-  const TOP_OFFSET = 205;
+  const TOP_OFFSET = 220;
 
   useMetaTags({
     t,
