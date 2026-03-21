@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "title": "Your Favorite Psychologists",
+    "description": "Manage your favorite psychologists and quickly book sessions.",
+    "ogTitle": "Saved Psychologists",
+    "ogDescription": "Curated list of favorite therapists for easy booking."
+  },
+  "title": "Your Favorite Psychologists",
+  "listTitle": "Your Favorite Psychologists list",
+  "emptyTitle": "No Favorites Yet",
+  "emptyDescription": "You haven't added any psychologists to your favorites. Start browsing and save your top picks!",
+  "loadMore": "Load more",
+  "loadingMore": "Loading..."
+}

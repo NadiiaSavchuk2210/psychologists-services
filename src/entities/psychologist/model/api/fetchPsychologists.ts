@@ -1,21 +1,19 @@
+import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
+import type { Psychologist } from '../types/psychologist';
+import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
+import type { SortOption } from '../types/psychologist-sort';
+import { rtdb } from '@shared/lib/config/firebase/database';
+import { DB_PATHS } from '@shared/constants/psychologist-api';
 import {
-  ref,
-  get,
   query,
   orderByChild,
   startAfter,
-  limitToFirst,
   endBefore,
+  limitToFirst,
   limitToLast,
+  get,
+  ref,
 } from 'firebase/database';
-
-import { db } from '@shared/lib/config/firebase/database';
-import { DB_FIELDS, DB_PATHS } from '@shared/constants/psychologist-api';
-import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
-import { SORT_CONFIG } from '../config/sortConfig';
-import type { SortOption } from '../types/psychologist-sort';
-import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
-import type { PsychologistDTO } from '../types/psychologist';
 
 export const fetchPsychologists = async ({
   sort,
@@ -23,77 +21,88 @@ export const fetchPsychologists = async ({
   cursor,
   lang,
 }: {
-  sort: string;
+  sort: SortOption;
   pageSize: number;
   cursor: CursorData | null;
   lang: 'en' | 'ua';
 }): Promise<FetchResponseDTO> => {
-  const config = SORT_CONFIG[sort as SortOption];
-  if (!config) throw new Error(`Unknown sort option: ${sort}`);
+  const dbRef = ref(rtdb, DB_PATHS.PSYCHOLOGISTS);
 
-  let sortField = config.field;
+  let sortField = lang === 'ua' ? 'name_ua' : 'name';
+  let isDesc = false;
 
-  if (
-    sort === SORT_OPTIONS.A_Z ||
-    sort === SORT_OPTIONS.Z_A ||
-    sort === SORT_OPTIONS.ALL
-  ) {
-    sortField = lang === 'ua' ? DB_FIELDS.SORT_NAME_UA : DB_FIELDS.SORT_NAME_EN;
+  switch (sort) {
+    case SORT_OPTIONS.POPULAR:
+      sortField = 'rating';
+      isDesc = true;
+      break;
+
+    case SORT_OPTIONS.NOT_POPULAR:
+      sortField = 'rating';
+      break;
+
+    case SORT_OPTIONS.CHEAP:
+      sortField = 'price_per_hour';
+      break;
+
+    case SORT_OPTIONS.EXPENSIVE:
+      sortField = 'price_per_hour';
+      isDesc = true;
+      break;
+
+    case SORT_OPTIONS.A_Z:
+      sortField = lang === 'ua' ? 'name_ua' : 'name';
+      break;
+
+    case SORT_OPTIONS.Z_A:
+      sortField = lang === 'ua' ? 'name_ua' : 'name';
+      isDesc = true;
+      break;
   }
 
-  const isDescending = config.order === 'desc';
-  const dbRef = ref(db, DB_PATHS.PSYCHOLOGISTS);
-
-  const fetchLimit = config.filter ? pageSize * 5 : pageSize;
-
   let apiQuery;
-  if (isDescending) {
+
+  if (!isDesc) {
     apiQuery = query(
       dbRef,
       orderByChild(sortField),
-      ...(cursor ? [endBefore(cursor.value, cursor.id)] : []),
-      limitToLast(fetchLimit)
+      ...(cursor ? [startAfter(cursor.value, cursor.id)] : []),
+      limitToFirst(pageSize)
     );
   } else {
     apiQuery = query(
       dbRef,
       orderByChild(sortField),
-      ...(cursor ? [startAfter(cursor.value, cursor.id)] : []),
-      limitToFirst(fetchLimit)
+      ...(cursor ? [endBefore(cursor.value, cursor.id)] : []),
+      limitToLast(pageSize)
     );
   }
 
   const snapshot = await get(apiQuery);
-  const rawItems: PsychologistDTO[] = [];
+
+  const items: Psychologist[] = [];
 
   snapshot.forEach(child => {
-    rawItems.push({ ...(child.val() as PsychologistDTO), id: child.key! });
+    items.push({
+      ...(child.val() as Psychologist),
+      id: child.key!,
+    });
   });
 
-  if (isDescending) rawItems.reverse();
+  if (isDesc) items.reverse();
 
-  const filteredItems = config.filter
-    ? rawItems.filter(item => config.filter!(item.price_per_hour))
-    : rawItems;
+  const last = items[items.length - 1];
 
-  const resultItems = filteredItems.slice(0, pageSize);
-
-  let nextCursor: CursorData | null = null;
-  if (rawItems.length >= fetchLimit) {
-    const lastRawItem = rawItems[rawItems.length - 1];
-    const cursorValue = lastRawItem[sortField as keyof PsychologistDTO];
-
-    if (cursorValue !== undefined) {
-      nextCursor = {
-        value: cursorValue as string | number,
-        id: lastRawItem.id,
-      };
-    }
-  }
+  const nextCursor = last
+    ? {
+        id: last.id,
+        value: last[sortField as keyof Psychologist] as string | number,
+      }
+    : null;
 
   return {
-    items: resultItems,
+    items,
     nextCursor,
-    hasMore: !!nextCursor,
+    hasMore: items.length >= pageSize,
   };
 };

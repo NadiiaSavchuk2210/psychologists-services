@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 import css from './CardDetails.module.css';
-import type { Psychologist } from '@entities/psychologist/model/types/psychologist';
+import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 import { usePsychologistsTranslation } from '@shared/hooks';
 import Reviews from '@shared/ui/Reviews/Reviews';
 import { Button } from '@shared/ui';
 
 interface Props {
   isExpanded: boolean;
-  psychologist: Psychologist;
+  psychologist: PsychologistUI;
 }
 
 const CardDetails = ({ isExpanded, psychologist }: Props) => {

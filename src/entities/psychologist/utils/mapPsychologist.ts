@@ -1,29 +1,19 @@
 import type { Lang } from '@shared/lib/i18n';
-import type {
-  Psychologist,
-  PsychologistDTO,
-} from '../model/types/psychologist';
+import type { Psychologist } from '../model/types/psychologist';
 
-export const mapPsychologist = (
-  dto: PsychologistDTO,
-  lang: Lang
-): Psychologist => {
+export const mapPsychologist = (dto: Psychologist, lang: Lang) => {
   return {
-    id: dto.id!,
+    ...dto,
 
-    name: lang === 'ua' ? dto.name_ua : dto.name,
-    specialization: lang === 'ua' ? dto.specialization_ua : dto.specialization,
-    about: lang === 'ua' ? dto.about_ua : dto.about,
+    displayName: lang === 'ua' ? dto.name_ua : dto.name,
+    displaySpecialization:
+      lang === 'ua' ? dto.specialization_ua : dto.specialization,
+    displayAbout: lang === 'ua' ? dto.about_ua : dto.about,
 
-    experience:
+    displayExperience:
       lang === 'ua' ? dto.experience.replace('years', 'років') : dto.experience,
 
-    avatar_url: dto.avatar_url,
-    price_per_hour: dto.price_per_hour,
-    rating: dto.rating,
-    license: dto.license,
-
-    initial_consultation:
+    displayInitialConsultation:
       lang === 'ua'
         ? dto.initial_consultation
             .replace('Free', 'Безкоштовна')
@@ -31,10 +21,10 @@ export const mapPsychologist = (
             .replace('initial consultation', 'первинна консультація')
         : dto.initial_consultation,
 
-    reviews: dto.reviews.map(r => ({
-      reviewer: lang === 'ua' ? r.reviewer_ua : r.reviewer,
-      rating: r.rating,
-      comment: r.comment[lang],
+    displayReviews: dto.reviews.map(r => ({
+      ...r,
+      displayReviewer: lang === 'ua' ? r.reviewer_ua : r.reviewer,
+      displayComment: lang === 'ua' ? r.comment_ua : r.comment,
     })),
   };
 };

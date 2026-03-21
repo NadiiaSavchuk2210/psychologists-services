@@ -1,0 +1,45 @@
+.main {
+  padding: 34px 0 50px;
+  background-color: var(--color-badges);
+}
+
+.btnLoadMore {
+  margin: 0 auto;
+  padding: 14px 48px;
+  display: block;
+  min-width: 176px;
+  min-height: 48px;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.psychologists {
+  margin-bottom: 40px;
+}
+
+.psychologistsList {
+  margin-bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  padding: 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding: 64px 0 100px;
+  }
+  .psychologistsList {
+    margin-bottom: 64px;
+  }
+}

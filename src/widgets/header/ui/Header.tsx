@@ -7,16 +7,22 @@ import { Navbar } from '@widgets/navbar';
 import { Icon } from '@shared/ui';
 import { AuthNavigation } from '@features/auth-navigation';
 import { MobileMenu } from '@widgets/mobile-menu';
-import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { LoginModal } from '@features/auth/login';
 import { RegisterModal } from '@features/auth/register';
 import { useCommonTranslation } from '@shared/hooks';
+import { useModalStore } from '@shared/lib/store/modalStore';
 
 const Header = () => {
   const { t } = useCommonTranslation();
 
-  const loginModal = useDisclosure();
-  const registerModal = useDisclosure();
+  const {
+    isLoginOpen,
+    closeLogin,
+    isRegisterOpen,
+    closeRegister,
+    openLogin,
+    openRegister,
+  } = useModalStore();
 
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,10 +46,7 @@ const Header = () => {
         {!isMobile && (
           <>
             <Navbar />
-            <AuthNavigation
-              openLogin={loginModal.onOpen}
-              openRegister={registerModal.onOpen}
-            />
+            <AuthNavigation openLogin={openLogin} openRegister={openRegister} />
           </>
         )}
 
@@ -68,19 +71,13 @@ const Header = () => {
         <MobileMenu
           isMenuOpen={isMenuOpen}
           closeMenu={closeMenu}
-          openLogin={loginModal.onOpen}
-          openRegister={registerModal.onOpen}
+          openLogin={openLogin}
+          openRegister={openRegister}
         />
       )}
 
-      <LoginModal
-        isOpen={loginModal.isOpen}
-        onOpenChange={loginModal.onClose}
-      />
-      <RegisterModal
-        isOpen={registerModal.isOpen}
-        onOpenChange={registerModal.onClose}
-      />
+      <LoginModal isOpen={isLoginOpen} onOpenChange={closeLogin} />
+      <RegisterModal isOpen={isRegisterOpen} onOpenChange={closeRegister} />
     </header>
   );
 };

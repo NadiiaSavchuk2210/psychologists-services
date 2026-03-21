@@ -20,6 +20,9 @@ i18n
       'home',
       'psychologists',
       'filters',
+      'favorites',
+      'not-found',
+      'error',
     ],
     defaultNS: 'common',
     backend: {
@@ -28,6 +31,11 @@ i18n
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
+    },
+    react: {
+      useSuspense: true,
+      bindI18n: 'languageChanged loaded',
+      wait: true,
     },
     interpolation: {
       escapeValue: false,

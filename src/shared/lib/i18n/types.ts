@@ -1,5 +1,12 @@
 export type Lang = 'en' | 'ua';
 
+export interface IMetaTranslations {
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+}
+
 export interface IFiltersTranslations {
   all: string;
   a_z: string;
@@ -27,6 +34,13 @@ export interface IAuthTranslations {
   registerEmailPlaceholder: string;
   registerPasswordPlaceholder: string;
   registerButton: string;
+
+  toastAuthRequired: string;
+  toastAuthAction: string;
+
+  toastFavoriteAdded: string;
+  toastFavoriteRemoved: string;
+  toastFavoriteError: string;
 }
 
 export interface IValidationTranslations {
@@ -74,6 +88,7 @@ export interface INavbarTranslations {
 }
 
 export interface IHomeTranslations {
+  meta: IMetaTranslations;
   heroTitlePrefix: string;
   heroTitleAccent: string;
   heroTitleSuffix: string;
@@ -83,6 +98,7 @@ export interface IHomeTranslations {
 }
 
 export interface IPsychologistsTranslations {
+  meta: IMetaTranslations;
   psychologist: string;
   rating: string;
   reviews: string;
@@ -103,6 +119,32 @@ export interface IPsychologistsTranslations {
   emptyDescription: string;
 }
 
+export interface IFavoritesTranslations {
+  meta: IMetaTranslations;
+  title: string;
+  listTitle: string;
+  ogTitle: string;
+  ogDescription: string;
+  emptyTitle: string;
+  emptyDescription: string;
+  loadMore: string;
+  loadingMore: string;
+}
+
+export interface INotFoundTranslations {
+  meta: IMetaTranslations;
+  title: string;
+  buttonGoHome: string;
+  text: string;
+}
+
+export interface IErrorTranslations {
+  meta: IMetaTranslations;
+  title: string;
+  text: string;
+  buttonGoHome: string;
+}
+
 export interface ILocales {
   common: ICommonTranslations;
   a11y: IA11yTranslations;
@@ -112,4 +154,7 @@ export interface ILocales {
   home: IHomeTranslations;
   psychologists: IPsychologistsTranslations;
   filters: IFiltersTranslations;
+  favorites: IFavoritesTranslations;
+  'not-found': INotFoundTranslations;
+  error: IErrorTranslations;
 }

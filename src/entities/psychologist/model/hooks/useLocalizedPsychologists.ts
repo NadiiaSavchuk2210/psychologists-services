@@ -4,15 +4,14 @@ import { usePsychologistsInfinite } from './usePsychologistsInfinite';
 import { mapPsychologist } from '@entities/psychologist/utils/mapPsychologist';
 import type { Lang } from '@shared/lib/i18n';
 import type { SortOption } from '../types/psychologist-sort';
+import { getLang } from '@shared/utils';
 
 export const useLocalizedPsychologists = (sort: SortOption) => {
   const { i18n } = useTranslation();
+
   const query = usePsychologistsInfinite(sort);
 
-  const lang: Lang =
-    i18n.language.startsWith('uk') || i18n.language.startsWith('ua')
-      ? 'ua'
-      : 'en';
+  const lang: Lang = getLang(i18n);
 
   const localizedData = useMemo(() => {
     if (!query.data) return undefined;
@@ -24,7 +23,7 @@ export const useLocalizedPsychologists = (sort: SortOption) => {
         items: page.items.map(dto => mapPsychologist(dto, lang)),
       })),
     };
-  }, [query.data, i18n.language, lang]);
+  }, [query.data, lang]);
 
   return {
     ...query,

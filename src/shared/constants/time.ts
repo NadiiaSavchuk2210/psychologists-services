@@ -1,5 +1,8 @@
 export const TIME = {
+  MILLISECOND: 1,
   SECOND: 1000,
+  THREE_SECONDS: 3 * 1000,
+  FIVE_SECONDS: 5 * 1000,
   MINUTE: 60 * 1000,
   HOUR: 60 * 60 * 1000,
 };

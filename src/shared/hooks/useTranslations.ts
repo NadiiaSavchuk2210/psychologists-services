@@ -9,3 +9,6 @@ export const useNavbarTranslation = () => useTranslation('navbar');
 export const usePsychologistsTranslation = () =>
   useTranslation('psychologists');
 export const useFiltersTranslation = () => useTranslation('filters');
+export const useFavoritesTranslation = () => useTranslation('favorites');
+export const useNotFoundTranslation = () => useTranslation('not-found');
+export const useErrorTranslation = () => useTranslation('error');

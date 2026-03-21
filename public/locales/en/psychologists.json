@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "title": "Psychologists Directory | Ratings, Reviews & Specialties",
+    "description": "Browse 50+ licensed psychologists by specialization: depression, relationships, anxiety. Filter by rating, price, experience.",
+    "ogTitle": "Find Top Psychologists Near You",
+    "ogDescription": "Discover verified therapists with client reviews. Compare rates from $120/hour and book secure appointments online."
+  },
   "psychologist": "Psychologist",
   "rating": "Rating: {{rating}}",
   "reviews": "Reviews",
