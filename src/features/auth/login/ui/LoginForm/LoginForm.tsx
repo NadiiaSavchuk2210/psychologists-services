@@ -42,8 +42,6 @@ const LoginForm = ({ onOpenChange }: Props) => {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-
     loginMutation.mutate(data, {
       onSuccess: () => {
         reset();

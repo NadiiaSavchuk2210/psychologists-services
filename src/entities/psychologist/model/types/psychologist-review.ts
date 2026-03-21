@@ -1,14 +1,12 @@
-import type { Lang } from '@shared/lib/i18n';
-
-export interface ReviewDTO {
+export interface Review {
   reviewer: string;
   reviewer_ua: string;
   rating: number;
-  comment: Record<Lang, string>;
+  comment: string;
+  comment_ua: string;
 }
 
-export interface Review {
-  reviewer: string;
-  rating: number;
-  comment: string;
+export interface ReviewUI extends Review {
+  displayReviewer: string;
+  displayComment: string;
 }

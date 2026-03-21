@@ -1,32 +1,46 @@
-import { useCallback, useState } from 'react';
-import { PsychologistCard, type Psychologist } from '@entities/psychologist';
+import { useCallback, useState, forwardRef } from 'react';
+import { PsychologistCard, type PsychologistUI } from '@entities/psychologist';
+import { AnimatePresence, motion } from 'framer-motion';
+import css from './PsychologistsList.module.css';
 
 interface Props {
-  psychologists: Psychologist[];
+  psychologists: PsychologistUI[];
 }
 
-const PsychologistsList = ({ psychologists }: Props) => {
-  const [expandedIds, setExpandedIds] = useState<string[]>([]);
+const PsychologistsList = forwardRef<HTMLUListElement, Props>(
+  ({ psychologists = [] }, ref) => {
+    const [expandedIds, setExpandedIds] = useState<string[]>([]);
 
-  const toggleCard = useCallback((id: string) => {
-    setExpandedIds(prev =>
-      prev.includes(id) ? prev.filter(eid => eid !== id) : [...prev, id]
+    const toggleCard = useCallback((id: string) => {
+      setExpandedIds(prev =>
+        prev.includes(id) ? prev.filter(eid => eid !== id) : [...prev, id]
+      );
+    }, []);
+
+    return (
+      <ul ref={ref} className={css.psychologistsList}>
+        <AnimatePresence>
+          {psychologists.map(psychologist => (
+            <motion.li
+              key={psychologist.id}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              <PsychologistCard
+                psychologist={psychologist}
+                isExpanded={expandedIds.includes(psychologist.id)}
+                onToggle={() => toggleCard(psychologist.id)}
+              />
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </ul>
     );
-  }, []);
+  }
+);
 
-  return (
-    <>
-      {psychologists.map(psychologist => (
-        <li key={psychologist.id}>
-          <PsychologistCard
-            psychologist={psychologist}
-            isExpanded={expandedIds.includes(psychologist.id)}
-            onToggle={() => toggleCard(psychologist.id)}
-          />
-        </li>
-      ))}
-    </>
-  );
-};
-
+PsychologistsList.displayName = 'PsychologistsList';
 export default PsychologistsList;

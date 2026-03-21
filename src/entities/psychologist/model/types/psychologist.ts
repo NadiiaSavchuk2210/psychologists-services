@@ -1,6 +1,6 @@
-import type { Review, ReviewDTO } from './psychologist-review';
+import type { Review, ReviewUI } from './psychologist-review';
 
-export interface PsychologistDTO {
+export interface Psychologist {
   id: string;
   name: string;
   name_ua: string;
@@ -14,19 +14,14 @@ export interface PsychologistDTO {
   about: string;
   about_ua: string;
   initial_consultation: string;
-  reviews: ReviewDTO[];
+  reviews: Review[];
 }
 
-export interface Psychologist {
-  id: string;
-  name: string;
-  avatar_url: string;
-  experience: string;
-  price_per_hour: number;
-  rating: number;
-  license: string;
-  specialization: string;
-  about: string;
-  initial_consultation: string;
-  reviews: Review[];
+export interface PsychologistUI extends Psychologist {
+  displayName: string;
+  displayExperience: string;
+  displaySpecialization: string;
+  displayAbout: string;
+  displayInitialConsultation: string;
+  displayReviews: ReviewUI[];
 }

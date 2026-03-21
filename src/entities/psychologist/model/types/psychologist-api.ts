@@ -1,4 +1,4 @@
-import type { Psychologist, PsychologistDTO } from './psychologist';
+import type { Psychologist } from './psychologist';
 
 export type CursorValue = string | number;
 
@@ -8,7 +8,7 @@ export interface CursorData {
 }
 
 export interface FetchResponseDTO {
-  items: PsychologistDTO[];
+  items: Psychologist[];
   nextCursor: CursorData | null;
   hasMore: boolean;
 }

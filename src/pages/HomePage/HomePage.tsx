@@ -1,30 +1,26 @@
+import { useMetaTags } from '@shared/hooks/useMetaTags';
 import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 import HomeHero from '../../widgets/home-hero/ui/HomeHero';
+import { useHomeTranslation } from '@shared/hooks';
 
 const HomePage = () => {
+  const { t, i18n } = useHomeTranslation();
+
+  useMetaTags({
+    t,
+    i18n,
+    titleKey: 'meta.title',
+    descriptionKey: 'meta.description',
+    ogTitleKey: 'meta.ogTitle',
+    ogDescriptionKey: 'meta.ogDescription',
+    ogImage: `${HOME_PAGE_URL}/${OG_IMAGE}`,
+    ogUrl: HOME_PAGE_URL,
+    canonicalUrl: HOME_PAGE_URL,
+  });
   return (
-    <>
-      <title>Psychologists & Therapy Services | Online & In-Person</title>
-      <meta
-        name="description"
-        content="Find expert psychologists for stress, anxiety, depression, and relationship issues. Free initial consultations, easy online booking."
-      />
-      <meta
-        property="og:title"
-        content="Professional Psychology Help | Find Your Therapist"
-      />
-      <meta
-        property="og:description"
-        content="Access licensed therapists specializing in mental wellness. Start your journey to better mental health today."
-      />
-      <meta property="og:image" content={`${HOME_PAGE_URL}/${OG_IMAGE}`} />
-      <meta property="og:url" content={HOME_PAGE_URL} />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <main>
-        <HomeHero />
-      </main>
-    </>
+    <main>
+      <HomeHero />
+    </main>
   );
 };
 

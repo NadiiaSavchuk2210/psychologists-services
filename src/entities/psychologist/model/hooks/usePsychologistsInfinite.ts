@@ -11,6 +11,7 @@ import { TIME } from '@shared/constants/time';
 
 import type { SortOption } from '../types/psychologist-sort';
 import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
+import { getLang } from '@shared/utils';
 
 export function usePsychologistsInfinite(
   sort: SortOption,
@@ -18,10 +19,7 @@ export function usePsychologistsInfinite(
 ) {
   const { i18n } = useTranslation();
 
-  const lang =
-    i18n.language.startsWith('uk') || i18n.language.startsWith('ua')
-      ? 'ua'
-      : 'en';
+  const lang = getLang(i18n);
 
   return useInfiniteQuery<
     FetchResponseDTO,

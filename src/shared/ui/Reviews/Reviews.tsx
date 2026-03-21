@@ -1,19 +1,19 @@
 import css from './Reviews.module.css';
 import { ReviewItem } from '..';
-import type { Psychologist } from '@entities/psychologist';
+import type { PsychologistUI } from '@entities/psychologist';
 
 interface Props {
-  psychologist: Psychologist;
+  psychologist: PsychologistUI;
 }
 
 const Reviews = ({ psychologist }: Props) => {
-  const { reviews } = psychologist;
+  const { displayReviews } = psychologist;
 
   return (
     <ul className={css.reviewsList}>
-      {reviews.map(review => (
+      {displayReviews.map((review, index) => (
         <ReviewItem
-          key={`${psychologist.id}-${review.reviewer}`}
+          key={`${review.displayReviewer}-${review.rating}-${index}`}
           review={review}
         />
       ))}

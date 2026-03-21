@@ -1,0 +1,19 @@
+.favoriteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favoriteIcon {
+  stroke: var(--color-text-primary);
+  color: transparent;
+  transition:
+    fill var(--transition-base),
+    stroke var(--transition-base);
+}
+
+.favoriteBtn:hover .favoriteIcon,
+.isFavorite {
+  color: var(--color-primary);
+  stroke: var(--color-primary);
+}

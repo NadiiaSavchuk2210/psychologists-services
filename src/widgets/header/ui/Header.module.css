@@ -1,5 +1,5 @@
 .header {
-  height: 96px;
+  max-height: 96px;
   position: sticky;
   top: 0;
   width: 100%;
