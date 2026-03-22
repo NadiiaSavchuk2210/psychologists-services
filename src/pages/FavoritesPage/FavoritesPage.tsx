@@ -18,8 +18,12 @@ import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
 import clsx from 'clsx';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
 import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
+import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
+import { useModalStore } from '@shared/lib/store/modalStore';
 
 const FavoritesPage = () => {
+  const { isAppointmentOpen, closeAppointment } = useModalStore();
+
   const [activeSort, setActiveSort] = useState<SortOption>(
     SORT_OPTIONS.POPULAR
   );
@@ -114,6 +118,11 @@ const FavoritesPage = () => {
           />
         )}
       </main>
+
+      <AppointmentModal
+        isOpen={isAppointmentOpen}
+        onOpenChange={closeAppointment}
+      />
     </>
   );
 };

@@ -18,8 +18,12 @@ import {
 import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
 import clsx from 'clsx';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
+import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
+import { useModalStore } from '@shared/lib/store/modalStore';
 
 const PsychologistsPage = () => {
+  const { isAppointmentOpen, closeAppointment } = useModalStore();
+
   const [activeSort, setActiveSort] = useState<SortOption>(
     SORT_OPTIONS.ALL as SortOption
   );
@@ -102,6 +106,11 @@ const PsychologistsPage = () => {
           />
         )}
       </main>
+
+      <AppointmentModal
+        isOpen={isAppointmentOpen}
+        onOpenChange={closeAppointment}
+      />
     </>
   );
 };

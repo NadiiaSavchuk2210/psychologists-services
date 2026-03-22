@@ -4,14 +4,12 @@ import {
   keepPreviousData,
   type InfiniteData,
 } from '@tanstack/react-query';
-
 import { fetchPsychologists } from '../api/fetchPsychologists';
-import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
-import { TIME } from '@shared/constants/time';
-
 import type { SortOption } from '../types/psychologist-sort';
 import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
 import { getLang } from '@shared/utils';
+import { PSYCHOLOGISTS_PER_PAGE, TIME } from '@shared/constants';
+import type { Lang } from '@shared/lib/i18n';
 
 export function usePsychologistsInfinite(
   sort: SortOption,
@@ -19,7 +17,7 @@ export function usePsychologistsInfinite(
 ) {
   const { i18n } = useTranslation();
 
-  const lang = getLang(i18n);
+  const lang: Lang = getLang(i18n);
 
   return useInfiniteQuery<
     FetchResponseDTO,

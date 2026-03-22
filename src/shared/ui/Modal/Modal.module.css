@@ -90,6 +90,10 @@
     max-width: 565px;
   }
 
+  .appointmentModal {
+    max-width: 600px;
+  }
+
   .closeIcon {
     width: 32px;
     height: 32px;

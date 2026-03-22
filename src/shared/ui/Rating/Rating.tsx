@@ -1,11 +1,11 @@
-import type { Psychologist, Psychologist } from '@entities/psychologist';
+import type { PsychologistUI } from '@entities/psychologist';
 import Icon from '../Icon/Icon';
 import css from './Rating.module.css';
 import { usePsychologistsTranslation } from '@shared/hooks';
 import type { Review } from '@entities/psychologist/model/types/psychologist-review';
 
 type PsychologistItem = {
-  psychologist: Psychologist;
+  psychologist: PsychologistUI;
   isReviewItem?: false;
 };
 
@@ -26,7 +26,6 @@ const Rating = (props: Props) => {
         name="icon-star"
         width={16}
         height={16}
-        aria-hidden="true"
       />
 
       {!props.isReviewItem ? (

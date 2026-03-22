@@ -1,6 +1,6 @@
-import { DEFAULT_SORT_OPTION } from '@shared/constants/psychologist-sort';
-import { useFiltersTranslation } from '../../../../shared/hooks/useTranslations';
+import { DEFAULT_SORT_OPTION } from '@shared/constants';
 import { SORT_CONFIG } from '../config/sortConfig';
+import { useFiltersTranslation } from '@shared/hooks';
 
 export const useSortOptions = () => {
   const { t } = useFiltersTranslation();

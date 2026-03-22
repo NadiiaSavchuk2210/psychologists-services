@@ -1,0 +1,28 @@
+.psychologist-info {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.psychologist-info__profile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.psychologist-info__label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-xs);
+  line-height: 1.33;
+  color: var(--color-gray);
+}
+
+.psychologist-info__name {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-base);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}

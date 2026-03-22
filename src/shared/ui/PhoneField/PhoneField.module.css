@@ -1,0 +1,8 @@
+.phoneInput,
+.phoneInput::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}

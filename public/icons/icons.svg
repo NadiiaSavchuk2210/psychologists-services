@@ -9,7 +9,7 @@
         <symbol id="icon-check" viewBox="0 0 32 32">
             <path d="M8 13.333l-2.667 2.667 8 8 13.333-13.333-2.667-2.667-10.667 10.667-5.333-5.333z"></path>
         </symbol>
-        <symbol id="icon-clock" viewBox="0 0 32 32">
+        <symbol id="icon-clock" viewBox="0 0 32 32" fill="none" stroke="currentColor">
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4"
                 d="M16 29.333c7.364 0 13.333-5.969 13.333-13.333s-5.97-13.333-13.333-13.333c-7.364 0-13.333 5.97-13.333 13.333s5.97 13.333 13.333 13.333z">
             </path>

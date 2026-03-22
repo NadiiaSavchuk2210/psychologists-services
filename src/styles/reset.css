@@ -40,6 +40,10 @@ select {
   outline: none;
 }
 
+textarea {
+  resize: none;
+}
+
 input:checked {
   border: none;
 }

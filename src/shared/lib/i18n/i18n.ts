@@ -23,6 +23,7 @@ i18n
       'favorites',
       'not-found',
       'error',
+      'appointment',
     ],
     defaultNS: 'common',
     backend: {

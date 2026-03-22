@@ -1,9 +1,7 @@
-import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
+import { DB_PATHS, SORT_OPTIONS } from '@shared/constants';
 import type { Psychologist } from '../types/psychologist';
 import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
 import type { SortOption } from '../types/psychologist-sort';
-import { rtdb } from '@shared/lib/config/firebase/database';
-import { DB_PATHS } from '@shared/constants/psychologist-api';
 import {
   query,
   orderByChild,
@@ -14,6 +12,7 @@ import {
   get,
   ref,
 } from 'firebase/database';
+import { rtdb } from '@shared/lib/config/firebase';
 
 export const fetchPsychologists = async ({
   sort,

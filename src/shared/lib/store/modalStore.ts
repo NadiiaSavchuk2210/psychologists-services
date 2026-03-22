@@ -1,3 +1,4 @@
+import type { PsychologistUI } from '@entities/psychologist';
 import { create } from 'zustand';
 
 type ModalState = {
@@ -7,6 +8,11 @@ type ModalState = {
   isRegisterOpen: boolean;
   openRegister: () => void;
   closeRegister: () => void;
+
+  isAppointmentOpen: boolean;
+  appointmentPsychologist: PsychologistUI | null;
+  openAppointment: (psychologist: PsychologistUI) => void;
+  closeAppointment: () => void;
 };
 
 export const useModalStore = create<ModalState>()(set => ({
@@ -17,4 +23,11 @@ export const useModalStore = create<ModalState>()(set => ({
   isRegisterOpen: false,
   openRegister: () => set({ isRegisterOpen: true }),
   closeRegister: () => set({ isRegisterOpen: false }),
+
+  isAppointmentOpen: false,
+  appointmentPsychologist: null,
+  openAppointment: (psychologist: PsychologistUI) =>
+    set({ isAppointmentOpen: true, appointmentPsychologist: psychologist }),
+  closeAppointment: () =>
+    set({ isAppointmentOpen: false, appointmentPsychologist: null }),
 }));
