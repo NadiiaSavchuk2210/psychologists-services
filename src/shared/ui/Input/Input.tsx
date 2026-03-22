@@ -5,10 +5,18 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Icon from '../Icon/Icon';
 import css from './Input.module.css';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<
+  HTMLInputElement | HTMLTextAreaElement
+> {
   label?: string;
   register?: UseFormRegisterReturn;
   error?: FieldError;
+  classInputWrapper?: string;
+  classInput?: string;
+  classField?: string;
+  isTimePicker?: boolean;
+  onIconClick?: () => void;
+  rows?: number;
 }
 
 const Input = ({
@@ -17,6 +25,12 @@ const Input = ({
   error,
   id,
   type = 'text',
+  classInputWrapper = '',
+  classInput = '',
+  classField = '',
+  isTimePicker = false,
+  onIconClick,
+  rows = 3,
   ...props
 }: Props) => {
   const generatedId = useId();
@@ -24,32 +38,57 @@ const Input = ({
   const errorId = `${inputId}-error`;
 
   const isPassword = type === 'password';
-  const [showPassword, setShowPassword] = useState(false);
+  const isTextArea = type === 'textarea';
 
-  const inputType = isPassword && showPassword ? 'text' : type;
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
     setShowPassword(prev => !prev);
   };
 
+  const inputType = isPassword && showPassword ? 'text' : type;
+
+  const commonProps = {
+    id: inputId,
+    className: clsx(
+      css.input,
+      classInput,
+      error && css.inputError,
+      isTextArea && css.textarea
+    ),
+    'aria-invalid': !!error,
+    'aria-describedby': error ? errorId : undefined,
+    ...register,
+    ...props,
+  };
+
   return (
-    <div className={css.field}>
+    <div className={clsx(css.field, classField)}>
       {label && (
         <label htmlFor={inputId} className={css.label}>
           {label}
         </label>
       )}
 
-      <div className={clsx(css.inputWrapper, isPassword && css.password)}>
-        <input
-          id={inputId}
-          type={inputType}
-          className={clsx(css.input, error && css.inputError)}
-          aria-invalid={!!error}
-          aria-describedby={error ? errorId : undefined}
-          {...register}
-          {...props}
-        />
+      <div
+        className={clsx(
+          css.inputWrapper,
+          classInputWrapper,
+          isPassword && css.password,
+          isTextArea && css.textAreaWrapper
+        )}
+      >
+        {isTextArea ? (
+          <textarea
+            {...(commonProps as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+            rows={rows}
+          />
+        ) : (
+          <input
+            {...(commonProps as React.InputHTMLAttributes<HTMLInputElement>)}
+            type={inputType}
+          />
+        )}
 
         {isPassword && (
           <button
@@ -65,6 +104,17 @@ const Input = ({
               width={20}
               height={20}
             />
+          </button>
+        )}
+
+        {isTimePicker && (
+          <button
+            type="button"
+            className={css.eyeButton}
+            onClick={onIconClick}
+            aria-label="Open time picker"
+          >
+            <Icon name="icon-clock" width={20} height={20} />
           </button>
         )}
       </div>

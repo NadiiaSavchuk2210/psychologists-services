@@ -1,0 +1,41 @@
+.appointment-form__inputs {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px 8px;
+}
+.appointment-form__input-wrapper {
+  position: relative;
+}
+
+.appointment-form__input,
+.appointment-form__input::placeholder {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--font-base);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.appointment-form__field-time,
+.appointment-form__field-phone,
+.appointment-form__input,
+.appointment-form__input-phone,
+.appointment-form__input-time {
+  width: 100%;
+}
+
+.appointment-form__btn {
+  padding: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .appointment-form__field-time,
+  .appointment-form__field-phone,
+  .appointment-form__input-phone,
+  .appointment-form__input-time {
+    width: 232px;
+  }
+}

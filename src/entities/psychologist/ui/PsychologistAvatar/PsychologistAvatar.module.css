@@ -9,10 +9,21 @@
   border-radius: 30px;
 }
 
+.appointmentAvatarContainer {
+  width: 44px;
+  height: 44px;
+  border: none;
+}
+
 .avatar {
   width: 96px;
   height: 96px;
   border-radius: 15px;
+}
+
+.appointmentAvatar {
+  width: 44px;
+  height: 44px;
 }
 
 .avatarOnlineIndicator {

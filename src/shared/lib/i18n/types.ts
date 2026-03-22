@@ -145,6 +145,34 @@ export interface IErrorTranslations {
   buttonGoHome: string;
 }
 
+export interface IAppointmentTranslations {
+  title: string;
+  subtitle: string;
+  yourPsychologist: string;
+  fields: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+    meetingTime: string;
+    comment: string;
+    submit: string;
+    sending: string;
+  };
+  validation: {
+    required: string;
+    min: string;
+    max: string;
+    invalidEmail: string;
+    invalidPhone: string;
+    timeTaken: string;
+  };
+  toasts: {
+    success: string;
+    error: string;
+    authRequired: string;
+  };
+}
+
 export interface ILocales {
   common: ICommonTranslations;
   a11y: IA11yTranslations;
@@ -157,4 +185,5 @@ export interface ILocales {
   favorites: IFavoritesTranslations;
   'not-found': INotFoundTranslations;
   error: IErrorTranslations;
+  appointment: IAppointmentTranslations;
 }

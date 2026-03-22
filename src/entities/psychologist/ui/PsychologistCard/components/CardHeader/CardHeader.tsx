@@ -8,6 +8,7 @@ import PsychologistAvatar from '@entities/psychologist/ui/PsychologistAvatar/Psy
 import CardTrigger from '../CardTrigger/CardTrigger';
 import CardDetails from '../CardDetails/CardDetails';
 import { FavoriteButton } from '@features/favorites';
+import { useModalStore } from '@shared/lib/store/modalStore';
 
 interface Props {
   psychologist: PsychologistUI;
@@ -19,38 +20,46 @@ const CardHeader = ({ psychologist, isExpanded, onToggle }: Props) => {
   const { t } = usePsychologistsTranslation();
   const { displayName, displayAbout } = psychologist;
 
+  const { openAppointment } = useModalStore();
+
   return (
-    <div className={css.header}>
-      <div className={css.headerAvatar}>
-        <PsychologistAvatar psychologist={psychologist} />
-      </div>
+    <>
+      <div className={css.header}>
+        <div className={css.headerAvatar}>
+          <PsychologistAvatar psychologist={psychologist} />
+        </div>
 
-      <div className={css.headerContent}>
-        <div className={css.top}>
-          <div className={css.titleContainer}>
-            <span className={css.category}>{t('psychologist')}</span>
-            <h3 className={css.title}>{displayName}</h3>
-          </div>
-
-          <div className={css.detailsContainer}>
-            <div className={css.infoContainer}>
-              <Rating psychologist={psychologist} />
-              <div className={css.divider}></div>
-              <PriceInfo psychologist={psychologist} />
+        <div className={css.headerContent}>
+          <div className={css.top}>
+            <div className={css.titleContainer}>
+              <p className={css.category}>{t('psychologist')}</p>
+              <h3 className={css.title}>{displayName}</h3>
             </div>
-            <FavoriteButton item={psychologist} />
+
+            <div className={css.detailsContainer}>
+              <div className={css.infoContainer}>
+                <Rating psychologist={psychologist} />
+                <div className={css.divider}></div>
+                <PriceInfo psychologist={psychologist} />
+              </div>
+              <FavoriteButton item={psychologist} />
+            </div>
           </div>
-        </div>
 
-        <div className={css.info}>
-          <BadgesList psychologist={psychologist} />
-          <p className={css.infoText}>{displayAbout}</p>
-        </div>
+          <div className={css.info}>
+            <BadgesList psychologist={psychologist} />
+            <p className={css.infoText}>{displayAbout}</p>
+          </div>
 
-        <CardTrigger isExpanded={isExpanded} onToggle={onToggle} />
-        <CardDetails isExpanded={isExpanded} psychologist={psychologist} />
+          <CardTrigger isExpanded={isExpanded} onToggle={onToggle} />
+          <CardDetails
+            onAppointmentOpen={() => openAppointment(psychologist)}
+            isExpanded={isExpanded}
+            psychologist={psychologist}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

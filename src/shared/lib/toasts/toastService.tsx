@@ -75,7 +75,12 @@ export const toastService = {
       icon: '💔',
     }),
 
-  authRequired: (openLogin: () => void, t: (key: string) => string) => {
+  authRequired: (
+    openLogin: () => void,
+    t: (key: string) => string,
+    tApp: (key: string) => string,
+    isAppointment = false
+  ) => {
     toast.custom(tost => (
       <div
         style={{
@@ -89,7 +94,11 @@ export const toastService = {
           gap: '12px',
         }}
       >
-        <span>{t('toastAuthRequired')}</span>
+        <span>
+          {!isAppointment
+            ? t('toastAuthRequired')
+            : tApp('toasts.authRequired')}
+        </span>
         <button
           onClick={() => {
             openLogin();
@@ -110,6 +119,11 @@ export const toastService = {
       </div>
     ));
   },
+
+  appointmentSuccess: (t: (key: string) => string) =>
+    toastService.show('appointmentSuccess', t('toasts.success'), 'success', {
+      icon: '📅',
+    }),
 
   error: (message: string) => toastService.show('error', message, 'error'),
 };

@@ -1,21 +1,28 @@
-import type { Psychologist } from '@entities/psychologist/model/types/psychologist';
+import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 import FallbackImg from '../../../../assets/images/psychologist-fallback.png';
 import css from './PsychologistAvatar.module.css';
+import clsx from 'clsx';
 
 interface Props {
-  psychologist: Psychologist;
+  psychologist: PsychologistUI | null;
+  isAppointment?: boolean;
 }
 
-const PsychologistAvatar = ({ psychologist }: Props) => {
+const PsychologistAvatar = ({ psychologist, isAppointment = false }: Props) => {
   return (
-    <div className={css.avatarContainer}>
+    <div
+      className={clsx(
+        css.avatarContainer,
+        isAppointment && css.appointmentAvatarContainer
+      )}
+    >
       <img
-        className={css.avatar}
-        src={psychologist.avatar_url ?? FallbackImg}
-        alt={psychologist.name}
+        className={clsx(css.avatar, isAppointment && css.appointmentAvatar)}
+        src={psychologist?.avatar_url ?? FallbackImg}
+        alt={psychologist?.name}
         width={96}
       />
-      <span className={css.avatarOnlineIndicator}></span>
+      {!isAppointment && <span className={css.avatarOnlineIndicator}></span>}
     </div>
   );
 };
