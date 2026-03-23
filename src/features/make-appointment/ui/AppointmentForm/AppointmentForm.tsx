@@ -151,7 +151,7 @@ export default function AppointmentForm({
       <Button
         className={css['appointment-form__btn']}
         type="submit"
-        disabled={isButtonDisabled}
+        disabled={isButtonDisabled || appointmentMutation.isPending}
       >
         {appointmentMutation.isPending
           ? t('fields.sending')

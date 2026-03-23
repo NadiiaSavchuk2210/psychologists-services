@@ -7,9 +7,7 @@ const HomePage = lazy(() => import('@pages/HomePage/HomePage'));
 const PsychologistsPage = lazy(
   () => import('@pages/PsychologistsPage/PsychologistsPage')
 );
-const PsychologistDetailsPage = lazy(
-  () => import('@pages/PsychologistDetailsPage/PsychologistDetailsPage')
-);
+
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/NotFoundPage'));
 
 const publicRoutes: RouteObject[] = [
@@ -18,10 +16,6 @@ const publicRoutes: RouteObject[] = [
     path: ROUTES.PSYCHOLOGISTS,
     children: [
       { index: true, element: SuspenseWrapper(<PsychologistsPage />) },
-      {
-        path: ':id',
-        element: SuspenseWrapper(<PsychologistDetailsPage />),
-      },
     ],
   },
   { path: ROUTES.NOT_FOUND, element: SuspenseWrapper(<NotFoundPage />) },

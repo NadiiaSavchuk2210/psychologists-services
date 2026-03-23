@@ -2,30 +2,25 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input } from '@shared/ui';
 import css from './LoginForm.module.css';
-import * as yup from 'yup';
-import { useAuthTranslation, useValidationTranslation } from '@shared/hooks';
+import { useAuthTranslation } from '@shared/hooks';
 import { useLoginMutation } from '@features/auth/model/queries';
 import type { LoginFormData } from '@features/auth/types/types';
+import { useLoginSchema } from '@features/auth/model/hooks/useLoginSchema';
 
 interface Props {
   onOpenChange: (isOpen: boolean) => void;
 }
 
+const DEFAULT_VALUES: LoginFormData = {
+  email: '',
+  password: '',
+};
+
 const LoginForm = ({ onOpenChange }: Props) => {
-  const loginMutation = useLoginMutation();
-
   const { t: tA } = useAuthTranslation();
-  const { t: tV } = useValidationTranslation();
 
-  const schema = yup.object({
-    email: yup
-      .string()
-      .email(tV('invalid_email'))
-      .required(tV('required', { field: tV('fields.email') })),
-    password: yup
-      .string()
-      .required(tV('required', { field: tV('fields.password') })),
-  });
+  const schema = useLoginSchema();
+  const loginMutation = useLoginMutation();
 
   const {
     register,
@@ -35,10 +30,7 @@ const LoginForm = ({ onOpenChange }: Props) => {
   } = useForm<LoginFormData>({
     resolver: yupResolver(schema),
     mode: 'onTouched',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: DEFAULT_VALUES,
   });
 
   const onSubmit = (data: LoginFormData) => {
@@ -75,7 +67,7 @@ const LoginForm = ({ onOpenChange }: Props) => {
       <Button
         className={css['login-form__btn']}
         type="submit"
-        disabled={isButtonDisabled}
+        disabled={isButtonDisabled || loginMutation.isPending}
       >
         {tA('login')}
       </Button>

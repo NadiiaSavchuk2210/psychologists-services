@@ -5,7 +5,7 @@ import { addFavorite } from '../api/addFavorite';
 import { removeFavorite } from '../api/removeFavorite';
 import { useAuthStore } from '@shared/lib/store/authStore';
 import { toastService } from '@shared/lib/toasts/toastService';
-import { useAuthTranslation } from '@shared/hooks';
+import { useAppointmentTranslation, useAuthTranslation } from '@shared/hooks';
 import type { Psychologist } from '@entities/psychologist';
 import { useModalStore } from '@shared/lib/store/modalStore';
 import { TIME } from '@shared/constants/time';
@@ -13,6 +13,7 @@ import { TIME } from '@shared/constants/time';
 export const useFavorites = (debounceTime = TIME.MILLISECOND * 3) => {
   const { user } = useAuthStore();
   const { t } = useAuthTranslation();
+  const { t: tApp } = useAppointmentTranslation();
   const queryClient = useQueryClient();
   const { openLogin } = useModalStore();
 
@@ -32,7 +33,7 @@ export const useFavorites = (debounceTime = TIME.MILLISECOND * 3) => {
 
   const toggleFavorite = (item: Psychologist) => {
     if (!user) {
-      toastService.authRequired(openLogin, t);
+      toastService.authRequired(openLogin, t, tApp, true);
       return;
     }
 

@@ -2,37 +2,27 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input } from '@shared/ui';
 import css from './RegisterForm.module.css';
-import * as yup from 'yup';
-import {
-  useAuthTranslation,
-  useCommonTranslation,
-  useValidationTranslation,
-} from '@shared/hooks';
+import { useAuthTranslation, useCommonTranslation } from '@shared/hooks';
 import { useRegisterMutation } from '@features/auth/model/queries';
 import type { RegisterFormData } from '@features/auth/types/types';
+import { useRegisterSchema } from '@features/auth/model/hooks/useRegisterSchema';
 
 interface Props {
   onOpenChange: (isOpen: boolean) => void;
 }
 
-const RegisterForm = ({ onOpenChange }: Props) => {
-  const registerMutation = useRegisterMutation();
+const DEFAULT_VALUES: RegisterFormData = {
+  name: '',
+  email: '',
+  password: '',
+};
 
+const RegisterForm = ({ onOpenChange }: Props) => {
   const { t: tA } = useAuthTranslation();
-  const { t: tV } = useValidationTranslation();
   const { t: tCommon } = useCommonTranslation();
 
-  const schema = yup.object({
-    name: yup.string().required(tV('required', { field: tV('fields.name') })),
-    email: yup
-      .string()
-      .email(tV('invalid_email'))
-      .required(tV('required', { field: tV('fields.email') })),
-    password: yup
-      .string()
-      .min(6, tV('min', { field: tV('fields.password'), min: 6 }))
-      .required(tV('required', { field: tV('fields.password') })),
-  });
+  const registerMutation = useRegisterMutation();
+  const schema = useRegisterSchema();
 
   const {
     register,
@@ -42,11 +32,7 @@ const RegisterForm = ({ onOpenChange }: Props) => {
   } = useForm<RegisterFormData>({
     resolver: yupResolver(schema),
     mode: 'onTouched',
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-    },
+    defaultValues: DEFAULT_VALUES,
   });
 
   const onSubmit = (data: RegisterFormData) => {
