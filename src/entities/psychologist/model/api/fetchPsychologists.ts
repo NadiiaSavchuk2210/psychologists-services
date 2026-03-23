@@ -13,6 +13,7 @@ import {
   ref,
 } from 'firebase/database';
 import { rtdb } from '@shared/lib/config/firebase';
+import type { Lang } from '@shared/lib/i18n';
 
 export const fetchPsychologists = async ({
   sort,
@@ -23,7 +24,7 @@ export const fetchPsychologists = async ({
   sort: SortOption;
   pageSize: number;
   cursor: CursorData | null;
-  lang: 'en' | 'ua';
+  lang: Lang;
 }): Promise<FetchResponseDTO> => {
   const dbRef = ref(rtdb, DB_PATHS.PSYCHOLOGISTS);
 
