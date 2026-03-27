@@ -1,9 +1,11 @@
-import { NavLink } from 'react-router-dom';
-import css from './Navbar.module.css';
 import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
+
 import { ROUTES } from '@app/router/routesConfig';
 import { useNavbarTranslation } from '@shared/hooks';
 import { useAuthStore } from '@shared/lib/store/authStore';
+
+import css from './Navbar.module.css';
 
 interface Props {
   closeMenu?: () => void;

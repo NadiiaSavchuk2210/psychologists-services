@@ -1,6 +1,8 @@
-import { useCallback, useState, forwardRef } from 'react';
-import { PsychologistCard, type PsychologistUI } from '@entities/psychologist';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useCallback, useState, forwardRef } from 'react';
+
+import { PsychologistCard, type PsychologistUI } from '@entities/psychologist';
+
 import css from './PsychologistsList.module.css';
 
 interface Props {

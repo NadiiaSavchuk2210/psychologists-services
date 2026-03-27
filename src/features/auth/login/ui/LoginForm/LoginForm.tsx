@@ -1,11 +1,14 @@
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input } from '@shared/ui';
-import css from './LoginForm.module.css';
-import { useAuthTranslation } from '@shared/hooks';
+import { useForm } from 'react-hook-form';
+
+import { useLoginSchema } from '@features/auth/model/hooks/useLoginSchema';
 import { useLoginMutation } from '@features/auth/model/queries';
 import type { LoginFormData } from '@features/auth/types/types';
-import { useLoginSchema } from '@features/auth/model/hooks/useLoginSchema';
+import { useAuthTranslation } from '@shared/hooks';
+import { Button, Input } from '@shared/ui';
+
+import css from './LoginForm.module.css';
+
 
 interface Props {
   onOpenChange: (isOpen: boolean) => void;

@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect } from 'react';
+
 import { auth } from '@shared/lib/config/firebase/auth';
 import { useAuthStore } from '@shared/lib/store/authStore';
 import { Loader } from '@shared/ui';
@@ -9,15 +10,14 @@ interface Props {
 }
 
 export const AuthProvider = ({ children }: Props) => {
-  const { loading, setUser, setLoading } = useAuthStore();
+  const { loading, setUser } = useAuthStore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       setUser(user);
-      setLoading(false);
     });
     return unsubscribe;
-  }, []);
+  }, [setUser]);
 
   if (loading) return <Loader />;
   return children;

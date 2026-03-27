@@ -1,15 +1,17 @@
-import { useTranslation } from 'react-i18next';
 import {
   useInfiniteQuery,
   keepPreviousData,
   type InfiniteData,
 } from '@tanstack/react-query';
-import { fetchPsychologists } from '../api/fetchPsychologists';
-import type { SortOption } from '../types/psychologist-sort';
-import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
-import { getLang } from '@shared/utils';
+import { useTranslation } from 'react-i18next';
+
 import { PSYCHOLOGISTS_PER_PAGE, TIME } from '@shared/constants';
 import type { Lang } from '@shared/lib/i18n';
+import { getLang } from '@shared/utils';
+
+import { fetchPsychologists } from '../api/fetchPsychologists';
+import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
+import type { SortOption } from '../types/psychologist-sort';
 
 export function usePsychologistsInfinite(
   sort: SortOption,

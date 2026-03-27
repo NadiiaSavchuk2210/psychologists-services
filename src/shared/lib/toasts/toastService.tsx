@@ -1,4 +1,5 @@
 import toast from 'react-hot-toast';
+
 import { TIME } from '@shared/constants/time';
 
 export type ToastType = 'success' | 'error' | 'info';

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import Icon from '../Icon/Icon';
+
 import css from './Badge.module.css';
+import Icon from '../Icon/Icon';
 
 type Variant = 'primary' | 'secondary';
 

@@ -1,6 +1,8 @@
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import type { Appointment } from '../model/types/appointment';
+
 import { db } from '@shared/lib/config/firebase';
+
+import type { Appointment } from '../model/types/appointment';
 
 export const createAppointment = async (
   userId: string,

@@ -1,6 +1,8 @@
-import type { RouteObject } from 'react-router-dom';
-import SuspenseWrapper from '@shared/ui/SuspenseWrapper/SuspenseWrapper';
 import { lazy } from 'react';
+import type { RouteObject } from 'react-router-dom';
+
+import SuspenseWrapper from '@shared/ui/SuspenseWrapper/SuspenseWrapper';
+
 import { ROUTES } from '../routesConfig';
 
 const HomePage = lazy(() => import('@pages/HomePage/HomePage'));

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import css from './AppointmentTimePicker.module.css';
+
 import { generateTimes } from '@features/make-appointment/utils/generateTimes';
 import { useAppointmentTranslation } from '@shared/hooks';
+
+import css from './AppointmentTimePicker.module.css';
 
 interface Props {
   onChange?: (value: string) => void;
@@ -11,23 +13,18 @@ interface Props {
 const ALL_TIMES = generateTimes(30);
 
 export default function AppointmentTimePicker({ onChange, value }: Props) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(() => {
+    const initialIndex = ALL_TIMES.indexOf(value);
+    return initialIndex === -1 ? 0 : initialIndex;
+  });
   const listRef = useRef<HTMLUListElement | null>(null);
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const selectedIndexRef = useRef(0);
   const { t } = useAppointmentTranslation();
 
   useEffect(() => {
     selectedIndexRef.current = selectedIndex;
   }, [selectedIndex]);
-
-  useEffect(() => {
-    if (!value) return;
-    const index = ALL_TIMES.indexOf(value);
-    if (index !== -1 && index !== selectedIndexRef.current) {
-      setSelectedIndex(index);
-    }
-  }, [value]);
 
   useEffect(() => {
     const container = listRef.current;
@@ -81,17 +78,19 @@ export default function AppointmentTimePicker({ onChange, value }: Props) {
         {ALL_TIMES.map((time, index) => {
           const [hours, minutes] = time.split(':');
           return (
-            <li
-              key={time}
-              ref={el => {
-                itemRefs.current[index] = el;
-              }}
-              className={`${css.item} ${selectedIndex === index ? css.active : ''}`}
-              onClick={() => handleClick(index)}
-            >
-              <span className={css.hours}>{hours}</span>
-              <span className={css.separator}>:</span>
-              <span className={css.minutes}>{minutes}</span>
+            <li key={time}>
+              <button
+                ref={el => {
+                  itemRefs.current[index] = el;
+                }}
+                className={`${css.item} ${selectedIndex === index ? css.active : ''}`}
+                type="button"
+                onClick={() => handleClick(index)}
+              >
+                <span className={css.hours}>{hours}</span>
+                <span className={css.separator}>:</span>
+                <span className={css.minutes}>{minutes}</span>
+              </button>
             </li>
           );
         })}

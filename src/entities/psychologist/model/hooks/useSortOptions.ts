@@ -1,6 +1,7 @@
 import { DEFAULT_SORT_OPTION } from '@shared/constants';
-import { SORT_CONFIG } from '../config/sortConfig';
 import { useFiltersTranslation } from '@shared/hooks';
+
+import { SORT_CONFIG } from '../config/sortConfig';
 
 export const useSortOptions = () => {
   const { t } = useFiltersTranslation();

@@ -1,7 +1,9 @@
-import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
-import FallbackImg from '../../../../assets/images/psychologist-fallback.png';
-import css from './PsychologistAvatar.module.css';
 import clsx from 'clsx';
+
+import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
+
+import css from './PsychologistAvatar.module.css';
+import FallbackImg from '../../../../assets/images/psychologist-fallback.png';
 
 interface Props {
   psychologist: PsychologistUI | null;

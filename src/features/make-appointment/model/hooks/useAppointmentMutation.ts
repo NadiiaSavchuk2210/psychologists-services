@@ -1,7 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
+
+import { createAppointment } from '@features/make-appointment/api/appointmentApi';
 import { useAppointmentTranslation, useFirebaseError } from '@shared/hooks';
 import { toastService } from '@shared/lib/toasts/toastService';
-import { createAppointment } from '@features/make-appointment/api/appointmentApi';
+
 import type { Appointment } from '../types/appointment';
 
 interface AppointmentPayload {

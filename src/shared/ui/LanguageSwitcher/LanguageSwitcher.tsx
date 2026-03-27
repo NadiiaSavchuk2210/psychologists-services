@@ -1,5 +1,6 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { useTranslation } from 'react-i18next';
+
 import css from './LanguageSwitcher.module.css';
 
 const LanguageSwitcher = () => {

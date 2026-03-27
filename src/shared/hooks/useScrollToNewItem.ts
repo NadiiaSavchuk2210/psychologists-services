@@ -4,7 +4,7 @@ export const useScrollToNewItem = <T extends HTMLElement>(
   listRef: React.RefObject<T | null>,
   itemsLength: number,
   topOffset: number = 0,
-  deps: any[] = []
+  deps: ReadonlyArray<unknown> = []
 ) => {
   const prevLengthRef = useRef(0);
 
@@ -25,5 +25,5 @@ export const useScrollToNewItem = <T extends HTMLElement>(
     }
 
     prevLengthRef.current = itemsLength;
-  }, [itemsLength, topOffset, ...deps]);
+  }, [itemsLength, listRef, topOffset, deps]);
 };

@@ -1,25 +1,27 @@
-import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
-import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
+import clsx from 'clsx';
 import { useMemo, useRef, useState } from 'react';
-import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
-import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
+
+import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
 import { useLocalizedPsychologists } from '@entities/psychologist/model/hooks/useLocalizedPsychologists';
-import css from './PsychologistsPage.module.css';
+import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
+import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
+import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
+import {
+  PRICE_LIMITS,
+  SORT_OPTIONS,
+} from '@shared/constants/psychologist-sort';
 import {
   usePsychologistsTranslation,
   useScrollToNewItem,
   useScrollToTopOnLanguageChange,
 } from '@shared/hooks';
-import { Button, EmptyState, ErrorMessage } from '@shared/ui';
-import {
-  PRICE_LIMITS,
-  SORT_OPTIONS,
-} from '@shared/constants/psychologist-sort';
-import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
-import clsx from 'clsx';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
-import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
 import { useModalStore } from '@shared/lib/store/modalStore';
+import { Button, EmptyState, ErrorMessage } from '@shared/ui';
+import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
+
+import css from './PsychologistsPage.module.css';
+import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 
 const PsychologistsPage = () => {
   const { isAppointmentOpen, closeAppointment } = useModalStore();
@@ -44,9 +46,9 @@ const PsychologistsPage = () => {
 
   const isReady = !isLoading && !error;
 
-  const psychologists = data?.pages.flatMap(p => p.items) ?? [];
-
   const filtered = useMemo(() => {
+    const psychologists = data?.pages.flatMap(p => p.items) ?? [];
+
     switch (activeSort) {
       case SORT_OPTIONS.CHEAP:
         return psychologists.filter(
@@ -61,7 +63,7 @@ const PsychologistsPage = () => {
       default:
         return psychologists;
     }
-  }, [psychologists, activeSort]);
+  }, [data?.pages, activeSort]);
 
   const listRef = useRef<HTMLUListElement>(null);
   useScrollToNewItem(listRef, filtered.length, TOP_OFFSET, [i18n.language]);

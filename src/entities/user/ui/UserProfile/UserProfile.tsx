@@ -1,7 +1,8 @@
-import { Icon } from '@shared/ui';
-import css from './UserProfile.module.css';
-import { useAuthStore } from '@shared/lib/store/authStore';
 import { getUserName } from '@entities/user/utils/getUserName';
+import { useAuthStore } from '@shared/lib/store/authStore';
+import { Icon } from '@shared/ui';
+
+import css from './UserProfile.module.css';
 
 const UserProfile = () => {
   const { user } = useAuthStore();

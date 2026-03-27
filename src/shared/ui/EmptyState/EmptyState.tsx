@@ -1,5 +1,6 @@
-import css from './EmptyState.module.css';
 import clsx from 'clsx';
+
+import css from './EmptyState.module.css';
 
 interface Props {
   title?: string;

@@ -1,10 +1,12 @@
-import type { SortOption } from '@entities/psychologist';
 import * as Select from '@radix-ui/react-select';
-import css from './FilterSelect.module.css';
+import clsx from 'clsx';
+
+import type { SortOption } from '@entities/psychologist';
 import { useSortOptions } from '@entities/psychologist/model/hooks/useSortOptions';
 import { useDisclosure, useFiltersTranslation } from '@shared/hooks';
-import clsx from 'clsx';
 import { Icon } from '@shared/ui';
+
+import css from './FilterSelect.module.css';
 
 interface Props {
   activeSort: SortOption;

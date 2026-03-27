@@ -1,4 +1,5 @@
 import { PRICE_LIMITS, SORT_OPTIONS } from '@shared/constants';
+
 import type { SortConfig, SortOption } from '../types/psychologist-sort';
 
 export const SORT_CONFIG: Record<SortOption, SortConfig> = {

@@ -1,7 +1,8 @@
-import type { RegisterFormData } from '@features/auth/types/types';
-import { useValidationTranslation } from '@shared/hooks';
 import { useMemo } from 'react';
 import * as yup from 'yup';
+
+import type { RegisterFormData } from '@features/auth/types/types';
+import { useValidationTranslation } from '@shared/hooks';
 
 export const useRegisterSchema = (): yup.ObjectSchema<RegisterFormData> => {
   const { t: tV } = useValidationTranslation();

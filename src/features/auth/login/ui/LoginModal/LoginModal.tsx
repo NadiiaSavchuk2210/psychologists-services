@@ -1,6 +1,7 @@
-import Modal from '@shared/ui/Modal/Modal';
-import LoginForm from '../LoginForm/LoginForm';
 import { useAuthTranslation } from '@shared/hooks';
+import Modal from '@shared/ui/Modal/Modal';
+
+import LoginForm from '../LoginForm/LoginForm';
 
 interface Props {
   isOpen: boolean;

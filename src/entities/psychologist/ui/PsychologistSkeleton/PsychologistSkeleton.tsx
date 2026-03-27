@@ -1,5 +1,6 @@
-import { motion, type Variants } from 'framer-motion';
 import clsx from 'clsx';
+import { motion, type Variants } from 'framer-motion';
+
 import css from './PsychologistSkeleton.module.css';
 
 const itemVariants: Variants = {

@@ -1,7 +1,8 @@
-import type { LoginFormData } from '@features/auth/types/types';
-import { useValidationTranslation } from '@shared/hooks';
 import { useMemo } from 'react';
 import * as yup from 'yup';
+
+import type { LoginFormData } from '@features/auth/types/types';
+import { useValidationTranslation } from '@shared/hooks';
 
 export const useLoginSchema = (): yup.ObjectSchema<LoginFormData> => {
   const { t: tV } = useValidationTranslation();

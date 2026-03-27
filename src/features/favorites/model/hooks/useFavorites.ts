@@ -1,14 +1,17 @@
-import { useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchFavorites } from '../api/fetchFavorites';
-import { addFavorite } from '../api/addFavorite';
-import { removeFavorite } from '../api/removeFavorite';
-import { useAuthStore } from '@shared/lib/store/authStore';
-import { toastService } from '@shared/lib/toasts/toastService';
-import { useAppointmentTranslation, useAuthTranslation } from '@shared/hooks';
+import { useRef } from 'react';
+
 import type { Psychologist } from '@entities/psychologist';
-import { useModalStore } from '@shared/lib/store/modalStore';
 import { TIME } from '@shared/constants/time';
+import { useAppointmentTranslation, useAuthTranslation } from '@shared/hooks';
+import { useAuthStore } from '@shared/lib/store/authStore';
+import { useModalStore } from '@shared/lib/store/modalStore';
+import { toastService } from '@shared/lib/toasts/toastService';
+
+import { addFavorite } from '../api/addFavorite';
+import { fetchFavorites } from '../api/fetchFavorites';
+import { removeFavorite } from '../api/removeFavorite';
+
 
 export const useFavorites = (debounceTime = TIME.MILLISECOND * 3) => {
   const { user } = useAuthStore();

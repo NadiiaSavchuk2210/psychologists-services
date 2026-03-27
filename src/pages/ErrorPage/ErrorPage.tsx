@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import styles from './ErrorPage.module.css';
-import { useMetaTags } from '@shared/hooks/useMetaTags';
-import { useErrorTranslation } from '@shared/hooks';
+
 import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
+import { useErrorTranslation } from '@shared/hooks';
+import { useMetaTags } from '@shared/hooks/useMetaTags';
+
+import styles from './ErrorPage.module.css';
 
 const ErrorPage = () => {
   const { t, i18n } = useErrorTranslation();

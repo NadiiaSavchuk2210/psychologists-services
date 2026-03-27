@@ -1,7 +1,8 @@
-import * as yup from 'yup';
 import { useMemo } from 'react';
-import { useAppointmentTranslation } from '@shared/hooks';
+import * as yup from 'yup';
+
 import { PHONE_REG_EXP } from '@shared/constants';
+import { useAppointmentTranslation } from '@shared/hooks';
 
 export const useAppointmentSchema = () => {
   const { t } = useAppointmentTranslation();

@@ -1,9 +1,11 @@
-import { useAuthTranslation, useFirebaseError } from '@shared/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { LoginFormData, RegisterFormData } from '../types/types';
-import { loginUser, logoutUser, registerUser } from '../api/authApi';
+
+import { useAuthTranslation, useFirebaseError } from '@shared/hooks';
 import { useAuthStore } from '@shared/lib/store/authStore';
 import { toastService } from '@shared/lib/toasts/toastService';
+
+import { loginUser, logoutUser, registerUser } from '../api/authApi';
+import type { LoginFormData, RegisterFormData } from '../types/types';
 
 export const useRegisterMutation = () => {
   const { t: tA } = useAuthTranslation();
