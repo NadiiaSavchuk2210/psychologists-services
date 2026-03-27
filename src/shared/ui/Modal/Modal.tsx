@@ -1,8 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
+
 import css from './Modal.module.css';
 import Icon from '../Icon/Icon';
-import { useTranslation } from 'react-i18next';
-import clsx from 'clsx';
 
 interface ModalProps {
   open: boolean;
@@ -59,7 +60,6 @@ const Modal = ({
   );
 };
 
-// Compound components
 const Header = ({
   children,
   description,
