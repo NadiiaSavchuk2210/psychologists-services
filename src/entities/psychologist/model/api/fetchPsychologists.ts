@@ -34,6 +34,15 @@ export const fetchPsychologists = async ({
   let isDesc = false;
 
   switch (sort) {
+    case SORT_OPTIONS.PRICE_LOW_HIGH:
+      sortField = 'price_per_hour';
+      break;
+
+    case SORT_OPTIONS.PRICE_HIGH_LOW:
+      sortField = 'price_per_hour';
+      isDesc = true;
+      break;
+
     case SORT_OPTIONS.POPULAR:
       sortField = 'rating';
       isDesc = true;

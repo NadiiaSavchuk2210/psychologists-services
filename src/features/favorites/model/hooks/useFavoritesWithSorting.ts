@@ -22,17 +22,23 @@ export const useFavoritesWithSorting = (sort: SortOption) => {
 
     return [...localized].sort((a, b) => {
       switch (sort) {
-        case SORT_OPTIONS.POPULAR:
-          return b.rating - a.rating;
+        case SORT_OPTIONS.PRICE_LOW_HIGH:
+          return a.price_per_hour - b.price_per_hour;
 
-        case SORT_OPTIONS.NOT_POPULAR:
-          return a.rating - b.rating;
+        case SORT_OPTIONS.PRICE_HIGH_LOW:
+          return b.price_per_hour - a.price_per_hour;
 
         case SORT_OPTIONS.CHEAP:
           return a.price_per_hour - b.price_per_hour;
 
         case SORT_OPTIONS.EXPENSIVE:
           return b.price_per_hour - a.price_per_hour;
+
+        case SORT_OPTIONS.POPULAR:
+          return b.rating - a.rating;
+
+        case SORT_OPTIONS.NOT_POPULAR:
+          return a.rating - b.rating;
 
         case SORT_OPTIONS.A_Z:
           return a.displayName.localeCompare(b.displayName, lang);

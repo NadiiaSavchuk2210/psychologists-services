@@ -11,6 +11,8 @@ export interface IFiltersTranslations {
   all: string;
   a_z: string;
   z_a: string;
+  price_low_high: string;
+  price_high_low: string;
   popular: string;
   not_popular: string;
   cheap: string;
