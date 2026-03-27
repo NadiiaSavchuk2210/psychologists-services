@@ -1,8 +1,9 @@
 import { memo, useEffect, useRef } from 'react';
-import css from './PsychologistCard.module.css';
+
+import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 
 import CardHeader from './components/CardHeader/CardHeader';
-import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
+import css from './PsychologistCard.module.css';
 
 interface Props {
   psychologist: PsychologistUI;
@@ -32,5 +33,7 @@ const PsychologistCard = memo(
     );
   }
 );
+
+PsychologistCard.displayName = 'PsychologistCard';
 
 export default PsychologistCard;

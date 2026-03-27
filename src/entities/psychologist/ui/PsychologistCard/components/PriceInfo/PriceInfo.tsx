@@ -1,7 +1,9 @@
 import { Trans } from 'react-i18next';
-import { usePsychologistsTranslation } from '@shared/hooks';
-import css from './PriceInfo.module.css';
+
 import type { Psychologist } from '@entities/psychologist';
+import { usePsychologistsTranslation } from '@shared/hooks';
+
+import css from './PriceInfo.module.css';
 
 interface Props {
   psychologist: Psychologist;

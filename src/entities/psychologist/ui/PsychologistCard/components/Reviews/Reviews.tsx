@@ -1,6 +1,7 @@
-import css from './Reviews.module.css';
-import { ReviewItem } from '..';
 import type { PsychologistUI } from '@entities/psychologist';
+
+import ReviewItem from './ReviewItem/ReviewItem';
+import css from './Reviews.module.css';
 
 interface Props {
   psychologist: PsychologistUI;
