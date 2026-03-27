@@ -1,10 +1,12 @@
 import { type ControllerRenderProps, type FieldError } from 'react-hook-form';
-import Input from '../Input/Input';
-import AppointmentTimePicker from '@features/make-appointment/ui/AppointmentTimePicker/AppointmentTimePicker';
-import type { AppointmentFormData } from '@features/make-appointment';
-import css from './TimeField.module.css';
 
-interface TimeFieldProps {
+import type { AppointmentFormData } from '@features/make-appointment/model/types/appointment';
+import { Input } from '@shared/ui';
+
+import css from './AppointmentTimeField.module.css';
+import AppointmentTimePicker from '../AppointmentTimePicker/AppointmentTimePicker';
+
+interface AppointmentTimeFieldProps {
   field: ControllerRenderProps<AppointmentFormData, 'meetingTime'>;
   error?: FieldError;
   isOpen: boolean;
@@ -14,7 +16,7 @@ interface TimeFieldProps {
   classInputWrapper?: string;
 }
 
-export default function TimeField({
+export default function AppointmentTimeField({
   field,
   error,
   isOpen,
@@ -22,7 +24,7 @@ export default function TimeField({
   close,
   classField = '',
   classInputWrapper = '',
-}: TimeFieldProps) {
+}: AppointmentTimeFieldProps) {
   const handleChange = (time: string) => {
     if (time !== field.value) {
       field.onChange(time);
