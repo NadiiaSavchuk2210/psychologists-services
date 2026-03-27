@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react';
+import { memo, useEffect, useId, useRef } from 'react';
 
 import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 
@@ -15,6 +15,7 @@ interface Props {
 const PsychologistCard = memo(
   ({ psychologist, isExpanded, onToggle }: Props) => {
     const ref = useRef<HTMLElement>(null);
+    const detailsId = useId();
 
     useEffect(() => {
       if (isExpanded) {
@@ -25,6 +26,7 @@ const PsychologistCard = memo(
     return (
       <article ref={ref} className={css.card}>
         <CardHeader
+          detailsId={detailsId}
           psychologist={psychologist}
           isExpanded={isExpanded}
           onToggle={onToggle}

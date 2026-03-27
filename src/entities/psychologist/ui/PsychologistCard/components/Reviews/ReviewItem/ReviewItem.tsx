@@ -17,7 +17,7 @@ const ReviewItem = ({ review }: Props) => {
         <Avatar reviewerName={displayReviewer} />
 
         <div className={css.reviewRatingContainer}>
-          <h4 className={css.reviewerName}>{displayReviewer}</h4>
+          <p className={css.reviewerName}>{displayReviewer}</p>
           <Rating isReviewItem review={review} />
         </div>
       </div>

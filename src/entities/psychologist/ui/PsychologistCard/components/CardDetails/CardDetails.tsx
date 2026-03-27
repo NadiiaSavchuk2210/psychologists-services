@@ -15,12 +15,14 @@ import css from './CardDetails.module.css';
 import Reviews from '../Reviews/Reviews';
 
 interface Props {
+  detailsId: string;
   isExpanded: boolean;
   psychologist: PsychologistUI;
   onAppointmentOpen: () => void;
 }
 
 const CardDetails = ({
+  detailsId,
   isExpanded,
   psychologist,
   onAppointmentOpen,
@@ -41,10 +43,12 @@ const CardDetails = ({
 
   return (
     <motion.div
+      id={detailsId}
       layout
       initial={false}
       animate={{ height: isExpanded ? 'auto' : 0 }}
       className={css.details}
+      aria-hidden={!isExpanded}
     >
       <section className={css.section}>
         <h4 className="visually-hidden">{t('reviews')}</h4>

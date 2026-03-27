@@ -13,11 +13,17 @@ import Rating from '../Rating/Rating';
 
 interface Props {
   psychologist: PsychologistUI;
+  detailsId: string;
   isExpanded: boolean;
   onToggle: () => void;
 }
 
-const CardHeader = ({ psychologist, isExpanded, onToggle }: Props) => {
+const CardHeader = ({
+  psychologist,
+  detailsId,
+  isExpanded,
+  onToggle,
+}: Props) => {
   const { t } = usePsychologistsTranslation();
   const { displayName, displayAbout } = psychologist;
 
@@ -52,8 +58,13 @@ const CardHeader = ({ psychologist, isExpanded, onToggle }: Props) => {
             <p className={css.infoText}>{displayAbout}</p>
           </div>
 
-          <CardTrigger isExpanded={isExpanded} onToggle={onToggle} />
+          <CardTrigger
+            detailsId={detailsId}
+            isExpanded={isExpanded}
+            onToggle={onToggle}
+          />
           <CardDetails
+            detailsId={detailsId}
             onAppointmentOpen={() => openAppointment(psychologist)}
             isExpanded={isExpanded}
             psychologist={psychologist}
