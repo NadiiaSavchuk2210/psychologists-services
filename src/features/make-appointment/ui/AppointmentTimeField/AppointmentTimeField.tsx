@@ -10,6 +10,7 @@ import AppointmentTimePicker from '../AppointmentTimePicker/AppointmentTimePicke
 interface AppointmentTimeFieldProps {
   field: ControllerRenderProps<AppointmentFormData, 'meetingTime'>;
   error?: FieldError;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   toggle: () => void;
   close: () => void;
@@ -20,6 +21,7 @@ interface AppointmentTimeFieldProps {
 export default function AppointmentTimeField({
   field,
   error,
+  containerRef,
   isOpen,
   toggle,
   close,
@@ -36,7 +38,7 @@ export default function AppointmentTimeField({
   };
 
   return (
-    <div className={css.timeFieldContainer}>
+    <div ref={containerRef} className={css.timeFieldContainer}>
       <Input
         type="text"
         value={field.value || ''}

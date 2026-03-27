@@ -19,8 +19,8 @@ const Modal = ({
   open,
   onOpenChange,
   children,
-  title = 'Modal',
-  description = 'Modal dialog',
+  title,
+  description,
   header,
   modalClassName = '',
 }: ModalProps) => {
@@ -46,10 +46,12 @@ const Modal = ({
             header
           ) : (
             <>
-              <Dialog.Title className={css.title}>{title}</Dialog.Title>
-              <Dialog.Description className={css.description}>
-                {description}
-              </Dialog.Description>
+              {title && <Dialog.Title className={css.title}>{title}</Dialog.Title>}
+              {description && (
+                <Dialog.Description className={css.description}>
+                  {description}
+                </Dialog.Description>
+              )}
             </>
           )}
 
