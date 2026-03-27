@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
-import css from './CardDetails.module.css';
+
 import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 import {
   useAppointmentTranslation,
   useAuthTranslation,
   usePsychologistsTranslation,
 } from '@shared/hooks';
-import Reviews from '@shared/ui/Reviews/Reviews';
-import { Button } from '@shared/ui';
 import { useAuthStore } from '@shared/lib/store/authStore';
-import { toastService } from '@shared/lib/toasts/toastService';
 import { useModalStore } from '@shared/lib/store/modalStore';
+import { toastService } from '@shared/lib/toasts/toastService';
+import { Button } from '@shared/ui';
+
+import css from './CardDetails.module.css';
+import Reviews from '../Reviews/Reviews';
 
 interface Props {
   isExpanded: boolean;

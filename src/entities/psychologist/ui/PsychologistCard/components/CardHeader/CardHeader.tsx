@@ -1,14 +1,15 @@
-import css from './CardHeader.module.css';
-import { PriceInfo, Rating } from '@shared/ui';
 import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
-import { usePsychologistsTranslation } from '@shared/hooks';
-
-import BadgesList from '@shared/ui/BadgesList/BadgesList';
 import PsychologistAvatar from '@entities/psychologist/ui/PsychologistAvatar/PsychologistAvatar';
-import CardTrigger from '../CardTrigger/CardTrigger';
-import CardDetails from '../CardDetails/CardDetails';
 import { FavoriteButton } from '@features/favorites';
+import { usePsychologistsTranslation } from '@shared/hooks';
 import { useModalStore } from '@shared/lib/store/modalStore';
+
+import css from './CardHeader.module.css';
+import BadgesList from '../BadgesList/BadgesList';
+import CardDetails from '../CardDetails/CardDetails';
+import CardTrigger from '../CardTrigger/CardTrigger';
+import PriceInfo from '../PriceInfo/PriceInfo';
+import Rating from '../Rating/Rating';
 
 interface Props {
   psychologist: PsychologistUI;

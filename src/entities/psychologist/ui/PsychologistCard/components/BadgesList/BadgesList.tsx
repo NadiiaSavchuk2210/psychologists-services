@@ -1,8 +1,10 @@
-import css from './BadgesList.module.css';
 import { Trans } from 'react-i18next';
-import { usePsychologistsTranslation } from '@shared/hooks';
+
 import type { Psychologist } from '@entities/psychologist';
-import Badge from '../Badge/Badge';
+import { usePsychologistsTranslation } from '@shared/hooks';
+import Badge from '@shared/ui/Badge/Badge';
+
+import css from './BadgesList.module.css';
 
 interface Props {
   psychologist: Psychologist;

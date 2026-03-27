@@ -1,8 +1,9 @@
 import type { PsychologistUI } from '@entities/psychologist';
-import Icon from '../Icon/Icon';
-import css from './Rating.module.css';
-import { usePsychologistsTranslation } from '@shared/hooks';
 import type { Review } from '@entities/psychologist/model/types/psychologist-review';
+import { usePsychologistsTranslation } from '@shared/hooks';
+import Icon from '@shared/ui/Icon/Icon';
+
+import css from './Rating.module.css';
 
 type PsychologistItem = {
   psychologist: PsychologistUI;

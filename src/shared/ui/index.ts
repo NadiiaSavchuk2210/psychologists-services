@@ -6,7 +6,4 @@ export { default as SuspenseWrapper } from './SuspenseWrapper/SuspenseWrapper.ts
 export { default as LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher.tsx';
 export { default as ErrorMessage } from './ErrorMessage/ErrorMessage.tsx';
 export { default as Input } from './Input/Input.tsx';
-export { default as Rating } from './Rating/Rating.tsx';
-export { default as PriceInfo } from './PriceInfo/PriceInfo.tsx';
-export { default as ReviewItem } from './Reviews/ReviewItem/ReviewItem.tsx';
 export { default as EmptyState } from './EmptyState/EmptyState.tsx';

@@ -1,7 +1,8 @@
 import type { ReviewUI } from '@entities/psychologist/model/types/psychologist-review';
+
 import css from './ReviewItem.module.css';
-import Avatar from '@shared/ui/Avatar/Avatar';
-import Rating from '@shared/ui/Rating/Rating';
+import Avatar from '../../Avatar/Avatar';
+import Rating from '../../Rating/Rating';
 
 interface Props {
   review: ReviewUI;
@@ -9,6 +10,7 @@ interface Props {
 
 const ReviewItem = ({ review }: Props) => {
   const { displayReviewer, displayComment } = review;
+
   return (
     <li className={css.review}>
       <div className={css.reviewHeader}>

@@ -1,4 +1,5 @@
 import { getInitial } from '@shared/utils';
+
 import css from './Avatar.module.css';
 
 interface Props {
