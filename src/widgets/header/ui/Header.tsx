@@ -1,16 +1,18 @@
 import clsx from 'clsx';
-import css from './Header.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
-import { Navbar } from '@widgets/navbar';
-import { Icon } from '@shared/ui';
-import { AuthNavigation } from '@features/auth-navigation';
-import { MobileMenu } from '@widgets/mobile-menu';
+
 import { LoginModal } from '@features/auth/login';
 import { RegisterModal } from '@features/auth/register';
+import { AuthNavigation } from '@features/auth-navigation';
 import { useCommonTranslation } from '@shared/hooks';
 import { useModalStore } from '@shared/lib/store/modalStore';
+import { Icon } from '@shared/ui';
+import { MobileMenu } from '@widgets/mobile-menu';
+import { Navbar } from '@widgets/navbar';
+
+import css from './Header.module.css';
 
 const Header = () => {
   const { t } = useCommonTranslation();
@@ -55,13 +57,13 @@ const Header = () => {
             className={css['burger-btn']}
             type="button"
             onClick={openMenu}
+            aria-label={t('openMenu')}
           >
             <Icon
               name="icon-burger"
               className={css['burger-icon']}
               width={24}
               height={24}
-              aria-label={t('openMenu')}
             />
           </button>
         )}

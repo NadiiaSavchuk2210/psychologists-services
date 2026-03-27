@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import css from './MobileMenu.module.css';
-import { Icon } from '@shared/ui';
-import { Navbar } from '@widgets/navbar';
+
 import { AuthNavigation } from '@features/auth-navigation';
 import { useCommonTranslation } from '@shared/hooks';
+import { Icon } from '@shared/ui';
+import { Navbar } from '@widgets/navbar';
+
+import css from './MobileMenu.module.css';
 
 interface Props {
   isMenuOpen: boolean;
@@ -29,6 +31,7 @@ const MobileMenu = ({
       <div className={clsx('container', css['mobile-menu-container'])}>
         <button
           className={css['mobile-menu-close']}
+          type="button"
           onClick={closeMenu}
           aria-label={t('closeMenu')}
         >

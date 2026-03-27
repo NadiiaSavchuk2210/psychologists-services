@@ -1,20 +1,21 @@
 import type { Lang } from '@shared/lib/i18n';
+
 import type { Psychologist } from '../model/types/psychologist';
 
 export const mapPsychologist = (dto: Psychologist, lang: Lang) => {
   return {
     ...dto,
 
-    displayName: lang === 'ua' ? dto.name_ua : dto.name,
+    displayName: lang === 'uk' ? dto.name_ua : dto.name,
     displaySpecialization:
-      lang === 'ua' ? dto.specialization_ua : dto.specialization,
-    displayAbout: lang === 'ua' ? dto.about_ua : dto.about,
+      lang === 'uk' ? dto.specialization_ua : dto.specialization,
+    displayAbout: lang === 'uk' ? dto.about_ua : dto.about,
 
     displayExperience:
-      lang === 'ua' ? dto.experience.replace('years', 'років') : dto.experience,
+      lang === 'uk' ? dto.experience.replace('years', 'років') : dto.experience,
 
     displayInitialConsultation:
-      lang === 'ua'
+      lang === 'uk'
         ? dto.initial_consultation
             .replace('Free', 'Безкоштовна')
             .replace('-minute', '-хвилинна')
@@ -23,8 +24,8 @@ export const mapPsychologist = (dto: Psychologist, lang: Lang) => {
 
     displayReviews: dto.reviews.map(r => ({
       ...r,
-      displayReviewer: lang === 'ua' ? r.reviewer_ua : r.reviewer,
-      displayComment: lang === 'ua' ? r.comment_ua : r.comment,
+      displayReviewer: lang === 'uk' ? r.reviewer_ua : r.reviewer,
+      displayComment: lang === 'uk' ? r.comment_ua : r.comment,
     })),
   };
 };
