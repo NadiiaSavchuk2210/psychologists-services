@@ -1,12 +1,15 @@
-import css from './HomeHero.module.css';
 import clsx from 'clsx';
-import { Icon, Button } from '@shared/ui';
+
 import { ROUTES } from '@app/router/routesConfig';
-import heroJpg1x from '../../../assets/images/hero/hero-psychologist.jpg';
-import heroJpg2x from '../../../assets/images/hero/hero-psychologist@2x.jpg';
-import heroWebp1x from '../../../assets/images/hero/hero-psychologist.webp';
-import heroWebp2x from '../../../assets/images/hero/hero-psychologist@2x.webp';
 import { useHomeTranslation } from '@shared/hooks';
+import { Icon, Button } from '@shared/ui';
+
+import css from './HomeHero.module.css';
+import heroJpg1x from '../../../assets/images/hero/hero-psychologist.jpg';
+import heroWebp1x from '../../../assets/images/hero/hero-psychologist.webp';
+import heroJpg2x from '../../../assets/images/hero/hero-psychologist@2x.jpg';
+import heroWebp2x from '../../../assets/images/hero/hero-psychologist@2x.webp';
+
 
 const HomeHero = () => {
   const { t } = useHomeTranslation();

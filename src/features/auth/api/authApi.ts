@@ -5,6 +5,7 @@ import {
   updateProfile,
   type UserCredential,
 } from 'firebase/auth';
+
 import { auth } from '../../../shared/lib/config/firebase/auth';
 
 export const registerUser = async (

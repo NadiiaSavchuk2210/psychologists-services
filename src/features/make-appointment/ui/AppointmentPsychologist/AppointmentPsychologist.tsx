@@ -1,7 +1,8 @@
-import { useAppointmentTranslation } from '@shared/hooks';
-import css from './AppointmentPsychologist.module.css';
-import PsychologistAvatar from '@entities/psychologist/ui/PsychologistAvatar/PsychologistAvatar';
 import type { PsychologistUI } from '@entities/psychologist';
+import PsychologistAvatar from '@entities/psychologist/ui/PsychologistAvatar/PsychologistAvatar';
+import { useAppointmentTranslation } from '@shared/hooks';
+
+import css from './AppointmentPsychologist.module.css';
 
 interface Props {
   psychologist: PsychologistUI | null;

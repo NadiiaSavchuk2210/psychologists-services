@@ -1,5 +1,5 @@
-import { useLayoutEffect } from 'react';
 import i18next from 'i18next';
+import { useLayoutEffect } from 'react';
 
 export const useScrollToTopOnLanguageChange = (i18n: typeof i18next) => {
   useLayoutEffect(() => {

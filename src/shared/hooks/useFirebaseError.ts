@@ -1,5 +1,7 @@
 import { FirebaseError } from 'firebase/app';
+
 import { getFirebaseErrorMap } from '@shared/lib/auth/errorMap';
+
 import { useCommonTranslation } from './index';
 
 type ErrorMessage = string;

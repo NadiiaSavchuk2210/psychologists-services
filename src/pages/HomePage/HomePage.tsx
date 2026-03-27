@@ -1,7 +1,8 @@
+import { useHomeTranslation } from '@shared/hooks';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
+
 import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 import HomeHero from '../../widgets/home-hero/ui/HomeHero';
-import { useHomeTranslation } from '@shared/hooks';
 
 const HomePage = () => {
   const { t, i18n } = useHomeTranslation();

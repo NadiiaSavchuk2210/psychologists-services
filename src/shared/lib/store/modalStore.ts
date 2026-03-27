@@ -1,5 +1,6 @@
-import type { PsychologistUI } from '@entities/psychologist';
 import { create } from 'zustand';
+
+import type { PsychologistUI } from '@entities/psychologist';
 
 type ModalState = {
   isLoginOpen: boolean;

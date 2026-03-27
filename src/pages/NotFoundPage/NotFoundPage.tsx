@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import css from './NotFoundPage.module.css';
 import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
 import { useNotFoundTranslation } from '@shared/hooks';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
+
+import css from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
   const { t, i18n } = useNotFoundTranslation();

@@ -1,6 +1,8 @@
-import { useTheme } from '@app/providers/theme';
-import css from './ThemeSwitcher.module.css';
 import clsx from 'clsx';
+
+import { useTheme } from '@app/providers/theme';
+
+import css from './ThemeSwitcher.module.css';
 import { THEMES, type Theme } from '../model/theme.config';
 
 const ThemeSwitcher = () => {
@@ -23,6 +25,7 @@ const ThemeSwitcher = () => {
               onChange={() => setTheme(key as Theme)}
               className={css['theme-input']}
             />
+            <span className="visually-hidden">{value.label}</span>
           </label>
         </li>
       ))}

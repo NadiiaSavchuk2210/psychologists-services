@@ -1,6 +1,7 @@
+import { collection, getDocs } from 'firebase/firestore';
+
 import type { Psychologist } from '@entities/psychologist';
 import { db } from '@shared/lib/config/firebase/firestore';
-import { collection, getDocs } from 'firebase/firestore';
 
 export const fetchFavorites = async (
   userId: string

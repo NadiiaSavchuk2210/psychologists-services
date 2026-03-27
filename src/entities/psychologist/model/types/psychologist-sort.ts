@@ -8,5 +8,5 @@ export type SortField = 'name' | 'rating' | 'price';
 export type SortConfig = {
   labelKey: keyof IFiltersTranslations;
   order?: 'asc' | 'desc';
-  filter?: (value: any) => boolean;
+  filter?: (value: number) => boolean;
 };

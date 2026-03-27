@@ -1,6 +1,7 @@
-import Modal from '@shared/ui/Modal/Modal';
-import RegisterForm from '../RegisterForm/RegisterForm';
 import { useAuthTranslation } from '@shared/hooks';
+import Modal from '@shared/ui/Modal/Modal';
+
+import RegisterForm from '../RegisterForm/RegisterForm';
 
 interface Props {
   isOpen: boolean;
