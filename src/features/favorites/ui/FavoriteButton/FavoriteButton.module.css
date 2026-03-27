@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.favoriteBtn:disabled {
+  cursor: not-allowed;
+}
+
 .favoriteIcon {
   stroke: var(--color-text-primary);
   color: transparent;
@@ -16,4 +20,8 @@
 .isFavorite {
   color: var(--color-primary);
   stroke: var(--color-primary);
+}
+
+.favoriteBtn:disabled .favoriteIcon {
+  opacity: 0.7;
 }

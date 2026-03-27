@@ -39,8 +39,14 @@ const PsychologistsPage = () => {
     path: 'psychologists',
   });
 
-  const { data, fetchNextPage, hasNextPage, isLoading, error } =
-    useLocalizedPsychologists(activeSort);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+    error,
+  } = useLocalizedPsychologists(activeSort);
 
   const isReady = !isLoading && !error;
   const psychologists = data?.pages.flatMap(page => page.items) ?? [];
@@ -74,9 +80,10 @@ const PsychologistsPage = () => {
             {hasNextPage && (
               <Button
                 className={css.btnLoadMore}
+                disabled={isFetchingNextPage}
                 onClick={() => fetchNextPage()}
               >
-                {isLoading ? t('loadingMore') : t('loadMore')}
+                {isFetchingNextPage ? t('loadingMore') : t('loadMore')}
               </Button>
             )}
           </section>

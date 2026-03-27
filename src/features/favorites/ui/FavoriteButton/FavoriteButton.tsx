@@ -13,9 +13,10 @@ interface Props {
 
 const FavoriteButton = ({ item }: Props) => {
   const { t } = useA11yTranslation();
-  const { favorites, toggleFavorite } = useFavorites();
+  const { favorites, isFavoritePending, toggleFavorite } = useFavorites();
 
   const isFavorite = favorites.some(f => f.id === item.id);
+  const isPending = isFavoritePending(item.id);
   const label = isFavorite ? t('favoriteRemove') : t('favoriteAdd');
 
   return (
@@ -24,7 +25,11 @@ const FavoriteButton = ({ item }: Props) => {
       type="button"
       aria-label={label}
       aria-pressed={isFavorite}
-      onClick={() => toggleFavorite(item)}
+      aria-busy={isPending}
+      disabled={isPending}
+      onClick={() => {
+        void toggleFavorite(item);
+      }}
     >
       <Icon
         className={clsx(css.favoriteIcon, isFavorite && css.isFavorite)}

@@ -78,14 +78,14 @@ export const fetchPsychologists = async ({
       dbRef,
       orderByChild(sortField),
       ...(cursor ? [startAfter(cursor.value, cursor.id)] : []),
-      limitToFirst(pageSize)
+      limitToFirst(pageSize + 1)
     );
   } else {
     apiQuery = query(
       dbRef,
       orderByChild(sortField),
       ...(cursor ? [endBefore(cursor.value, cursor.id)] : []),
-      limitToLast(pageSize)
+      limitToLast(pageSize + 1)
     );
   }
 
@@ -102,7 +102,9 @@ export const fetchPsychologists = async ({
 
   if (isDesc) items.reverse();
 
-  const last = items[items.length - 1];
+  const hasMore = items.length > pageSize;
+  const visibleItems = hasMore ? items.slice(0, pageSize) : items;
+  const last = visibleItems[visibleItems.length - 1];
 
   const nextCursor = last
     ? {
@@ -112,8 +114,8 @@ export const fetchPsychologists = async ({
     : null;
 
   return {
-    items,
+    items: visibleItems,
     nextCursor,
-    hasMore: items.length >= pageSize,
+    hasMore,
   };
 };

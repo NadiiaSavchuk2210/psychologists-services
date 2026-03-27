@@ -39,7 +39,8 @@ export function usePsychologistsInfinite(
       }),
 
     initialPageParam: null,
-    getNextPageParam: lastPage => lastPage.nextCursor ?? undefined,
+    getNextPageParam: lastPage =>
+      lastPage.hasMore ? lastPage.nextCursor ?? undefined : undefined,
     placeholderData: keepPreviousData,
     staleTime: TIME.MINUTE * 5,
   });
