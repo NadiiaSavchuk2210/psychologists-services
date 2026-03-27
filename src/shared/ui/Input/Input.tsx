@@ -1,9 +1,12 @@
+import clsx from 'clsx';
 import { useId, useState } from 'react';
 import type { FieldError, UseFormRegisterReturn } from 'react-hook-form';
-import clsx from 'clsx';
+
+import { useA11yTranslation } from '@shared/hooks';
+
+import css from './Input.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Icon from '../Icon/Icon';
-import css from './Input.module.css';
 
 interface Props extends React.InputHTMLAttributes<
   HTMLInputElement | HTMLTextAreaElement
@@ -33,6 +36,7 @@ const Input = ({
   rows = 3,
   ...props
 }: Props) => {
+  const { t } = useA11yTranslation();
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
@@ -95,7 +99,7 @@ const Input = ({
             type="button"
             className={css.eyeButton}
             onClick={handleTogglePassword}
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            aria-label={showPassword ? t('hidePassword') : t('showPassword')}
             aria-pressed={showPassword}
             aria-controls={inputId}
           >
@@ -112,7 +116,7 @@ const Input = ({
             type="button"
             className={css.eyeButton}
             onClick={onIconClick}
-            aria-label="Open time picker"
+            aria-label={t('openTimePicker')}
           >
             <Icon name="icon-clock" width={20} height={20} />
           </button>

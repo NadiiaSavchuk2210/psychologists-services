@@ -79,6 +79,9 @@ export interface IA11yTranslations {
   favoriteRemove: string;
   modalClose: string;
   expand: string;
+  showPassword: string;
+  hidePassword: string;
+  openTimePicker: string;
 }
 
 export interface INavbarTranslations {

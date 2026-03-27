@@ -1,11 +1,13 @@
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input } from '@shared/ui';
-import css from './RegisterForm.module.css';
-import { useAuthTranslation, useCommonTranslation } from '@shared/hooks';
+import { useForm } from 'react-hook-form';
+
+import { useRegisterSchema } from '@features/auth/model/hooks/useRegisterSchema';
 import { useRegisterMutation } from '@features/auth/model/queries';
 import type { RegisterFormData } from '@features/auth/types/types';
-import { useRegisterSchema } from '@features/auth/model/hooks/useRegisterSchema';
+import { useAuthTranslation, useCommonTranslation } from '@shared/hooks';
+import { Button, Input } from '@shared/ui';
+
+import css from './RegisterForm.module.css';
 
 interface Props {
   onOpenChange: (isOpen: boolean) => void;
@@ -36,8 +38,6 @@ const RegisterForm = ({ onOpenChange }: Props) => {
   });
 
   const onSubmit = (data: RegisterFormData) => {
-    console.log(data);
-
     registerMutation.mutate(data, {
       onSuccess: () => {
         reset();
