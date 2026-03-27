@@ -9,6 +9,7 @@ import {
 import { PatternFormat } from 'react-number-format';
 
 import type { AppointmentFormData } from '@features/make-appointment/model/types/appointment';
+import { useAppointmentTranslation } from '@shared/hooks';
 import { Input } from '@shared/ui';
 
 import css from './AppointmentPhoneField.module.css';
@@ -36,6 +37,8 @@ export default function AppointmentPhoneField<
   classField = '',
   className = 'appointment-form__input',
 }: AppointmentPhoneFieldProps<TFieldValues, TName>) {
+  const { t } = useAppointmentTranslation();
+
   return (
     <Controller
       name={name}
@@ -50,7 +53,7 @@ export default function AppointmentPhoneField<
           mask="_"
           customInput={Input}
           type="tel"
-          placeholder="+380"
+          placeholder={t('fields.phonePlaceholder')}
           error={error}
           className={clsx(css[className], css.phoneInput)}
           classInputWrapper={css[classInputWrapper]}

@@ -1,19 +1,20 @@
 import clsx from 'clsx';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
+import {
+  PsychologistSkeleton,
+  type SortOption,
+  useFilteredPsychologistsBySort,
+} from '@entities/psychologist';
 import { useFavoritesWithSorting } from '@features/favorites/model/hooks/useFavoritesWithSorting';
 import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
 import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
-import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
 import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
-import {
-  PRICE_LIMITS,
-  SORT_OPTIONS,
-} from '@shared/constants/psychologist-sort';
+import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
 import {
   useFavoritesTranslation,
   useMetaTags,
+  usePaginatedItems,
   useScrollToNewItem,
   useScrollToTopOnLanguageChange,
 } from '@shared/hooks';
@@ -29,20 +30,13 @@ const FavoritesPage = () => {
   const [activeSort, setActiveSort] = useState<SortOption>(
     SORT_OPTIONS.POPULAR
   );
-  const [page, setPage] = useState(1);
   const { t, i18n } = useFavoritesTranslation();
   const TOP_OFFSET = 220;
 
   useMetaTags({
     t,
     i18n,
-    titleKey: 'meta.title',
-    descriptionKey: 'meta.description',
-    ogTitleKey: 'meta.ogTitle',
-    ogDescriptionKey: 'meta.ogDescription',
-    ogImage: `${HOME_PAGE_URL}/${OG_IMAGE}`,
-    ogUrl: `${HOME_PAGE_URL}/favorites`,
-    canonicalUrl: `${HOME_PAGE_URL}/favorites`,
+    path: 'favorites',
   });
 
   const {
@@ -52,33 +46,21 @@ const FavoritesPage = () => {
   } = useFavoritesWithSorting(activeSort);
 
   const isReady = !isLoading && !error;
-
-  const filtered = useMemo(() => {
-    switch (activeSort) {
-      case SORT_OPTIONS.CHEAP:
-        return localizedFavorites.filter(
-          p => p.price_per_hour <= PRICE_LIMITS.CHEAP_MAX
-        );
-      case SORT_OPTIONS.EXPENSIVE:
-        return localizedFavorites.filter(
-          p => p.price_per_hour > PRICE_LIMITS.EXPENSIVE_MIN
-        );
-      default:
-        return localizedFavorites;
-    }
-  }, [localizedFavorites, activeSort]);
+  const filtered = useFilteredPsychologistsBySort(
+    localizedFavorites,
+    activeSort
+  );
 
   const listRef = useRef<HTMLUListElement>(null);
-  const visibleItems = useMemo(() => {
-    return filtered.slice(0, page * PSYCHOLOGISTS_PER_PAGE);
-  }, [filtered, page]);
+  const { visibleItems, hasMore, loadMore, resetPagination } =
+    usePaginatedItems(filtered, PSYCHOLOGISTS_PER_PAGE);
 
   useScrollToNewItem(listRef, visibleItems.length, TOP_OFFSET, [i18n.language]);
   useScrollToTopOnLanguageChange(i18n);
 
   const handleSortChange = (value: SortOption) => {
     setActiveSort(value);
-    setPage(1);
+    resetPagination();
   };
 
   return (
@@ -103,11 +85,8 @@ const FavoritesPage = () => {
             <h2 className="visually-hidden">{t('listTitle')}</h2>
             <PsychologistsList ref={listRef} psychologists={visibleItems} />
 
-            {page * PSYCHOLOGISTS_PER_PAGE < filtered.length && (
-              <Button
-                className={css.btnLoadMore}
-                onClick={() => setPage(p => p + 1)}
-              >
+            {hasMore && (
+              <Button className={css.btnLoadMore} onClick={loadMore}>
                 {isLoading ? t('loadingMore') : t('loadMore')}
               </Button>
             )}

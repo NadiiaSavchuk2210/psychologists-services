@@ -72,6 +72,8 @@ export interface ICommonTranslations {
   homeLink: string;
   openMenu: string;
   closeMenu: string;
+  languageEnglish: string;
+  languageUkrainian: string;
 }
 
 export interface IA11yTranslations {
@@ -158,6 +160,8 @@ export interface IAppointmentTranslations {
     phoneNumber: string;
     meetingTime: string;
     comment: string;
+    phonePlaceholder: string;
+    timePlaceholder: string;
     submit: string;
     sending: string;
   };
