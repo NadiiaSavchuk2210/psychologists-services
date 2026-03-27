@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 
+import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
+
 type MetaParams = {
   t: (key: string) => string;
   i18n: { language: string };
+  path?: string;
   titleKey?: string;
   descriptionKey?: string;
   ogTitleKey?: string;
@@ -18,11 +21,12 @@ type MetaParams = {
 export const useMetaTags = ({
   t,
   i18n,
+  path = '',
   titleKey = 'meta.title',
   descriptionKey = 'meta.description',
   ogTitleKey = 'meta.ogTitle',
   ogDescriptionKey = 'meta.ogDescription',
-  ogImage,
+  ogImage = `${HOME_PAGE_URL}/${OG_IMAGE}`,
   ogUrl,
   canonicalUrl,
   ogType = 'website',
@@ -30,6 +34,8 @@ export const useMetaTags = ({
   twitterImage,
 }: MetaParams) => {
   useEffect(() => {
+    const normalizedPath = path ? `/${path.replace(/^\/+|\/+$/g, '')}` : '';
+    const pageUrl = `${HOME_PAGE_URL}${normalizedPath}`;
     const title = t(titleKey);
     const description = t(descriptionKey);
     const ogTitle = t(ogTitleKey);
@@ -70,7 +76,7 @@ export const useMetaTags = ({
     setMetaTag('property', 'og:title', ogTitle);
     setMetaTag('property', 'og:description', ogDescription);
     setMetaTag('property', 'og:image', ogImage);
-    setMetaTag('property', 'og:url', ogUrl);
+    setMetaTag('property', 'og:url', ogUrl || pageUrl);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag(
       'property',
@@ -83,10 +89,11 @@ export const useMetaTags = ({
     setMetaTag('name', 'twitter:description', ogDescription);
     setMetaTag('name', 'twitter:image', twitterImage || ogImage);
 
-    setLinkTag('canonical', canonicalUrl || ogUrl);
+    setLinkTag('canonical', canonicalUrl || ogUrl || pageUrl);
   }, [
     t,
     i18n.language,
+    path,
     titleKey,
     descriptionKey,
     ogTitleKey,

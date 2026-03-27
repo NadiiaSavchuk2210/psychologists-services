@@ -1,27 +1,27 @@
 import clsx from 'clsx';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
+import {
+  PsychologistSkeleton,
+  type SortOption,
+  useFilteredPsychologistsBySort,
+} from '@entities/psychologist';
 import { useLocalizedPsychologists } from '@entities/psychologist/model/hooks/useLocalizedPsychologists';
 import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
 import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
 import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
+import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
 import {
-  PRICE_LIMITS,
-  SORT_OPTIONS,
-} from '@shared/constants/psychologist-sort';
-import {
+  useMetaTags,
   usePsychologistsTranslation,
   useScrollToNewItem,
   useScrollToTopOnLanguageChange,
 } from '@shared/hooks';
-import { useMetaTags } from '@shared/hooks/useMetaTags';
 import { useModalStore } from '@shared/lib/store/modalStore';
 import { Button, EmptyState, ErrorMessage } from '@shared/ui';
 import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
 
 import css from './PsychologistsPage.module.css';
-import { HOME_PAGE_URL, OG_IMAGE } from '../../shared/constants/metadata';
 
 const PsychologistsPage = () => {
   const { isAppointmentOpen, closeAppointment } = useModalStore();
@@ -36,34 +36,15 @@ const PsychologistsPage = () => {
   useMetaTags({
     t,
     i18n,
-    ogImage: `${HOME_PAGE_URL}/${OG_IMAGE}`,
-    ogUrl: HOME_PAGE_URL,
-    canonicalUrl: HOME_PAGE_URL,
+    path: 'psychologists',
   });
 
   const { data, fetchNextPage, hasNextPage, isLoading, error } =
     useLocalizedPsychologists(activeSort);
 
   const isReady = !isLoading && !error;
-
-  const filtered = useMemo(() => {
-    const psychologists = data?.pages.flatMap(p => p.items) ?? [];
-
-    switch (activeSort) {
-      case SORT_OPTIONS.CHEAP:
-        return psychologists.filter(
-          p => p.price_per_hour < PRICE_LIMITS.CHEAP_MAX
-        );
-
-      case SORT_OPTIONS.EXPENSIVE:
-        return psychologists.filter(
-          p => p.price_per_hour >= PRICE_LIMITS.EXPENSIVE_MIN
-        );
-
-      default:
-        return psychologists;
-    }
-  }, [data?.pages, activeSort]);
+  const psychologists = data?.pages.flatMap(page => page.items) ?? [];
+  const filtered = useFilteredPsychologistsBySort(psychologists, activeSort);
 
   const listRef = useRef<HTMLUListElement>(null);
   useScrollToNewItem(listRef, filtered.length, TOP_OFFSET, [i18n.language]);

@@ -1,6 +1,7 @@
 import { type ControllerRenderProps, type FieldError } from 'react-hook-form';
 
 import type { AppointmentFormData } from '@features/make-appointment/model/types/appointment';
+import { useAppointmentTranslation } from '@shared/hooks';
 import { Input } from '@shared/ui';
 
 import css from './AppointmentTimeField.module.css';
@@ -25,6 +26,8 @@ export default function AppointmentTimeField({
   classField = '',
   classInputWrapper = '',
 }: AppointmentTimeFieldProps) {
+  const { t } = useAppointmentTranslation();
+
   const handleChange = (time: string) => {
     if (time !== field.value) {
       field.onChange(time);
@@ -38,7 +41,7 @@ export default function AppointmentTimeField({
         type="text"
         value={field.value || ''}
         readOnly
-        placeholder="00:00"
+        placeholder={t('fields.timePlaceholder')}
         error={error}
         onClick={toggle}
         isTimePicker

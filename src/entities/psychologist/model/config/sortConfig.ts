@@ -31,6 +31,6 @@ export const SORT_CONFIG: Record<SortOption, SortConfig> = {
   [SORT_OPTIONS.EXPENSIVE]: {
     labelKey: 'expensive',
     order: 'desc',
-    filter: (price: number) => price >= PRICE_LIMITS.EXPENSIVE_MIN,
+    filter: (price: number) => price > PRICE_LIMITS.EXPENSIVE_MIN,
   },
 };

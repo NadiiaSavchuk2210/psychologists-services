@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
 import { useNotFoundTranslation } from '@shared/hooks';
 import { useMetaTags } from '@shared/hooks/useMetaTags';
 
@@ -12,13 +11,7 @@ const NotFoundPage = () => {
   useMetaTags({
     t,
     i18n,
-    titleKey: 'meta.title',
-    descriptionKey: 'meta.description',
-    ogTitleKey: 'meta.ogTitle',
-    ogDescriptionKey: 'meta.ogDescription',
-    ogImage: `${HOME_PAGE_URL}/${OG_IMAGE}`,
-    ogUrl: `${HOME_PAGE_URL}/404`,
-    canonicalUrl: `${HOME_PAGE_URL}/404`,
+    path: '404',
   });
 
   return (
