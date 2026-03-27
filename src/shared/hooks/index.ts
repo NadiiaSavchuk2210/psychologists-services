@@ -1,4 +1,5 @@
 export * from './useDisclosure';
+export * from './useClickOutside';
 export * from './useFirebaseError';
 export * from './useMetaTags';
 export * from './usePaginatedItems';

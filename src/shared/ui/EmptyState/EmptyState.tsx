@@ -3,14 +3,11 @@ import clsx from 'clsx';
 import css from './EmptyState.module.css';
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
 }
 
-const EmptyState = ({
-  title = 'Nothing found',
-  description = 'There are no items to display.',
-}: Props) => {
+const EmptyState = ({ title, description }: Props) => {
   return (
     <div className={clsx(css.empty, 'container')}>
       <h3 className={css.title}>{title}</h3>
