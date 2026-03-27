@@ -1,17 +1,19 @@
-import { Controller } from 'react-hook-form';
-import { PatternFormat } from 'react-number-format';
-import { Input } from '@shared/ui';
-import type {
-  Control,
-  FieldError,
-  FieldPath,
-  FieldValues,
-} from 'react-hook-form';
-import type { AppointmentFormData } from '@features/make-appointment/model/types/appointment';
-import css from './PhoneField.module.css';
 import clsx from 'clsx';
+import {
+  Controller,
+  type Control,
+  type FieldError,
+  type FieldPath,
+  type FieldValues,
+} from 'react-hook-form';
+import { PatternFormat } from 'react-number-format';
 
-interface PhoneFieldProps<
+import type { AppointmentFormData } from '@features/make-appointment/model/types/appointment';
+import { Input } from '@shared/ui';
+
+import css from './AppointmentPhoneField.module.css';
+
+interface AppointmentPhoneFieldProps<
   TFieldValues extends FieldValues = AppointmentFormData,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
@@ -23,7 +25,7 @@ interface PhoneFieldProps<
   className?: string;
 }
 
-export default function PhoneField<
+export default function AppointmentPhoneField<
   TFieldValues extends FieldValues = AppointmentFormData,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
@@ -33,7 +35,7 @@ export default function PhoneField<
   classInputWrapper = '',
   classField = '',
   className = 'appointment-form__input',
-}: PhoneFieldProps<TFieldValues, TName>) {
+}: AppointmentPhoneFieldProps<TFieldValues, TName>) {
   return (
     <Controller
       name={name}

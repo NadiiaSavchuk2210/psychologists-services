@@ -1,19 +1,21 @@
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input, Button } from '@shared/ui';
-import { useAppointmentTranslation } from '@shared/hooks';
-import css from './AppointmentForm.module.css';
-import { useAppointmentMutation } from '@features/make-appointment/model/hooks/useAppointmentMutation';
 import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
+import { useAppointmentMutation } from '@features/make-appointment/model/hooks/useAppointmentMutation';
+import { useAppointmentSchema } from '@features/make-appointment/model/hooks/useAppointmentSchema';
 import type {
   Appointment,
   AppointmentFormData,
 } from '@features/make-appointment/model/types/appointment';
-import { useEffect, useRef, useState } from 'react';
+import { useAppointmentTranslation } from '@shared/hooks';
 import { useAuthStore } from '@shared/lib/store/authStore';
-import TimeField from '@shared/ui/TimeField/TimeField';
-import PhoneField from '@shared/ui/PhoneField/PhoneField';
-import { useAppointmentSchema } from '@features/make-appointment/model/hooks/useAppointmentSchema';
+import { Button, Input } from '@shared/ui';
+
+import css from './AppointmentForm.module.css';
+import AppointmentPhoneField from '../AppointmentPhoneField/AppointmentPhoneField';
+import AppointmentTimeField from '../AppointmentTimeField/AppointmentTimeField';
 
 interface Props {
   onOpenChange: (isOpen: boolean) => void;
@@ -104,7 +106,7 @@ export default function AppointmentForm({
           className={clsx(css['appointment-form__input'])}
         />
 
-        <PhoneField
+        <AppointmentPhoneField
           control={control}
           name="phoneNumber"
           error={errors.phoneNumber}
@@ -116,7 +118,7 @@ export default function AppointmentForm({
           name="meetingTime"
           control={control}
           render={({ field }) => (
-            <TimeField
+            <AppointmentTimeField
               field={field}
               error={errors.meetingTime}
               isOpen={isTimePickerOpen}
