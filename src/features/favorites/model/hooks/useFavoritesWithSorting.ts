@@ -1,11 +1,13 @@
-import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
-import { useTranslation } from 'react-i18next';
-import { useFavorites } from './useFavorites';
-import type { SortOption } from '@entities/psychologist';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import type { SortOption } from '@entities/psychologist';
+import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
 import type { Lang } from '@shared/lib/i18n';
-import { mapPsychologist } from '../../../../entities/psychologist/utils/mapPsychologist';
 import { getLang } from '@shared/utils';
+
+import { useFavorites } from './useFavorites';
+import { mapPsychologist } from '../../../../entities/psychologist/utils/mapPsychologist';
 
 export const useFavoritesWithSorting = (sort: SortOption) => {
   const { favorites = [], isLoading, error } = useFavorites();
@@ -33,10 +35,10 @@ export const useFavoritesWithSorting = (sort: SortOption) => {
           return b.price_per_hour - a.price_per_hour;
 
         case SORT_OPTIONS.A_Z:
-          return a.name.localeCompare(b.name, lang);
+          return a.displayName.localeCompare(b.displayName, lang);
 
         case SORT_OPTIONS.Z_A:
-          return b.name.localeCompare(a.name, lang);
+          return b.displayName.localeCompare(a.displayName, lang);
 
         default:
           return 0;

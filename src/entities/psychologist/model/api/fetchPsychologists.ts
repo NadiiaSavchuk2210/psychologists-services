@@ -1,19 +1,21 @@
+import {
+  endBefore,
+  get,
+  limitToFirst,
+  limitToLast,
+  orderByChild,
+  query,
+  ref,
+  startAfter,
+} from 'firebase/database';
+
 import { DB_PATHS, SORT_OPTIONS } from '@shared/constants';
+import { rtdb } from '@shared/lib/config/firebase';
+import type { Lang } from '@shared/lib/i18n';
+
 import type { Psychologist } from '../types/psychologist';
 import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
 import type { SortOption } from '../types/psychologist-sort';
-import {
-  query,
-  orderByChild,
-  startAfter,
-  endBefore,
-  limitToFirst,
-  limitToLast,
-  get,
-  ref,
-} from 'firebase/database';
-import { rtdb } from '@shared/lib/config/firebase';
-import type { Lang } from '@shared/lib/i18n';
 
 export const fetchPsychologists = async ({
   sort,
@@ -28,7 +30,7 @@ export const fetchPsychologists = async ({
 }): Promise<FetchResponseDTO> => {
   const dbRef = ref(rtdb, DB_PATHS.PSYCHOLOGISTS);
 
-  let sortField = lang === 'ua' ? 'name_ua' : 'name';
+  let sortField = lang === 'uk' ? 'name_ua' : 'name';
   let isDesc = false;
 
   switch (sort) {
@@ -51,11 +53,11 @@ export const fetchPsychologists = async ({
       break;
 
     case SORT_OPTIONS.A_Z:
-      sortField = lang === 'ua' ? 'name_ua' : 'name';
+      sortField = lang === 'uk' ? 'name_ua' : 'name';
       break;
 
     case SORT_OPTIONS.Z_A:
-      sortField = lang === 'ua' ? 'name_ua' : 'name';
+      sortField = lang === 'uk' ? 'name_ua' : 'name';
       isDesc = true;
       break;
   }

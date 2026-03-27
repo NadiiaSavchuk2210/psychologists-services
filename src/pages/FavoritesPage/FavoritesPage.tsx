@@ -1,25 +1,27 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import {
-  useFavoritesTranslation,
-  useScrollToNewItem,
-  useScrollToTopOnLanguageChange,
-} from '@shared/hooks';
+import clsx from 'clsx';
+import { useMemo, useRef, useState } from 'react';
+
+import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
+import { useFavoritesWithSorting } from '@features/favorites/model/hooks/useFavoritesWithSorting';
+import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
+import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
+import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
+import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
 import {
   PRICE_LIMITS,
   SORT_OPTIONS,
 } from '@shared/constants/psychologist-sort';
-import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
+import {
+  useFavoritesTranslation,
+  useMetaTags,
+  useScrollToNewItem,
+  useScrollToTopOnLanguageChange,
+} from '@shared/hooks';
+import { useModalStore } from '@shared/lib/store/modalStore';
 import { Button, EmptyState, ErrorMessage } from '@shared/ui';
 import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
+
 import css from './FavoritesPage.module.css';
-import { HOME_PAGE_URL, OG_IMAGE } from '@shared/constants/metadata';
-import { useFavoritesWithSorting } from '@features/favorites/model/hooks/useFavoritesWithSorting';
-import { PsychologistSkeleton, type SortOption } from '@entities/psychologist';
-import clsx from 'clsx';
-import { useMetaTags } from '@shared/hooks/useMetaTags';
-import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
-import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
-import { useModalStore } from '@shared/lib/store/modalStore';
 
 const FavoritesPage = () => {
   const { isAppointmentOpen, closeAppointment } = useModalStore();
@@ -69,21 +71,22 @@ const FavoritesPage = () => {
   const listRef = useRef<HTMLUListElement>(null);
   const visibleItems = useMemo(() => {
     return filtered.slice(0, page * PSYCHOLOGISTS_PER_PAGE);
-  }, [localizedFavorites, page]);
+  }, [filtered, page]);
 
   useScrollToNewItem(listRef, visibleItems.length, TOP_OFFSET, [i18n.language]);
   useScrollToTopOnLanguageChange(i18n);
 
-  useEffect(() => {
+  const handleSortChange = (value: SortOption) => {
+    setActiveSort(value);
     setPage(1);
-  }, [activeSort]);
+  };
 
   return (
     <>
       <main className={css.main}>
         <h1 className="visually-hidden">{t('title')}</h1>
 
-        <FilterSelect activeSort={activeSort} onChange={setActiveSort} />
+        <FilterSelect activeSort={activeSort} onChange={handleSortChange} />
 
         {isLoading && (
           <div className={css.loadingContainer}>

@@ -1,6 +1,14 @@
 import type { Lang } from '@shared/lib/i18n';
 
-export const getLang = (i18n: any): Lang =>
-  i18n.language.startsWith('uk') || i18n.language.startsWith('ua')
-    ? 'ua'
+type LanguageState = {
+  language: string;
+  resolvedLanguage?: string;
+};
+
+export const getLang = (i18n: LanguageState): Lang => {
+  const currentLanguage = i18n.resolvedLanguage ?? i18n.language;
+
+  return currentLanguage.startsWith('uk') || currentLanguage.startsWith('ua')
+    ? 'uk'
     : 'en';
+};

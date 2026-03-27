@@ -1,4 +1,4 @@
-export type Lang = 'en' | 'ua';
+export type Lang = 'en' | 'uk';
 
 export interface IMetaTranslations {
   title: string;
