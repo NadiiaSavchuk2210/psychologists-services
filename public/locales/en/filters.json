@@ -2,6 +2,8 @@
   "all": "Show all",
   "a_z": "A to Z",
   "z_a": "Z to A",
+  "price_low_high": "Price: Low to High",
+  "price_high_low": "Price: High to Low",
   "popular": "Popular",
   "not_popular": "Not popular",
   "cheap": "Less than 10$",

@@ -15,13 +15,21 @@ export const SORT_CONFIG: Record<SortOption, SortConfig> = {
     labelKey: 'z_a',
     order: 'desc',
   },
+  [SORT_OPTIONS.PRICE_LOW_HIGH]: {
+    labelKey: 'price_low_high',
+    order: 'asc',
+  },
+  [SORT_OPTIONS.PRICE_HIGH_LOW]: {
+    labelKey: 'price_high_low',
+    order: 'desc',
+  },
   [SORT_OPTIONS.POPULAR]: {
     labelKey: 'popular',
-    order: 'asc',
+    order: 'desc',
   },
   [SORT_OPTIONS.NOT_POPULAR]: {
     labelKey: 'not_popular',
-    order: 'desc',
+    order: 'asc',
   },
   [SORT_OPTIONS.CHEAP]: {
     labelKey: 'cheap',
