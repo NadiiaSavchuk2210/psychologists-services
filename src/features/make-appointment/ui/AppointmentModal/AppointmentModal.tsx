@@ -1,8 +1,9 @@
-import Modal from '@shared/ui/Modal/Modal';
 import { useAppointmentTranslation } from '@shared/hooks';
+import { useModalStore } from '@shared/lib/store/modalStore';
+import Modal from '@shared/ui/Modal/Modal';
+
 import AppointmentForm from '../AppointmentForm/AppointmentForm';
 import AppointmentPsychologist from '../AppointmentPsychologist/AppointmentPsychologist';
-import { useModalStore } from '@shared/lib/store/modalStore';
 
 interface Props {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export default function AppointmentModal({ isOpen, onOpenChange }: Props) {
       <Modal.Body>
         <AppointmentPsychologist psychologist={psychologist} />
         <AppointmentForm
-          psychologistName={psychologist?.name ?? ''}
+          psychologistName={psychologist?.displayName ?? ''}
           onOpenChange={onOpenChange}
         />
       </Modal.Body>
