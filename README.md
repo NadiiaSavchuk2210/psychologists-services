@@ -1,181 +1,142 @@
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:54BE96,50:3470FF,100:FC832C&height=220&section=header&text=Psychologists%20Services&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Responsive%20mental%20health%20platform%20built%20with%20React%2C%20TypeScript%2C%20Vite%2C%20and%20Firebase&descAlignY=60&descSize=16" alt="Psychologists Services header" />
+
 <div align="center">
 
-![Psychologists Services Premium Banner](public/psychologists-services-og.png)
+<img src="public/apple-touch-icon.png" alt="Psychologists Services logo" width="96" height="96" />
 
 # Psychologists Services
 
-### Discover psychologists, save favorites, and book appointments in a calm, modern interface
+A web app for browsing psychologists, saving favorites, and booking appointments.
 
-_Built with React, TypeScript, Vite, and Firebase._
+<p>
+  <img src="https://img.shields.io/badge/status-active-54BE96?style=flat-square" alt="Project status: active" />
+  <img src="https://img.shields.io/badge/platform-web-3470FF?style=flat-square" alt="Platform: web" />
+  <img src="https://img.shields.io/badge/locales-en%20%7C%20uk-FC832C?style=flat-square" alt="Locales: English and Ukrainian" />
+</p>
 
-<img
-  src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&duration=2600&pause=900&color=54BE96&center=true&vCenter=true&width=920&lines=Responsive+mental+health+platform;Firebase+authentication+and+persistent+favorites;Appointment+booking+with+validated+forms;Recruiter-friendly+frontend+showcase"
-  alt="Animated project highlights"
-/>
+<p>
+  <a href="https://psychologists-services-orpin.vercel.app/"><strong>Live Demo</strong></a>
+  ·
+  <a href="https://github.com/NadiiaSavchuk2210/psychologists-services"><strong>Source Code</strong></a>
+  ·
+  <a href="https://www.figma.com/design/I5vjNb0NsJOpQRnRpMloSY/Psychologists.Services?m=auto&t=MPhtRiTVSHH0Bl64-6"><strong>Figma</strong></a>
+</p>
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![React Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)](https://tanstack.com/query/latest)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)](https://tanstack.com/query/latest)
 [![i18next](https://img.shields.io/badge/i18next-26A69A?style=for-the-badge&logo=i18next&logoColor=white)](https://www.i18next.com/)
 
-[![Source Code](https://img.shields.io/badge/Source_Code-191A15?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NadiiaSavchuk2210/psychologists-services)
-[![Figma Mockup](https://img.shields.io/badge/Figma-Mockup-54BE96?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/I5vjNb0NsJOpQRnRpMloSY/Psychologists.Services?m=auto&t=MPhtRiTVSHH0Bl64-6)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-54BE96?style=for-the-badge)](https://psychologists-services-orpin.vercel.app/)
-![Status](https://img.shields.io/badge/Status-Ready_for_Deployment-2B4D43?style=for-the-badge)
-
-<br />
-
-<img src="https://skillicons.dev/icons?i=react,ts,vite,firebase,css" alt="Tech icons" />
-
-<br />
+<p>
+  <img src="https://skillicons.dev/icons?i=react,ts,vite,firebase,css,github,figma&perline=7" alt="Tech stack icons" />
+</p>
 
 </div>
 
 ---
 
-## ✦ Overview
+## Table of Contents
 
-**Psychologists Services** is a responsive mental health platform. It helps
-users browse psychologists, compare specialists with sorting, save favorites
-after authentication, and submit appointment requests through a clean modal
-flow.
+- [Overview](#-overview)
+- [Preview](#-preview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Routes](#-routes)
+- [Data and Firebase](#-data-and-firebase)
+- [Installation and Setup](#-installation-and-setup)
+- [Available Scripts](#-available-scripts)
+- [Deployment](#-deployment)
+- [Author](#-author)
 
-The product direction follows the visual language of the app itself:
+## 🌿 Overview
 
-- calm green-first palette
-- soft, readable UI
-- responsive layout from mobile to desktop
-- lightweight but scalable frontend architecture
-- Firebase-based persistence for auth and user actions
+**Psychologists Services** is a responsive single-page application for a psychology services platform. Users can browse a catalog of psychologists, sort specialists, save favorites after authentication, and send an appointment request through a modal form.
 
-> [!TIP] The project already includes protected routes, persistent favorites,
-> bilingual UI, form validation, and optimized production chunk splitting.
+The project is built with `React 19` and `Vite`, uses `Firebase Authentication`, `Realtime Database`, and `Firestore`, and supports both English and Ukrainian localization.
 
----
+> Built as a clean, modern SPA with protected routes, persisted UI state, and a Firebase-backed user flow.
 
-## ✦ Quick Navigation
+## 🖼 Preview
 
-| Section                                         | Description                           |
-| ----------------------------------------------- | ------------------------------------- |
-| [✨ Key Features](#-key-features)               | Main user-facing functionality        |
-| [🗂 Project Structure](#-project-structure)     | Folder organization                   |
-| [⚙ Tech Stack](#-tech-stack)                    | Core technologies used                |
-| [🔥 Firebase Data Model](#-firebase-data-model) | Realtime Database and Firestore usage |
-| [🚀 Quick Start](#-quick-start)                 | Setup and local launch instructions   |
-| [▲ Deployment](#-deployment)                   | Vercel deployment notes               |
+<div align="center">
+  <img src="public/psychologists-services-og.png" alt="Psychologists Services preview" width="100%" />
+</div>
 
----
----
+## ✨ Features
 
-<a id="key-features"></a>
+| Area | Details |
+| --- | --- |
+| Catalog | `/psychologists` page with loading in batches of `3` items |
+| Filters | Sorting psychologists by supported options |
+| Cards | Expandable cards with profile details and reviews |
+| Appointments | Modal booking form with validation and Firestore submission |
+| Authentication | Sign up, sign in, sign out, and protected favorites route |
+| Favorites | Add and remove psychologists from a personal saved list |
+| Persistence | Form drafts saved with `zustand/persist` |
+| Localization | Language switcher for `en` and `uk` |
+| Theme | Persisted color theme selection |
+| UX | Responsive layout, toasts, lazy loading, and smooth interactions |
 
-## ✨ Key Features
+## 🛠 Tech Stack
 
-| Area                          | Highlights                                                                    |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **🏠 Home Page**              | Hero section, slogan, CTA, brand-focused entry point                          |
-| **🧑‍⚕️ Psychologists Catalog**  | 3 cards on first render, `Load more`, sorting by name, price, and rating      |
-| **💚 Favorites Flow**         | Private favorites page, add/remove actions, persistent saved state            |
-| **📅 Appointment Experience** | Expandable card details, reviews, modal form, validation, notifications       |
-| **🔐 Authentication**         | Firebase registration, login, current user tracking, logout, route protection |
-| **🌐 Localization**           | Ukrainian and English translations                                            |
-| **🎨 UX Details**             | Theme switching, toasts, accessible modal interactions, responsive layout     |
+| Layer | Tools |
+| --- | --- |
+| Frontend | `React 19`, `TypeScript`, `Vite` |
+| Routing | `React Router 7` |
+| Data Fetching | `TanStack Query` |
+| Backend Services | `Firebase Authentication`, `Realtime Database`, `Firestore` |
+| Forms and Validation | `React Hook Form`, `Yup` |
+| State | `Zustand` |
+| UI and Motion | `Radix UI`, `Framer Motion`, `CSS Modules` |
+| Localization | `i18next` |
 
----
+<div align="center">
+  <img src="https://img.shields.io/badge/Architecture-SPA-54BE96?style=for-the-badge" alt="SPA architecture" />
+  <img src="https://img.shields.io/badge/Auth-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase auth" />
+  <img src="https://img.shields.io/badge/State-Zustand-3470FF?style=for-the-badge" alt="Zustand state" />
+  <img src="https://img.shields.io/badge/Forms-React_Hook_Form-FC832C?style=for-the-badge" alt="React Hook Form" />
+</div>
 
-<a id="project-structure"></a>
-
-## 🗂 Project Structure
+## 📁 Project Structure
 
 ```text
 psychologists-services/
-├── public/                         # Icons, locales, manifest, social preview image
+├── public/                    # locales, manifest, icons, preview image
 ├── src/
-│   ├── app/                        # App bootstrap, providers, routing
-│   │   ├── providers/              # Auth, query client, theme providers
-│   │   └── router/                 # Routes and auth guard
-│   ├── assets/                     # Local images
-│   ├── entities/                   # Core business entities
-│   │   ├── psychologist/           # Types, API, sorting, card UI
-│   │   └── user/                   # Current user model and profile UI
-│   ├── features/                   # Business features
-│   │   ├── auth/                   # Login and registration
-│   │   ├── auth-navigation/        # Auth-aware controls in the header
-│   │   ├── favorites/              # Favorites API, hooks, buttons
-│   │   ├── make-appointment/       # Appointment modal and form
-│   │   ├── psychologists-sort/     # Sorting UI
-│   │   └── theme-switcher/         # Theme selection
-│   ├── pages/                      # Route-level pages
-│   │   ├── HomePage/
-│   │   ├── PsychologistsPage/
-│   │   ├── FavoritesPage/
-│   │   ├── NotFoundPage/
-│   │   └── ErrorPage/
-│   ├── shared/                     # Shared UI, hooks, constants, libs, utils
-│   ├── styles/                     # Global styles, reset, variables
-│   └── widgets/                    # Page composition blocks
-│       ├── header/
-│       ├── home-hero/
-│       ├── mobile-menu/
-│       ├── navbar/
-│       └── psychologists-list/
-├── .env.example                    # Firebase environment variables template
+│   ├── app/                   # app bootstrap, routing, providers
+│   ├── assets/                # images
+│   ├── entities/              # domain entities
+│   ├── features/              # auth, favorites, appointment, sorting, theme
+│   ├── pages/                 # route-level pages
+│   ├── shared/                # shared UI, hooks, utils, config, store
+│   ├── styles/                # global styles and tokens
+│   └── widgets/               # composed page sections
+├── .env.example
 ├── package.json
 └── vite.config.ts
 ```
 
----
+## 🧭 Routes
 
-<a id="tech-stack"></a>
+| Route | Description |
+| --- | --- |
+| `/` | Home page |
+| `/psychologists` | Psychologists catalog |
+| `/favorites` | Favorite psychologists page for authenticated users only |
 
-## ⚙ Tech Stack
+## 🔥 Data and Firebase
 
-| Layer                | Tools                                                 |
-| -------------------- | ----------------------------------------------------- |
-| **Frontend**         | React 19, TypeScript, Vite                            |
-| **Routing**          | React Router                                          |
-| **Data Fetching**    | TanStack Query                                        |
-| **Backend Services** | Firebase Authentication, Realtime Database, Firestore |
-| **Forms**            | React Hook Form, Yup                                  |
-| **State Management** | Zustand                                               |
-| **Styling**          | CSS Modules, global design tokens                     |
-| **UX Utilities**     | Radix UI, Framer Motion, React Hot Toast              |
-| **Localization**     | i18next                                               |
+The project uses two Firebase data sources:
 
----
+- `Realtime Database` for the psychologists catalog
+- `Firestore` for user-specific data, including `favorites` and `appointments`
 
-<a id="firebase-data-model"></a>
+`Firebase Authentication` handles registration, login, logout, and current user session state.
 
-## 🔥 Firebase Data Model
-
-### Realtime Database
-
-The `psychologists` collection stores the main catalog data:
-
-- `name`
-- `avatar_url`
-- `experience`
-- `reviews`
-- `price_per_hour`
-- `rating`
-- `license`
-- `specialization`
-- `initial_consultation`
-- `about`
-
-### Firestore
-
-- `users/{userId}/favorites/{psychologistId}` for saved psychologists
-- `users/{userId}/appointments/{appointmentId}` for submitted appointment
-  requests
-
----
-
-<a id="quick-start"></a>
-
-## 🚀 Quick Start
+## 🚀 Installation and Setup
 
 1. Clone the repository:
 
@@ -190,9 +151,9 @@ cd psychologists-services
 npm install
 ```
 
-3. Create a local `.env` file from `.env.example`
+3. Create a local `.env` file based on `.env.example`
 
-4. Fill in your Firebase credentials:
+4. Fill in the environment variables:
 
 ```env
 VITE_FIREBASE_API_KEY=
@@ -205,59 +166,34 @@ VITE_FIREBASE_APP_ID=
 VITE_PUBLIC_APP_URL=http://localhost:5173
 ```
 
-5. Start development:
+5. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-6. Build for production:
-
-```bash
-npm run build
-```
-
-7. Preview the production build:
-
-```bash
-npm run preview
-```
-
----
-
-<a id="deployment"></a>
-
-## ▲ Deployment
-
-The project is deployed on Vercel:
-
-- Live demo: https://psychologists-services-orpin.vercel.app/
-
-For correct SPA routing on direct page refresh or manual URL entry, the project includes a `vercel.json` rewrite to `index.html`. This prevents `404` responses on routes like:
-
-- `/psychologists`
-- `/favorites`
-
-If you redeploy on Vercel after pulling the latest changes, direct navigation to nested routes should work correctly.
-
----
-
 ## 📜 Available Scripts
 
-- `npm run dev` starts the Vite development server
-- `npm run build` creates a production build
-- `npm run lint` runs ESLint checks
-- `npm run preview` previews the built app locally
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Starts the Vite development server |
+| `npm run build` | Creates a production build with `tsc -b && vite build` |
+| `npm run lint` | Runs ESLint |
+| `npm run preview` | Previews the production build locally |
 
----
+## 🌐 Deployment
+
+The production version is deployed on Vercel:
+
+- https://psychologists-services-orpin.vercel.app/
 
 ## 👩‍💻 Author
 
-**Nadiia Savchuk**  
-Frontend Developer
+**Nadiia Savchuk**
 
-[![GitHub](https://img.shields.io/badge/GitHub-191A15?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NadiiaSavchuk2210)
+- GitHub: [@NadiiaSavchuk2210](https://github.com/NadiiaSavchuk2210)
+- Project Repository: [psychologists-services](https://github.com/NadiiaSavchuk2210/psychologists-services)
 
----
-
-**Psychologists Services © 2026 • Designed and developed by Nadiia Savchuk**
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FC832C,50:3470FF,100:54BE96&height=120&section=footer" alt="Footer decoration" />
+</p>
