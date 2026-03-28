@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { Suspense, lazy, useRef, useState } from 'react';
 
 import {
   PsychologistSkeleton,
@@ -7,7 +7,6 @@ import {
   useFilteredPsychologistsBySort,
 } from '@entities/psychologist';
 import { useFavoritesWithSorting } from '@features/favorites/model/hooks/useFavoritesWithSorting';
-import AppointmentModal from '@features/make-appointment/ui/AppointmentModal/AppointmentModal';
 import FilterSelect from '@features/psychologists-sort/ui/FilterSelect/FilterSelect';
 import { PSYCHOLOGISTS_PER_PAGE } from '@shared/constants/psychologist-api';
 import { SORT_OPTIONS } from '@shared/constants/psychologist-sort';
@@ -23,6 +22,10 @@ import { Button, EmptyState, ErrorMessage } from '@shared/ui';
 import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
 
 import css from './FavoritesPage.module.css';
+
+const AppointmentModal = lazy(
+  () => import('@features/make-appointment/ui/AppointmentModal/AppointmentModal')
+);
 
 const FavoritesPage = () => {
   const { isAppointmentOpen, closeAppointment } = useModalStore();
@@ -101,10 +104,14 @@ const FavoritesPage = () => {
         )}
       </main>
 
-      <AppointmentModal
-        isOpen={isAppointmentOpen}
-        onOpenChange={closeAppointment}
-      />
+      {isAppointmentOpen && (
+        <Suspense fallback={null}>
+          <AppointmentModal
+            isOpen={isAppointmentOpen}
+            onOpenChange={closeAppointment}
+          />
+        </Suspense>
+      )}
     </>
   );
 };
