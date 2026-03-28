@@ -1,10 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { useRegisterSchema } from '@features/auth/model/hooks/useRegisterSchema';
 import { useRegisterMutation } from '@features/auth/model/queries';
 import type { RegisterFormData } from '@features/auth/types/types';
 import { useAuthTranslation, useCommonTranslation } from '@shared/hooks';
+import {
+  REGISTER_DEFAULT_VALUES,
+  useFormDraftStore,
+} from '@shared/lib/store/formDraftStore';
 import { Button, Input } from '@shared/ui';
 
 import css from './RegisterForm.module.css';
@@ -13,34 +18,50 @@ interface Props {
   onOpenChange: (isOpen: boolean) => void;
 }
 
-const DEFAULT_VALUES: RegisterFormData = {
-  name: '',
-  email: '',
-  password: '',
-};
-
 const RegisterForm = ({ onOpenChange }: Props) => {
   const { t: tA } = useAuthTranslation();
   const { t: tCommon } = useCommonTranslation();
 
   const registerMutation = useRegisterMutation();
   const schema = useRegisterSchema();
+  const registerDraft = useFormDraftStore(state => state.register);
+  const setRegisterDraft = useFormDraftStore(state => state.setRegister);
+  const resetRegisterDraft = useFormDraftStore(state => state.resetRegister);
 
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors, isValid, touchedFields, isValidating },
   } = useForm<RegisterFormData>({
     resolver: yupResolver(schema),
     mode: 'onTouched',
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: registerDraft,
   });
+
+  const watchedValues = useWatch({
+    control,
+  });
+
+  useEffect(() => {
+    setRegisterDraft({
+      name: watchedValues.name ?? '',
+      email: watchedValues.email ?? '',
+      password: watchedValues.password ?? '',
+    });
+  }, [
+    setRegisterDraft,
+    watchedValues.email,
+    watchedValues.name,
+    watchedValues.password,
+  ]);
 
   const onSubmit = (data: RegisterFormData) => {
     registerMutation.mutate(data, {
       onSuccess: () => {
-        reset();
+        reset(REGISTER_DEFAULT_VALUES);
+        resetRegisterDraft();
         onOpenChange(false);
       },
     });
