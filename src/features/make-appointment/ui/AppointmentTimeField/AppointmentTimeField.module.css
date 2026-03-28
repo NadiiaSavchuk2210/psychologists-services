@@ -1,6 +1,7 @@
 .timeFieldContainer {
   position: relative;
   width: 100%;
+  max-width: 100%;
 }
 
 .timeInput,
@@ -12,8 +13,9 @@
   color: var(--color-text-primary);
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .timeFieldContainer {
-    width: 232px;
+    width: 100%;
+    max-width: 100%;
   }
 }

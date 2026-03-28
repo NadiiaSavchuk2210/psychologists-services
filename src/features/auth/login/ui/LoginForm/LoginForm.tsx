@@ -49,20 +49,30 @@ const LoginForm = ({ onOpenChange }: Props) => {
     Object.keys(touchedFields).length > 0 && (!isValid || isValidating);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css['login-form']}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={css['login-form']}
+      noValidate
+    >
       <div className={css['login-form__inputs']}>
         <Input
           type="email"
+          label={tA('loginEmailPlaceholder')}
+          hideLabel
           placeholder={tA('loginEmailPlaceholder')}
           register={register('email')}
           error={errors.email}
+          autoComplete="email"
           className={css['login-form__input']}
         />
         <Input
           type="password"
+          label={tA('loginPasswordPlaceholder')}
+          hideLabel
           placeholder={tA('loginPasswordPlaceholder')}
           register={register('password')}
           error={errors.password}
+          autoComplete="current-password"
           className={css['login-form__input']}
         />
       </div>

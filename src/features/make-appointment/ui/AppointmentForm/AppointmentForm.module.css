@@ -26,6 +26,11 @@
   width: 100%;
 }
 
+.appointment-form__field-time,
+.appointment-form__field-phone {
+  flex: 1 1 100%;
+}
+
 .appointment-form__btn {
   padding: 16px;
   width: 100%;
@@ -33,9 +38,9 @@
 
 @media (min-width: 768px) {
   .appointment-form__field-time,
-  .appointment-form__field-phone,
-  .appointment-form__input-phone,
-  .appointment-form__input-time {
-    width: 232px;
+  .appointment-form__field-phone {
+    flex: 0 0 calc((100% - 8px) / 2);
+    width: calc((100% - 8px) / 2);
+    min-width: 0;
   }
 }

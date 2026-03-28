@@ -6,24 +6,40 @@ import { useAppointmentTranslation } from '@shared/hooks';
 import css from './AppointmentTimePicker.module.css';
 
 interface Props {
+  id: string;
+  label: string;
   onChange?: (value: string) => void;
+  onClose?: () => void;
   value: string;
 }
 
-const ALL_TIMES = generateTimes(30);
+const TIME_STEP_MINUTES = 30;
+const INITIAL_SELECTED_INDEX = 0;
+const SCROLL_SETTLE_DELAY_MS = 100;
+const ALL_TIMES = generateTimes(TIME_STEP_MINUTES);
 
-export default function AppointmentTimePicker({ onChange, value }: Props) {
+export default function AppointmentTimePicker({
+  id,
+  label,
+  onChange,
+  onClose,
+  value,
+}: Props) {
   const [selectedIndex, setSelectedIndex] = useState(() => {
     const initialIndex = ALL_TIMES.indexOf(value);
-    return initialIndex === -1 ? 0 : initialIndex;
+    return initialIndex === -1 ? INITIAL_SELECTED_INDEX : initialIndex;
   });
   const listRef = useRef<HTMLUListElement | null>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const selectedIndexRef = useRef(0);
+  const selectedIndexRef = useRef(INITIAL_SELECTED_INDEX);
   const { t } = useAppointmentTranslation();
 
   useEffect(() => {
     selectedIndexRef.current = selectedIndex;
+  }, [selectedIndex]);
+
+  useEffect(() => {
+    itemRefs.current[selectedIndex]?.focus();
   }, [selectedIndex]);
 
   useEffect(() => {
@@ -54,7 +70,7 @@ export default function AppointmentTimePicker({ onChange, value }: Props) {
         if (closestIndex !== selectedIndexRef.current) {
           setSelectedIndex(closestIndex);
         }
-      }, 100);
+      }, SCROLL_SETTLE_DELAY_MS);
     };
 
     container.addEventListener('scroll', handleScroll);
@@ -70,11 +86,51 @@ export default function AppointmentTimePicker({ onChange, value }: Props) {
     onChange?.(time);
   };
 
+  const focusItem = (index: number) => {
+    const nextIndex = (index + ALL_TIMES.length) % ALL_TIMES.length;
+    setSelectedIndex(nextIndex);
+    itemRefs.current[nextIndex]?.focus();
+  };
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        focusItem(index + 1);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        focusItem(index - 1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        focusItem(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        focusItem(ALL_TIMES.length - 1);
+        break;
+      case 'Escape':
+        event.preventDefault();
+        onClose?.();
+        break;
+    }
+  };
+
   return (
     <div className={css.wrapper}>
       <p className={css.title}>{t('fields.meetingTime')}</p>
 
-      <ul ref={listRef} className={css.list}>
+      <ul
+        id={id}
+        ref={listRef}
+        className={css.list}
+        role="listbox"
+        aria-label={label}
+      >
         {ALL_TIMES.map((time, index) => {
           const [hours, minutes] = time.split(':');
           return (
@@ -85,7 +141,10 @@ export default function AppointmentTimePicker({ onChange, value }: Props) {
                 }}
                 className={`${css.item} ${selectedIndex === index ? css.active : ''}`}
                 type="button"
+                role="option"
+                aria-selected={selectedIndex === index}
                 onClick={() => handleClick(index)}
+                onKeyDown={event => handleKeyDown(event, index)}
               >
                 <span className={css.hours}>{hours}</span>
                 <span className={css.separator}>:</span>

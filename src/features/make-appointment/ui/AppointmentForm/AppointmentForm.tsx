@@ -38,13 +38,20 @@ export default function AppointmentForm({
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css['appointment-form']}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={css['appointment-form']}
+      noValidate
+    >
       <div className={css['appointment-form__inputs']}>
         <Input
           type="text"
+          label={t('fields.name')}
+          hideLabel
           placeholder={t('fields.name')}
           register={register('name')}
           error={errors.name}
+          autoComplete="name"
           className={clsx(css['appointment-form__input'])}
         />
 
@@ -67,7 +74,7 @@ export default function AppointmentForm({
               isOpen={isTimePickerOpen}
               toggle={toggleTimePicker}
               close={closeTimePicker}
-              classField={css['appointment-form__field-time']}
+              className={css['appointment-form__field-time']}
               classInputWrapper={css['appointment-form__input-time']}
             />
           )}
@@ -75,6 +82,8 @@ export default function AppointmentForm({
 
         <Input
           type="email"
+          label={t('fields.email')}
+          hideLabel
           placeholder={t('fields.email')}
           register={register('email')}
           error={errors.email}
@@ -84,6 +93,8 @@ export default function AppointmentForm({
 
         <Input
           type="textarea"
+          label={t('fields.comment')}
+          hideLabel
           placeholder={t('fields.comment')}
           register={register('comment')}
           error={errors.comment}

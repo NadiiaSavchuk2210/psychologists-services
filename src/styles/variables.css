@@ -22,23 +22,25 @@
   --color-badges: #f3f3f3;
   --color-rating: #ffc531;
   --color-error: #dc3545;
+  --scrollbar-thumb: rgba(84, 190, 150, 0.75);
+  --scrollbar-thumb-hover: #36a379;
+  --scrollbar-track: rgba(25, 26, 21, 0.08);
+  --scrollbar-track-modal: rgba(25, 26, 21, 0.06);
 
-  /* Font size */
-  --font-xs: 0.75rem; /* 12px */
-  --font-sm: 0.875rem; /* 14px */
-  --font-base: 1rem; /* 16px */
-  --font-md: 1.125rem; /* 18px */
-  --font-lg: 1.25rem; /* 20px */
-  --font-xl: 1.5rem; /* 24px */
-  --font-2xl: 2rem; /* 32px */
-  --font-3xl: 2.5rem; /* 40px */
-  --font-4xl: 3rem; /* 48px */
-  --font-5xl: 4rem; /* 64px */
-  --font-6xl: 5rem; /* 80px */
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-md: 1.125rem;
+  --font-lg: 1.25rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 2rem;
+  --font-3xl: 2.5rem;
+  --font-4xl: 3rem;
+  --font-5xl: 4rem;
+  --font-6xl: 5rem;
 
   --transition-base: 0.5s ease;
 
-  /* z-index */
   --z-header: 100;
   --z-filter: 100;
   --z-filter-trigger: 102;
@@ -54,6 +56,10 @@
   --color-primary: #54be96;
   --color-secondary: rgba(84, 190, 150, 0.2);
   --color-tertiary: #36a379;
+  --scrollbar-thumb: rgba(84, 190, 150, 0.78);
+  --scrollbar-thumb-hover: #36a379;
+  --scrollbar-track: rgba(84, 190, 150, 0.12);
+  --scrollbar-track-modal: rgba(84, 190, 150, 0.08);
 
   --color-icon-primary: #4535af;
   --color-icon-secondary: #fbc75e;
@@ -66,6 +72,10 @@
   --color-primary: #3470ff;
   --color-secondary: rgba(52, 112, 255, 0.2);
   --color-tertiary: #255ee8;
+  --scrollbar-thumb: rgba(52, 112, 255, 0.78);
+  --scrollbar-thumb-hover: #255ee8;
+  --scrollbar-track: rgba(52, 112, 255, 0.12);
+  --scrollbar-track-modal: rgba(52, 112, 255, 0.08);
 
   --color-icon-primary: #54be96;
   --color-icon-secondary: #fbc75e;
@@ -78,6 +88,10 @@
   --color-primary: #fc832c;
   --color-secondary: rgba(252, 131, 44, 0.2);
   --color-tertiary: #f37113;
+  --scrollbar-thumb: rgba(252, 131, 44, 0.82);
+  --scrollbar-thumb-hover: #f37113;
+  --scrollbar-track: rgba(252, 131, 44, 0.12);
+  --scrollbar-track-modal: rgba(252, 131, 44, 0.08);
 
   --color-icon-primary: #54be96;
   --color-icon-secondary: #fbc75e;

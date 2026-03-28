@@ -8,7 +8,7 @@
     "phoneNumber": "Номер телефону",
     "meetingTime": "Час зустрічі",
     "comment": "Коментар",
-    "phonePlaceholder": "+38 (0XX) XXX-XX-XX",
+    "phonePlaceholder": "+380",
     "timePlaceholder": "00:00",
     "submit": "Відправити",
     "sending": "Відправка..."

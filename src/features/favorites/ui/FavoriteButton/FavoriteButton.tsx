@@ -14,9 +14,10 @@ interface Props {
 const FavoriteButton = ({ item }: Props) => {
   const { t } = useA11yTranslation();
   const { favorites, isFavoritePending, toggleFavorite } = useFavorites();
+  const itemId = String(item.id);
 
-  const isFavorite = favorites.some(f => f.id === item.id);
-  const isPending = isFavoritePending(item.id);
+  const isFavorite = favorites.some(f => String(f.id) === itemId);
+  const isPending = isFavoritePending(itemId);
   const label = isFavorite ? t('favoriteRemove') : t('favoriteAdd');
 
   return (

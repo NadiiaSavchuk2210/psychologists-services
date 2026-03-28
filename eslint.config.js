@@ -16,6 +16,13 @@ export default defineConfig([
   react.configs.flat.recommended,
   reactHooks.configs.flat.recommended,
   jsxA11y.flatConfigs.recommended,
+  {
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
 
   {
     files: ['**/*.{ts,tsx}'],
@@ -29,9 +36,6 @@ export default defineConfig([
       globals: globals.browser,
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { SORT_CONFIG } from '../config/sortConfig';
+import { filterPsychologistsBySort } from '../lib/psychologistSort';
 import type { SortOption } from '../types/psychologist-sort';
 
 type WithPrice = {
@@ -11,11 +11,5 @@ export const useFilteredPsychologistsBySort = <T extends WithPrice>(
   items: T[],
   sort: SortOption
 ) => {
-  return useMemo(() => {
-    const filter = SORT_CONFIG[sort].filter;
-
-    return filter
-      ? items.filter(item => filter(item.price_per_hour))
-      : items;
-  }, [items, sort]);
+  return useMemo(() => filterPsychologistsBySort(items, sort), [items, sort]);
 };

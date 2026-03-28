@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
@@ -28,6 +28,7 @@ const Header = () => {
 
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileMenuId = useId();
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
@@ -58,6 +59,9 @@ const Header = () => {
             type="button"
             onClick={openMenu}
             aria-label={t('openMenu')}
+            aria-expanded={isMenuOpen}
+            aria-controls={mobileMenuId}
+            aria-haspopup="dialog"
           >
             <Icon
               name="icon-burger"
@@ -71,6 +75,7 @@ const Header = () => {
 
       {isMobile && (
         <MobileMenu
+          menuId={mobileMenuId}
           isMenuOpen={isMenuOpen}
           closeMenu={closeMenu}
           openLogin={openLogin}

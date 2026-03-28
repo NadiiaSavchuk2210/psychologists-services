@@ -42,20 +42,28 @@ const Modal = ({
             </button>
           </Dialog.Close>
 
-          {header ? (
-            header
-          ) : (
-            <>
-              {title && <Dialog.Title className={css.title}>{title}</Dialog.Title>}
-              {description && (
-                <Dialog.Description className={css.description}>
-                  {description}
-                </Dialog.Description>
-              )}
-            </>
-          )}
+          <div className={css.scrollArea}>
+            {header ? (
+              header
+            ) : (
+              <>
+                {title && <Dialog.Title className={css.title}>{title}</Dialog.Title>}
+                {description && (
+                  <Dialog.Description className={css.description}>
+                    {description}
+                  </Dialog.Description>
+                )}
+              </>
+            )}
 
-          {children}
+            {!description && !header && (
+              <Dialog.Description className="visually-hidden">
+                {title ?? t('modalClose')}
+              </Dialog.Description>
+            )}
+
+            {children}
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
