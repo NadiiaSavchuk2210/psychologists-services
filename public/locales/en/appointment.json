@@ -8,7 +8,7 @@
     "phoneNumber": "Phone number",
     "meetingTime": "Meeting time",
     "comment": "Comment",
-    "phonePlaceholder": "+38 (0XX) XXX-XX-XX",
+    "phonePlaceholder": "+380",
     "timePlaceholder": "00:00",
     "submit": "Send",
     "sending": "Sending..."

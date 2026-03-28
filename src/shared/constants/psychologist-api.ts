@@ -3,12 +3,10 @@ export const DB_PATHS = {
 } as const;
 
 export const DB_FIELDS = {
-  NAME: 'name',
-  NAME_UA: 'name_ua',
-  PRICE: 'price_per_hour',
-  RATING: 'rating',
   SORT_NAME_EN: 'sort_name_en',
+  SORT_NAME_EN_DESC: 'sort_name_en_desc',
   SORT_NAME_UA: 'sort_name_ua',
+  SORT_NAME_UA_DESC: 'sort_name_ua_desc',
   SORT_PRICE_ASC: 'sort_price_asc',
   SORT_PRICE_DESC: 'sort_price_desc',
   SORT_RATING_DESC: 'sort_rating_desc',

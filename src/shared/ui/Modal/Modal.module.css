@@ -9,19 +9,58 @@
 }
 
 .modal {
-  padding: 34px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.95);
   background-color: var(--color-bg);
-  width: 90%;
-  max-width: 375px;
+  width: calc(100% - 32px);
+  max-width: 566px;
+  max-height: min(calc(100vh - 24px), 860px);
   border-radius: 30px;
   z-index: var(--z-modal);
+  overflow: hidden;
+  overscroll-behavior: contain;
 
   opacity: 0;
   animation: modalShow 200ms ease forwards;
+}
+
+.appointmentModal {
+  max-width: 600px;
+}
+
+.scrollArea {
+  max-height: min(calc(100vh - 24px), 860px);
+  padding: 56px 20px 28px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track-modal);
+  scrollbar-width: thin;
+}
+
+.scrollArea::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  margin-block: 20px;
+  background: var(--scrollbar-track-modal);
+  border-radius: 999px;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--scrollbar-thumb) 0%,
+    var(--scrollbar-thumb-hover) 100%
+  );
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+
+.scrollArea::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 .closeButton {
@@ -63,6 +102,12 @@
   color: var(--color-text-secondary);
 }
 
+.header,
+.body,
+.footer {
+  width: 100%;
+}
+
 @keyframes overlayShow {
   from {
     opacity: 0;
@@ -85,13 +130,32 @@
 
 @media screen and (min-width: 768px) {
   .modal {
+    width: min(calc(100% - 64px), 566px);
+    max-height: min(88vh, 860px);
+  }
+
+  .scrollArea {
+    max-height: min(88vh, 860px);
     padding: 64px;
-    width: 100%;
-    max-width: 565px;
   }
 
   .appointmentModal {
+    width: min(calc(100% - 64px), 600px);
     max-width: 600px;
+  }
+
+  .appointmentModal .title {
+    max-width: 420px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .appointmentModal .description {
+    max-width: 470px;
+    margin-bottom: 40px;
+    font-size: var(--font-base);
+    line-height: 1.33;
   }
 
   .closeIcon {

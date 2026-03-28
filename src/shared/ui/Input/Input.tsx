@@ -12,6 +12,7 @@ interface Props extends React.InputHTMLAttributes<
   HTMLInputElement | HTMLTextAreaElement
 > {
   label?: string;
+  hideLabel?: boolean;
   register?: UseFormRegisterReturn;
   error?: FieldError;
   classInputWrapper?: string;
@@ -19,20 +20,24 @@ interface Props extends React.InputHTMLAttributes<
   classField?: string;
   isTimePicker?: boolean;
   onIconClick?: () => void;
+  iconButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   rows?: number;
 }
 
 const Input = ({
   label,
+  hideLabel = false,
   register,
   error,
   id,
   type = 'text',
+  className = '',
   classInputWrapper = '',
   classInput = '',
   classField = '',
   isTimePicker = false,
   onIconClick,
+  iconButtonProps,
   rows = 3,
   ...props
 }: Props) => {
@@ -40,6 +45,9 @@ const Input = ({
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
+  const describedBy = [props['aria-describedby'], error ? errorId : undefined]
+    .filter(Boolean)
+    .join(' ');
 
   const isPassword = type === 'password';
   const isTextArea = type === 'textarea';
@@ -57,11 +65,12 @@ const Input = ({
     className: clsx(
       css.input,
       classInput,
+      className,
       error && css.inputError,
       isTextArea && css.textarea
     ),
-    'aria-invalid': !!error,
-    'aria-describedby': error ? errorId : undefined,
+    'aria-invalid': props['aria-invalid'] ?? !!error,
+    'aria-describedby': describedBy || undefined,
     ...register,
     ...props,
   };
@@ -69,7 +78,10 @@ const Input = ({
   return (
     <div className={clsx(css.field, classField)}>
       {label && (
-        <label htmlFor={inputId} className={css.label}>
+        <label
+          htmlFor={inputId}
+          className={clsx(css.label, hideLabel && 'visually-hidden')}
+        >
           {label}
         </label>
       )}
@@ -117,6 +129,7 @@ const Input = ({
             className={css.eyeButton}
             onClick={onIconClick}
             aria-label={t('openTimePicker')}
+            {...iconButtonProps}
           >
             <Icon name="icon-clock" width={20} height={20} />
           </button>

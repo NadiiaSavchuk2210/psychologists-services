@@ -1,4 +1,8 @@
 .field {
+  --input-height: 52px;
+  --input-inline-padding: 18px;
+  --input-password-padding-right: 56px;
+  --text-area-height: 116px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -10,12 +14,11 @@
 }
 
 .inputWrapper {
-  padding-left: 18px;
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 52px;
+  height: var(--input-height);
   color: var(--color-text-primary);
   border: 1px solid var(--color-gray-light-secondary);
   border-radius: 12px;
@@ -31,7 +34,7 @@
 }
 
 .input {
-  padding: 16px 18px;
+  padding: 16px var(--input-inline-padding);
   font-family: var(--font-primary);
   font-weight: 400;
   font-size: var(--font-base);
@@ -45,36 +48,36 @@
 }
 
 .input::placeholder {
-  color: var(--color-tertiary);
+  color: var(--color-text-primary);
   opacity: 1;
 }
 
 .input:-webkit-autofill::placeholder {
-  color: var(--color-tertiary);
+  color: var(--color-text-primary);
 }
 
 .input:-ms-input-placeholder {
-  color: var(--color-tertiary);
+  color: var(--color-text-primary);
 }
 
 .input::-moz-placeholder {
-  color: var(--color-tertiary);
+  color: var(--color-text-primary);
   opacity: 1;
 }
 
 .textAreaWrapper {
-  height: 116px;
+  height: var(--text-area-height);
   overflow-y: auto;
 }
 
 .password .input {
-  padding-right: 56px;
+  padding-right: var(--input-password-padding-right);
 }
 
 .eyeButton {
   padding: 0;
   position: absolute;
-  right: 18px;
+  right: var(--input-inline-padding);
   display: flex;
   align-items: center;
   justify-content: center;

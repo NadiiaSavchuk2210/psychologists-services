@@ -1,4 +1,6 @@
+import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
+import { useRef } from 'react';
 
 import { AuthNavigation } from '@features/auth-navigation';
 import { useCommonTranslation } from '@shared/hooks';
@@ -8,6 +10,7 @@ import { Navbar } from '@widgets/navbar';
 import css from './MobileMenu.module.css';
 
 interface Props {
+  menuId: string;
   isMenuOpen: boolean;
   closeMenu: () => void;
   openLogin: () => void;
@@ -15,38 +18,68 @@ interface Props {
 }
 
 const MobileMenu = ({
+  menuId,
   isMenuOpen,
   closeMenu,
   openLogin,
   openRegister,
 }: Props) => {
   const { t } = useCommonTranslation();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div
-      className={clsx(css['mobile-menu'], isMenuOpen && css.open)}
-      role="dialog"
-      aria-modal="true"
+    <Dialog.Root
+      open={isMenuOpen}
+      onOpenChange={open => {
+        if (!open) {
+          closeMenu();
+        }
+      }}
     >
-      <div className={clsx('container', css['mobile-menu-container'])}>
-        <button
-          className={css['mobile-menu-close']}
-          type="button"
-          onClick={closeMenu}
-          aria-label={t('closeMenu')}
+      <Dialog.Portal>
+        <Dialog.Content
+          id={menuId}
+          className={css['mobile-menu']}
+          onOpenAutoFocus={event => {
+            event.preventDefault();
+            closeButtonRef.current?.focus();
+          }}
         >
-          <Icon
-            className={css['mobile-menu-close-icon']}
-            name="icon-close"
-            width={16}
-            height={16}
-          />
-        </button>
-        <Navbar isMobileMenu={true} closeMenu={closeMenu} />
+          <Dialog.Title className="visually-hidden">
+            {t('navigationMenu')}
+          </Dialog.Title>
+          <Dialog.Description className="visually-hidden">
+            {t('navigationMenu')}
+          </Dialog.Description>
 
-        <AuthNavigation openLogin={openLogin} openRegister={openRegister} />
-      </div>
-    </div>
+          <div className={clsx('container', css['mobile-menu-container'])}>
+            <Dialog.Close asChild>
+              <button
+                ref={closeButtonRef}
+                className={css['mobile-menu-close']}
+                type="button"
+                aria-label={t('closeMenu')}
+              >
+                <Icon
+                  className={css['mobile-menu-close-icon']}
+                  name="icon-close"
+                  width={16}
+                  height={16}
+                />
+              </button>
+            </Dialog.Close>
+
+            <Navbar isMobileMenu={true} closeMenu={closeMenu} />
+
+            <AuthNavigation
+              openLogin={openLogin}
+              openRegister={openRegister}
+              onActionComplete={closeMenu}
+            />
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 

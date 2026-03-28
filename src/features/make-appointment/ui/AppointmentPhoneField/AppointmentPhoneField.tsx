@@ -53,10 +53,14 @@ export default function AppointmentPhoneField<
           mask="_"
           customInput={Input}
           type="tel"
+          label={t('fields.phoneNumber')}
+          hideLabel
           placeholder={t('fields.phonePlaceholder')}
           error={error}
-          className={clsx(css[className], css.phoneInput)}
-          classInputWrapper={css[classInputWrapper]}
+          autoComplete="tel"
+          inputMode="tel"
+          className={clsx(className, css.phoneInput)}
+          classInputWrapper={classInputWrapper}
           classField={classField}
           onValueChange={values => {
             const newFormatted = values.formattedValue ?? '';

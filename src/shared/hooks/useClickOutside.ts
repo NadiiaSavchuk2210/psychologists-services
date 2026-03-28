@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+const OUTSIDE_CLICK_EVENT = 'pointerdown';
+
 export const useClickOutside = <T extends HTMLElement>(
   ref: React.RefObject<T | null>,
   isActive: boolean,
@@ -8,16 +10,16 @@ export const useClickOutside = <T extends HTMLElement>(
   useEffect(() => {
     if (!isActive) return;
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: Event) => {
+      if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
         onOutsideClick();
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener(OUTSIDE_CLICK_EVENT, handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener(OUTSIDE_CLICK_EVENT, handleClickOutside);
     };
   }, [isActive, onOutsideClick, ref]);
 };

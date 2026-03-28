@@ -33,44 +33,52 @@ export const useFavorites = () => {
   });
 
   const toggleFavorite = async (item: Psychologist) => {
+    const itemId = String(item.id);
+    const normalizedItem = {
+      ...item,
+      id: itemId,
+    };
+
     if (!user) {
       toastService.authRequired(openLogin, t, tApp, true);
       return;
     }
 
-    if (pendingIdsRef.current.has(item.id)) {
+    if (pendingIdsRef.current.has(itemId)) {
       return;
     }
 
     await queryClient.cancelQueries({ queryKey, exact: true });
 
     const current = queryClient.getQueryData<Psychologist[]>(queryKey) || [];
-    const isFavorite = current.some(f => f.id === item.id);
+    const isFavorite = current.some(f => String(f.id) === itemId);
     const previous = current;
 
-    pendingIdsRef.current.add(item.id);
-    setPendingIds(prev => [...prev, item.id]);
+    pendingIdsRef.current.add(itemId);
+    setPendingIds(prev => [...prev, itemId]);
 
     queryClient.setQueryData<Psychologist[]>(queryKey, old => {
-      if (!old) return [item];
+      if (!old) return [normalizedItem];
 
-      return isFavorite ? old.filter(f => f.id !== item.id) : [...old, item];
+      return isFavorite
+        ? old.filter(f => String(f.id) !== itemId)
+        : [...old, normalizedItem];
     });
 
     try {
       if (isFavorite) {
-        await removeFavorite(user.uid, item.id);
+        await removeFavorite(user.uid, itemId);
         toastService.favoriteRemoved(t);
       } else {
-        await addFavorite(user.uid, item);
+        await addFavorite(user.uid, normalizedItem);
         toastService.favoriteAdded(t);
       }
     } catch {
       queryClient.setQueryData(queryKey, previous);
       toastService.favoriteError(t);
     } finally {
-      pendingIdsRef.current.delete(item.id);
-      setPendingIds(prev => prev.filter(id => id !== item.id));
+      pendingIdsRef.current.delete(itemId);
+      setPendingIds(prev => prev.filter(id => id !== itemId));
       queryClient.invalidateQueries({ queryKey, exact: true });
     }
   };

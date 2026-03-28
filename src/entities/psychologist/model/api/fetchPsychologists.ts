@@ -1,21 +1,95 @@
-import {
-  endBefore,
-  get,
-  limitToFirst,
-  limitToLast,
-  orderByChild,
-  query,
-  ref,
-  startAfter,
-} from 'firebase/database';
-
-import { DB_PATHS, SORT_OPTIONS } from '@shared/constants';
-import { rtdb } from '@shared/lib/config/firebase';
+import { getFirebaseRtdb } from '@shared/api/firebaseRtdb';
+import { DB_PATHS } from '@shared/constants';
 import type { Lang } from '@shared/lib/i18n';
 
-import type { Psychologist } from '../types/psychologist';
+import {
+  buildResponse,
+  getNextOffsetCursor,
+  getNextServerCursor,
+  getNormalizedPsychologists,
+  getServerSortedPsychologists,
+  getStartIndex,
+} from './fetchPsychologists.helpers';
+import {
+  filterPsychologistsBySort,
+  getPsychologistPriceFilter,
+  getPsychologistServerSortField,
+  sortPsychologistsBySort,
+  type PsychologistServerSortField,
+} from '../lib/psychologistSort';
 import type { CursorData, FetchResponseDTO } from '../types/psychologist-api';
 import type { SortOption } from '../types/psychologist-sort';
+
+const PSYCHOLOGISTS_PATH = DB_PATHS.PSYCHOLOGISTS;
+
+const getServerPaginationParams = (
+  cursor: CursorData | null,
+  pageSize: number,
+  sortField: PsychologistServerSortField
+) => ({
+  orderBy: JSON.stringify(sortField),
+  ...(cursor ? { startAfter: JSON.stringify(cursor.value) } : {}),
+  limitToFirst: String(pageSize + 1),
+});
+
+const fetchAllPsychologists = async (
+  sort: SortOption,
+  pageSize: number,
+  cursor: CursorData | null,
+  lang: Lang
+): Promise<FetchResponseDTO> => {
+  const { data } = await getFirebaseRtdb<unknown>(PSYCHOLOGISTS_PATH);
+  const normalized = getNormalizedPsychologists(data);
+  const sorted = sortPsychologistsBySort(
+    filterPsychologistsBySort(normalized, sort),
+    sort,
+    lang
+  );
+
+  const startIndex = getStartIndex(cursor);
+  const endIndex = startIndex + pageSize;
+  const items = sorted.slice(startIndex, endIndex);
+  const hasMore = endIndex < sorted.length;
+
+  return buildResponse(items, getNextOffsetCursor(items, endIndex, hasMore), hasMore);
+};
+
+const fetchServerPaginatedPsychologists = async (
+  sort: SortOption,
+  pageSize: number,
+  cursor: CursorData | null,
+  lang: Lang
+): Promise<FetchResponseDTO | null> => {
+  const serverSortField = getPsychologistServerSortField(sort, lang);
+  const { data, status } = await getFirebaseRtdb<unknown>(
+    PSYCHOLOGISTS_PATH,
+    getServerPaginationParams(cursor, pageSize, serverSortField),
+    status => status === 200 || status === 400
+  );
+
+  if (status === 400) {
+    return null;
+  }
+
+  const normalized = getServerSortedPsychologists(data, serverSortField);
+
+  if (normalized === null) {
+    return null;
+  }
+
+  const priceFilter = getPsychologistPriceFilter(sort);
+  const filtered = priceFilter
+    ? normalized.filter(({ item }) => priceFilter(item.price_per_hour))
+    : normalized;
+  const hasMore = filtered.length > pageSize;
+  const visible = hasMore ? filtered.slice(0, pageSize) : filtered;
+
+  return buildResponse(
+    visible.map(({ item }) => item),
+    getNextServerCursor(visible, hasMore),
+    hasMore
+  );
+};
 
 export const fetchPsychologists = async ({
   sort,
@@ -28,94 +102,16 @@ export const fetchPsychologists = async ({
   cursor: CursorData | null;
   lang: Lang;
 }): Promise<FetchResponseDTO> => {
-  const dbRef = ref(rtdb, DB_PATHS.PSYCHOLOGISTS);
+  const paginated = await fetchServerPaginatedPsychologists(
+    sort,
+    pageSize,
+    cursor,
+    lang
+  );
 
-  let sortField = lang === 'uk' ? 'name_ua' : 'name';
-  let isDesc = false;
-
-  switch (sort) {
-    case SORT_OPTIONS.PRICE_LOW_HIGH:
-      sortField = 'price_per_hour';
-      break;
-
-    case SORT_OPTIONS.PRICE_HIGH_LOW:
-      sortField = 'price_per_hour';
-      isDesc = true;
-      break;
-
-    case SORT_OPTIONS.POPULAR:
-      sortField = 'rating';
-      isDesc = true;
-      break;
-
-    case SORT_OPTIONS.NOT_POPULAR:
-      sortField = 'rating';
-      break;
-
-    case SORT_OPTIONS.CHEAP:
-      sortField = 'price_per_hour';
-      break;
-
-    case SORT_OPTIONS.EXPENSIVE:
-      sortField = 'price_per_hour';
-      isDesc = true;
-      break;
-
-    case SORT_OPTIONS.A_Z:
-      sortField = lang === 'uk' ? 'name_ua' : 'name';
-      break;
-
-    case SORT_OPTIONS.Z_A:
-      sortField = lang === 'uk' ? 'name_ua' : 'name';
-      isDesc = true;
-      break;
+  if (paginated) {
+    return paginated;
   }
 
-  let apiQuery;
-
-  if (!isDesc) {
-    apiQuery = query(
-      dbRef,
-      orderByChild(sortField),
-      ...(cursor ? [startAfter(cursor.value, cursor.id)] : []),
-      limitToFirst(pageSize + 1)
-    );
-  } else {
-    apiQuery = query(
-      dbRef,
-      orderByChild(sortField),
-      ...(cursor ? [endBefore(cursor.value, cursor.id)] : []),
-      limitToLast(pageSize + 1)
-    );
-  }
-
-  const snapshot = await get(apiQuery);
-
-  const items: Psychologist[] = [];
-
-  snapshot.forEach(child => {
-    items.push({
-      ...(child.val() as Psychologist),
-      id: child.key!,
-    });
-  });
-
-  if (isDesc) items.reverse();
-
-  const hasMore = items.length > pageSize;
-  const visibleItems = hasMore ? items.slice(0, pageSize) : items;
-  const last = visibleItems[visibleItems.length - 1];
-
-  const nextCursor = last
-    ? {
-        id: last.id,
-        value: last[sortField as keyof Psychologist] as string | number,
-      }
-    : null;
-
-  return {
-    items: visibleItems,
-    nextCursor,
-    hasMore,
-  };
+  return fetchAllPsychologists(sort, pageSize, cursor, lang);
 };

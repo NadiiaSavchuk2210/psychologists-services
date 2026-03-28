@@ -9,15 +9,17 @@ import { Button } from '@shared/ui';
 
 import css from './AuthNavigation.module.css';
 
-
-
-
 interface Props {
   openLogin: () => void;
   openRegister: () => void;
+  onActionComplete?: () => void;
 }
 
-const AuthNavigation = ({ openLogin, openRegister }: Props) => {
+const AuthNavigation = ({
+  openLogin,
+  openRegister,
+  onActionComplete,
+}: Props) => {
   const navigate = useNavigate();
   const { t: tA } = useAuthTranslation();
   const { t: tCommon } = useCommonTranslation();
@@ -28,8 +30,19 @@ const AuthNavigation = ({ openLogin, openRegister }: Props) => {
     logoutMutation.mutate(undefined, {
       onSuccess: () => {
         navigate(ROUTES.HOME, { replace: true });
+        onActionComplete?.();
       },
     });
+  };
+
+  const handleOpenLogin = () => {
+    openLogin();
+    onActionComplete?.();
+  };
+
+  const handleOpenRegister = () => {
+    openRegister();
+    onActionComplete?.();
   };
 
   if (loading) {
@@ -48,14 +61,14 @@ const AuthNavigation = ({ openLogin, openRegister }: Props) => {
           <Button
             variant="outline"
             className={css['btn-login']}
-            onClick={openLogin}
+            onClick={handleOpenLogin}
           >
             {tA('login')}
           </Button>
           <Button
             variant="primary"
             className={css['btn-registration']}
-            onClick={openRegister}
+            onClick={handleOpenRegister}
           >
             {tA('register')}
           </Button>

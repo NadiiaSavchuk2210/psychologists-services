@@ -72,6 +72,7 @@ export interface ICommonTranslations {
     network_error: string;
   };
   homeLink: string;
+  navigationMenu: string;
   openMenu: string;
   closeMenu: string;
   languageEnglish: string;
