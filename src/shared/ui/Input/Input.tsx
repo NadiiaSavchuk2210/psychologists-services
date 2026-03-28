@@ -22,6 +22,7 @@ interface Props extends React.InputHTMLAttributes<
   onIconClick?: () => void;
   iconButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   rows?: number;
+  reserveErrorSpace?: boolean;
 }
 
 const Input = ({
@@ -39,6 +40,7 @@ const Input = ({
   onIconClick,
   iconButtonProps,
   rows = 3,
+  reserveErrorSpace = false,
   ...props
 }: Props) => {
   const { t } = useA11yTranslation();
@@ -136,7 +138,11 @@ const Input = ({
         )}
       </div>
 
-      <ErrorMessage id={errorId} error={error} />
+      <ErrorMessage
+        id={errorId}
+        error={error}
+        reserveSpace={reserveErrorSpace}
+      />
     </div>
   );
 };

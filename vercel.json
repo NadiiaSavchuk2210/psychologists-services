@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets|icons|locales|favicon.ico|site.webmanifest|android-chrome-192x192.png|android-chrome-512x512.png|apple-touch-icon.png|psychologists-services-og.png).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

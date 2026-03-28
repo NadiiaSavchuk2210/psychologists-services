@@ -1,6 +1,19 @@
 .error {
+  min-height: 20px;
   margin-top: 4px;
   padding-left: 8px;
   color: var(--color-error);
   font-size: var(--font-xs);
+  line-height: 1.33;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.error[data-empty='true'] {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-2px);
 }

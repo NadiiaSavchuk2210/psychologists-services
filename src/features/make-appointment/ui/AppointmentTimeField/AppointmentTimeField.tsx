@@ -86,6 +86,7 @@ export default function AppointmentTimeField({
         classInput={css.timeInput}
         classField={classField}
         classInputWrapper={classInputWrapper}
+        reserveErrorSpace
       />
 
       {isOpen && (

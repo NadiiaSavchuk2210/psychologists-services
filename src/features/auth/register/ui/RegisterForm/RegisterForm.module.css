@@ -1,3 +1,8 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .register-form__inputs {
   margin-bottom: 40px;
   display: flex;
@@ -21,4 +26,5 @@
 .register-form__btn {
   padding: 16px;
   width: 100%;
+  min-height: 54px;
 }

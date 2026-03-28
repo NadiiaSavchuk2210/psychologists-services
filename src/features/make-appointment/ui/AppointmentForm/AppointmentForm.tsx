@@ -53,6 +53,7 @@ export default function AppointmentForm({
           error={errors.name}
           autoComplete="name"
           className={clsx(css['appointment-form__input'])}
+          reserveErrorSpace
         />
 
         <AppointmentPhoneField
@@ -89,6 +90,7 @@ export default function AppointmentForm({
           error={errors.email}
           className={css['appointment-form__input']}
           autoComplete="email"
+          reserveErrorSpace
         />
 
         <Input
@@ -101,6 +103,7 @@ export default function AppointmentForm({
           className={css['appointment-form__input']}
           classField={css['appointment-form__field-comment']}
           classInputWrapper={css['appointment-form__input-comment']}
+          reserveErrorSpace
         />
       </div>
 
