@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useCallback, useEffect, useRef } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { useAppointmentMutation } from '@features/make-appointment/model/hooks/useAppointmentMutation';
 import { useAppointmentSchema } from '@features/make-appointment/model/hooks/useAppointmentSchema';
@@ -10,14 +10,10 @@ import type {
 } from '@features/make-appointment/model/types/appointment';
 import { useAppointmentTranslation, useClickOutside, useDisclosure } from '@shared/hooks';
 import { useAuthStore } from '@shared/lib/store/authStore';
-
-const DEFAULT_VALUES: AppointmentFormData = {
-  name: '',
-  phoneNumber: '',
-  meetingTime: '',
-  email: '',
-  comment: '',
-};
+import {
+  APPOINTMENT_DEFAULT_VALUES,
+  useFormDraftStore,
+} from '@shared/lib/store/formDraftStore';
 
 export const useAppointmentForm = ({
   onOpenChange,
@@ -30,6 +26,11 @@ export const useAppointmentForm = ({
   const { user } = useAuthStore();
   const appointmentMutation = useAppointmentMutation();
   const schema = useAppointmentSchema();
+  const appointmentDraft = useFormDraftStore(state => state.appointment);
+  const setAppointmentDraft = useFormDraftStore(state => state.setAppointment);
+  const resetAppointmentDraft = useFormDraftStore(
+    state => state.resetAppointment
+  );
   const timePickerRef = useRef<HTMLDivElement>(null);
   const {
     isOpen: isTimePickerOpen,
@@ -40,13 +41,35 @@ export const useAppointmentForm = ({
   const form = useForm<AppointmentFormData>({
     resolver: yupResolver(schema),
     mode: 'onTouched',
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: appointmentDraft,
   });
 
   const {
     reset,
+    control,
     formState: { isValid, touchedFields, isValidating },
   } = form;
+
+  const watchedValues = useWatch({
+    control,
+  });
+
+  useEffect(() => {
+    setAppointmentDraft({
+      name: watchedValues.name ?? '',
+      phoneNumber: watchedValues.phoneNumber ?? '',
+      meetingTime: watchedValues.meetingTime ?? '',
+      email: watchedValues.email ?? '',
+      comment: watchedValues.comment ?? '',
+    });
+  }, [
+    setAppointmentDraft,
+    watchedValues.comment,
+    watchedValues.email,
+    watchedValues.meetingTime,
+    watchedValues.name,
+    watchedValues.phoneNumber,
+  ]);
 
   useClickOutside(timePickerRef, isTimePickerOpen, closeTimePicker);
 
@@ -65,7 +88,10 @@ export const useAppointmentForm = ({
           onSuccess: () => {
             onOpenChange(false);
             closeTimePicker();
-            setTimeout(() => reset(DEFAULT_VALUES), 300);
+            setTimeout(() => {
+              reset(APPOINTMENT_DEFAULT_VALUES);
+              resetAppointmentDraft();
+            }, 300);
           },
         }
       );
@@ -76,6 +102,7 @@ export const useAppointmentForm = ({
       onOpenChange,
       psychologistName,
       reset,
+      resetAppointmentDraft,
       user,
     ]
   );
