@@ -1,10 +1,8 @@
 import clsx from 'clsx';
-import { useId, useState } from 'react';
+import { Suspense, lazy, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { LoginModal } from '@features/auth/login';
-import { RegisterModal } from '@features/auth/register';
 import { AuthNavigation } from '@features/auth-navigation';
 import { useCommonTranslation } from '@shared/hooks';
 import { useModalStore } from '@shared/lib/store/modalStore';
@@ -13,6 +11,13 @@ import { MobileMenu } from '@widgets/mobile-menu';
 import { Navbar } from '@widgets/navbar';
 
 import css from './Header.module.css';
+
+const LoginModal = lazy(
+  () => import('@features/auth/login/ui/LoginModal/LoginModal')
+);
+const RegisterModal = lazy(
+  () => import('@features/auth/register/ui/RegisterModal/RegisterModal')
+);
 
 const Header = () => {
   const { t } = useCommonTranslation();
@@ -83,8 +88,19 @@ const Header = () => {
         />
       )}
 
-      <LoginModal isOpen={isLoginOpen} onOpenChange={closeLogin} />
-      <RegisterModal isOpen={isRegisterOpen} onOpenChange={closeRegister} />
+      {(isLoginOpen || isRegisterOpen) && (
+        <Suspense fallback={null}>
+          {isLoginOpen && (
+            <LoginModal isOpen={isLoginOpen} onOpenChange={closeLogin} />
+          )}
+          {isRegisterOpen && (
+            <RegisterModal
+              isOpen={isRegisterOpen}
+              onOpenChange={closeRegister}
+            />
+          )}
+        </Suspense>
+      )}
     </header>
   );
 };
