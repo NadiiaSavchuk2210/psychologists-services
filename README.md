@@ -22,7 +22,7 @@ _Built with React, TypeScript, Vite, and Firebase._
 
 [![Source Code](https://img.shields.io/badge/Source_Code-191A15?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NadiiaSavchuk2210/psychologists-services)
 [![Figma Mockup](https://img.shields.io/badge/Figma-Mockup-54BE96?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/I5vjNb0NsJOpQRnRpMloSY/Psychologists.Services?m=auto&t=MPhtRiTVSHH0Bl64-6)
-![Live Demo Coming Soon](https://img.shields.io/badge/Live_Demo-Coming_Soon-8A8A89?style=for-the-badge)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-54BE96?style=for-the-badge)](https://psychologists-services-orpin.vercel.app/)
 ![Status](https://img.shields.io/badge/Status-Ready_for_Deployment-2B4D43?style=for-the-badge)
 
 <br />
@@ -64,9 +64,9 @@ The product direction follows the visual language of the app itself:
 | [⚙ Tech Stack](#-tech-stack)                    | Core technologies used                |
 | [🔥 Firebase Data Model](#-firebase-data-model) | Realtime Database and Firestore usage |
 | [🚀 Quick Start](#-quick-start)                 | Setup and local launch instructions   |
+| [▲ Deployment](#-deployment)                   | Vercel deployment notes               |
 
 ---
-
 ---
 
 <a id="key-features"></a>
@@ -222,6 +222,23 @@ npm run build
 ```bash
 npm run preview
 ```
+
+---
+
+<a id="deployment"></a>
+
+## ▲ Deployment
+
+The project is deployed on Vercel:
+
+- Live demo: https://psychologists-services-orpin.vercel.app/
+
+For correct SPA routing on direct page refresh or manual URL entry, the project includes a `vercel.json` rewrite to `index.html`. This prevents `404` responses on routes like:
+
+- `/psychologists`
+- `/favorites`
+
+If you redeploy on Vercel after pulling the latest changes, direct navigation to nested routes should work correctly.
 
 ---
 

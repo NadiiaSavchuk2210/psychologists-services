@@ -62,6 +62,7 @@ export default function AppointmentPhoneField<
           className={clsx(className, css.phoneInput)}
           classInputWrapper={classInputWrapper}
           classField={classField}
+          reserveErrorSpace
           onValueChange={values => {
             const newFormatted = values.formattedValue ?? '';
             if (newFormatted !== field.value && !newFormatted.includes('_')) {

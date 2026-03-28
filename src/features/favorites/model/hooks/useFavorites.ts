@@ -40,7 +40,7 @@ export const useFavorites = () => {
     };
 
     if (!user) {
-      toastService.authRequired(openLogin, t, tApp, true);
+      toastService.authRequired(openLogin, t, tApp);
       return;
     }
 

@@ -64,6 +64,7 @@ const LoginForm = ({ onOpenChange }: Props) => {
           error={errors.email}
           autoComplete="email"
           className={css['login-form__input']}
+          reserveErrorSpace
         />
         <Input
           type="password"
@@ -74,6 +75,7 @@ const LoginForm = ({ onOpenChange }: Props) => {
           error={errors.password}
           autoComplete="current-password"
           className={css['login-form__input']}
+          reserveErrorSpace
         />
       </div>
 

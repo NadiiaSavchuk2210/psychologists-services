@@ -64,6 +64,7 @@ const RegisterForm = ({ onOpenChange }: Props) => {
           error={errors.name}
           autoComplete="name"
           className={css['register-form__input']}
+          reserveErrorSpace
         />
         <Input
           type="email"
@@ -74,6 +75,7 @@ const RegisterForm = ({ onOpenChange }: Props) => {
           error={errors.email}
           autoComplete="email"
           className={css['register-form__input']}
+          reserveErrorSpace
         />
         <Input
           type="password"
@@ -84,6 +86,7 @@ const RegisterForm = ({ onOpenChange }: Props) => {
           error={errors.password}
           autoComplete="new-password"
           className={css['register-form__input']}
+          reserveErrorSpace
         />
       </div>
       <Button

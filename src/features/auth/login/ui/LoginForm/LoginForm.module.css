@@ -1,3 +1,8 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .login-form__inputs {
   margin-bottom: 40px;
   display: flex;
@@ -21,4 +26,5 @@
 .login-form__btn {
   padding: 16px;
   width: 100%;
+  min-height: 54px;
 }

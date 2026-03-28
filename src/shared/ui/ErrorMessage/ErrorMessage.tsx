@@ -6,15 +6,22 @@ interface Props {
   error?: FieldError;
   message?: string;
   id?: string;
+  reserveSpace?: boolean;
 }
 
-const ErrorMessage = ({ error, message, id }: Props) => {
+const ErrorMessage = ({ error, message, id, reserveSpace = false }: Props) => {
   const text = error?.message || message;
 
-  if (!text) return null;
+  if (!text && !reserveSpace) return null;
 
   return (
-    <p id={id} role="alert" className={css.error}>
+    <p
+      id={id}
+      role={text ? 'alert' : undefined}
+      aria-live={text ? 'polite' : undefined}
+      className={css.error}
+      data-empty={!text}
+    >
       {text}
     </p>
   );
