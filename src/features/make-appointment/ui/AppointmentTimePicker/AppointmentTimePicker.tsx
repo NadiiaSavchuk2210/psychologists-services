@@ -16,7 +16,6 @@ interface Props {
 const TIME_STEP_MINUTES = 30;
 const INITIAL_SELECTED_INDEX = 0;
 const SCROLL_SETTLE_DELAY_MS = 100;
-const ALL_TIMES = generateTimes(TIME_STEP_MINUTES);
 
 export default function AppointmentTimePicker({
   id,
@@ -25,8 +24,9 @@ export default function AppointmentTimePicker({
   onClose,
   value,
 }: Props) {
+  const allTimes = generateTimes(TIME_STEP_MINUTES);
   const [selectedIndex, setSelectedIndex] = useState(() => {
-    const initialIndex = ALL_TIMES.indexOf(value);
+    const initialIndex = allTimes.indexOf(value);
     return initialIndex === -1 ? INITIAL_SELECTED_INDEX : initialIndex;
   });
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -39,12 +39,14 @@ export default function AppointmentTimePicker({
   }, [selectedIndex]);
 
   useEffect(() => {
+    if (allTimes.length === 0) return;
+
     itemRefs.current[selectedIndex]?.focus();
-  }, [selectedIndex]);
+  }, [allTimes.length, selectedIndex]);
 
   useEffect(() => {
     const container = listRef.current;
-    if (!container) return;
+    if (!container || allTimes.length === 0) return;
 
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -78,16 +80,20 @@ export default function AppointmentTimePicker({
       container.removeEventListener('scroll', handleScroll);
       clearTimeout(timeout);
     };
-  }, []);
+  }, [allTimes.length]);
 
   const handleClick = (index: number) => {
-    const time = ALL_TIMES[index];
+    const time = allTimes[index];
+    if (!time) return;
+
     setSelectedIndex(index);
     onChange?.(time);
   };
 
   const focusItem = (index: number) => {
-    const nextIndex = (index + ALL_TIMES.length) % ALL_TIMES.length;
+    if (allTimes.length === 0) return;
+
+    const nextIndex = (index + allTimes.length) % allTimes.length;
     setSelectedIndex(nextIndex);
     itemRefs.current[nextIndex]?.focus();
   };
@@ -111,7 +117,7 @@ export default function AppointmentTimePicker({
         break;
       case 'End':
         event.preventDefault();
-        focusItem(ALL_TIMES.length - 1);
+        focusItem(allTimes.length - 1);
         break;
       case 'Escape':
         event.preventDefault();
@@ -124,38 +130,44 @@ export default function AppointmentTimePicker({
     <div className={css.wrapper}>
       <p className={css.title}>{t('fields.meetingTime')}</p>
 
-      <ul
-        id={id}
-        ref={listRef}
-        className={css.list}
-        role="listbox"
-        aria-label={label}
-      >
-        {ALL_TIMES.map((time, index) => {
-          const [hours, minutes] = time.split(':');
-          return (
-            <li key={time}>
-              <button
-                ref={el => {
-                  itemRefs.current[index] = el;
-                }}
-                className={`${css.item} ${selectedIndex === index ? css.active : ''}`}
-                type="button"
-                role="option"
-                aria-selected={selectedIndex === index}
-                onClick={() => handleClick(index)}
-                onKeyDown={event => handleKeyDown(event, index)}
-              >
-                <span className={css.hours}>{hours}</span>
-                <span className={css.separator}>:</span>
-                <span className={css.minutes}>{minutes}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      {allTimes.length === 0 ? (
+        <p className={css.emptyState}>{t('fields.noSlotsToday')}</p>
+      ) : (
+        <>
+          <ul
+            id={id}
+            ref={listRef}
+            className={css.list}
+            role="listbox"
+            aria-label={label}
+          >
+            {allTimes.map((time, index) => {
+              const [hours, minutes] = time.split(':');
+              return (
+                <li key={time}>
+                  <button
+                    ref={el => {
+                      itemRefs.current[index] = el;
+                    }}
+                    className={`${css.item} ${selectedIndex === index ? css.active : ''}`}
+                    type="button"
+                    role="option"
+                    aria-selected={selectedIndex === index}
+                    onClick={() => handleClick(index)}
+                    onKeyDown={event => handleKeyDown(event, index)}
+                  >
+                    <span className={css.hours}>{hours}</span>
+                    <span className={css.separator}>:</span>
+                    <span className={css.minutes}>{minutes}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
-      <div className={css.highlight} />
+          <div className={css.highlight} />
+        </>
+      )}
     </div>
   );
 }

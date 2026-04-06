@@ -7,6 +7,7 @@
     "email": "Email",
     "phoneNumber": "Номер телефону",
     "meetingTime": "Час зустрічі",
+    "noSlotsToday": "На сьогодні вже немає вільних місць",
     "comment": "Коментар",
     "phonePlaceholder": "+380",
     "timePlaceholder": "00:00",
