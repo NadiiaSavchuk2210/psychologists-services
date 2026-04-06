@@ -162,6 +162,7 @@ export interface IAppointmentTranslations {
     email: string;
     phoneNumber: string;
     meetingTime: string;
+    noSlotsToday: string;
     comment: string;
     phonePlaceholder: string;
     timePlaceholder: string;

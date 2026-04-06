@@ -39,6 +39,16 @@
   display: none;
 }
 
+.emptyState {
+  display: flex;
+  align-items: center;
+  min-height: calc(24px * 4);
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
 .item {
   width: 100%;
   padding: 0;

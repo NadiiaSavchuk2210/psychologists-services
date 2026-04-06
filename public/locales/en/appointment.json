@@ -7,6 +7,7 @@
     "email": "Email",
     "phoneNumber": "Phone number",
     "meetingTime": "Meeting time",
+    "noSlotsToday": "There are no available slots left for today",
     "comment": "Comment",
     "phonePlaceholder": "+380",
     "timePlaceholder": "00:00",
