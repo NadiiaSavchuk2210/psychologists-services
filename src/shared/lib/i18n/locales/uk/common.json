@@ -1,0 +1,22 @@
+{
+  "loading": "Завантаження...",
+  "save": "Зберегти",
+  "cancel": "Скасувати",
+  "error": "Щось пішло не так",
+  "success": "успішний",
+  "auth": {
+    "email_exists": "Користувач з таким email вже існує",
+    "weak_password": "Пароль занадто слабкий (мін. 6 символів)",
+    "invalid_email": "Невірний формат email",
+    "user_not_found": "Користувач не знайдений",
+    "wrong_password": "Невірний пароль",
+    "too_many_requests": "Забагато спроб. Спробуйте пізніше",
+    "network_error": "Помилка мережі. Перевірте підключення"
+  },
+  "homeLink": "Перейти на головну сторінку Psychologists Services",
+  "navigationMenu": "Меню навігації",
+  "openMenu": "Відкрити меню навігації",
+  "closeMenu": "Закрити меню навігації",
+  "languageEnglish": "Англійська",
+  "languageUkrainian": "Українська"
+}

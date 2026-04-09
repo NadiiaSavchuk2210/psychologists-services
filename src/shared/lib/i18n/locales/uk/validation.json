@@ -1,0 +1,10 @@
+{
+  "fields": {
+    "name": "Ім'я",
+    "email": "Email",
+    "password": "Пароль"
+  },
+  "required": "{{field}} є обов'язковим",
+  "min": "{{field}} має бути щонайменше {{min}} символів",
+  "invalid_email": "Невірний email"
+}

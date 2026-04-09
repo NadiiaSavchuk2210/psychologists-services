@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Каталог психологів | Рейтинги, відгуки та спеціалізації",
+    "description": "Переглядайте понад 50 ліцензованих психологів за спеціалізаціями: депресія, стосунки, тривожність. Фільтруйте за рейтингом, ціною та досвідом.",
+    "ogTitle": "Знайдіть найкращих психологів поруч",
+    "ogDescription": "Знаходьте перевірених спеціалістів з відгуками клієнтів. Порівнюйте ціни від $120/год та записуйтесь на консультацію онлайн."
+  },
+  "psychologist": "Психолог",
+  "rating": "Рейтинг: {{rating}}",
+  "reviews": "Відгуки",
+  "readMore": "Читати далі",
+  "collapse": "Згорнути",
+  "makeAppointment": "Записатися на консультацію",
+  "loadMore": "Завантажити ще",
+  "loadingMore": "Завантаження...",
+  "pricePerHour": "Ціна / 1 година: <price>{{price}}$</price>",
+  "noReviews": "Відгуків ще немає",
+  "experience": "<label>Досвід роботи:</label> <value>{{experience}}</value>",
+  "license": "<label>Ліцензія:</label> <value>{{license}}</value>",
+  "specialization": "<label>Спеціалізація:</label> <value>{{specialization}}</value>",
+  "initialConsultation": "<label>Первинна консультація:</label> <value>{{consultation}}</value>",
+  "title": "Психологи",
+  "listTitle": "Список психологів",
+  "emptyTitle": "Психологів не знайдено",
+  "emptyDescription": "Спробуйте змінити фільтри або поверніться пізніше"
+}

@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
+import HomePage from '@pages/HomePage/HomePage';
 import SuspenseWrapper from '@shared/ui/SuspenseWrapper/SuspenseWrapper';
 
 import { ROUTES } from '../routesConfig';
 
-const HomePage = lazy(() => import('@pages/HomePage/HomePage'));
 const PsychologistsPage = lazy(
   () => import('@pages/PsychologistsPage/PsychologistsPage')
 );

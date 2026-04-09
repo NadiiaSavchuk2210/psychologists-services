@@ -12,6 +12,7 @@ declare module '*.css';
 declare module '*.scss';
 
 declare module '*.png';
+declare module '*.avif';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.gif';
@@ -33,4 +34,3 @@ declare module 'modern-normalize';
 declare module 'i18next';
 declare module 'react-i18next';
 declare module 'i18next-browser-languagedetector';
-declare module 'i18next-http-backend';

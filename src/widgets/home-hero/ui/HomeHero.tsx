@@ -5,11 +5,17 @@ import { useHomeTranslation } from '@shared/hooks';
 import { Icon, Button } from '@shared/ui';
 
 import css from './HomeHero.module.css';
+import heroAvif1x from '../../../assets/images/hero/hero-psychologist.avif';
 import heroJpg1x from '../../../assets/images/hero/hero-psychologist.jpg';
 import heroWebp1x from '../../../assets/images/hero/hero-psychologist.webp';
+import heroAvif2x from '../../../assets/images/hero/hero-psychologist@2x.avif';
 import heroJpg2x from '../../../assets/images/hero/hero-psychologist@2x.jpg';
 import heroWebp2x from '../../../assets/images/hero/hero-psychologist@2x.webp';
+import heroAvifMobile from '../../../assets/images/hero/hero-psychologist@mobile.avif';
+import heroWebpMobile from '../../../assets/images/hero/hero-psychologist@mobile.webp';
 
+const HERO_IMAGE_SIZES =
+  '(min-width: 1158px) 580px, (min-width: 768px) 464px, (max-width: 319px) calc(100vw - 30px), 290px';
 
 const HomeHero = () => {
   const { t } = useHomeTranslation();
@@ -48,20 +54,31 @@ const HomeHero = () => {
         <div className={css['hero-picture-container']}>
           <picture className={css['hero-picture']}>
             <source
+              type="image/avif"
+              srcSet={`${heroAvif1x} 464w, ${heroAvifMobile} 580w, ${heroAvif2x} 928w`}
+            />
+
+            <source
               type="image/webp"
-              srcSet={`${heroWebp1x} 1x, ${heroWebp2x} 2x`}
+              srcSet={`${heroWebp1x} 464w, ${heroWebpMobile} 580w, ${heroWebp2x} 928w`}
             />
 
             <source
               type="image/jpeg"
-              srcSet={`${heroJpg1x} 1x, ${heroJpg2x} 2x`}
+              srcSet={`${heroJpg1x} 464w, ${heroJpg2x} 928w`}
             />
 
             <img
               className={css['hero-img']}
               src={heroJpg1x}
+              srcSet={`${heroJpg1x} 464w, ${heroJpg2x} 928w`}
+              sizes={HERO_IMAGE_SIZES}
               alt="Psychologist"
               width="464"
+              height="526"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
             />
           </picture>
 

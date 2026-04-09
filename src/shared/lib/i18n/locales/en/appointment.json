@@ -1,0 +1,30 @@
+{
+  "title": "Make an appointment with a psychologist",
+  "subtitle": "You are on the verge of changing your life for the better. Fill out the short form below to book your personal appointment with a professional psychologist. We guarantee confidentiality and respect for your privacy.",
+  "yourPsychologist": "Your psychologist",
+  "fields": {
+    "name": "Name",
+    "email": "Email",
+    "phoneNumber": "Phone number",
+    "meetingTime": "Meeting time",
+    "noSlotsToday": "There are no available slots left for today",
+    "comment": "Comment",
+    "phonePlaceholder": "+380",
+    "timePlaceholder": "00:00",
+    "submit": "Send",
+    "sending": "Sending..."
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "min": "{{field}} must be at least {{min}} characters",
+    "max": "{{field}} must be at most {{max}} characters",
+    "invalidEmail": "Invalid email",
+    "invalidPhone": "Invalid phone number format",
+    "timeTaken": "This time slot is already booked"
+  },
+  "toasts": {
+    "success": "Appointment sent successfully!",
+    "error": "Something went wrong. Please try again.",
+    "authRequired": "You need to log in to make an appointment"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "title": "Server Error | Psychology Services",
+    "description": "Temporary server issue. Our team is resolving it. Contact support or try our psychologist directory.",
+    "ogTitle": "Service Temporarily Unavailable",
+    "ogDescription": "Mental health services temporarily down. Return to find licensed therapists."
+  },
+  "title": "An unexpected error occurred",
+  "text": "Please try again later or contact support if the problem persists.",
+  "buttonGoHome": "Go back home"
+}
