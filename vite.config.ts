@@ -16,11 +16,7 @@ const getManualChunk = (id: string) => {
   }
 
   if (
-    hasPackage(id, [
-      'react-router',
-      'react-router-dom',
-      '@remix-run/router',
-    ])
+    hasPackage(id, ['react-router', 'react-router-dom', '@remix-run/router'])
   ) {
     return 'router-vendor';
   }
@@ -41,13 +37,14 @@ const getManualChunk = (id: string) => {
       'i18next',
       'react-i18next',
       'i18next-browser-languagedetector',
-      'i18next-http-backend',
     ])
   ) {
     return 'i18n-vendor';
   }
 
-  if (hasPackage(id, ['@tanstack/react-query', '@tanstack/react-query-devtools'])) {
+  if (
+    hasPackage(id, ['@tanstack/react-query', '@tanstack/react-query-devtools'])
+  ) {
     return 'query-vendor';
   }
 
@@ -57,7 +54,6 @@ const getManualChunk = (id: string) => {
       'motion-dom',
       'motion-utils',
       'react-hot-toast',
-      'react-spinners',
       'usehooks-ts',
       'zustand',
       'axios',
@@ -73,7 +69,6 @@ const getManualChunk = (id: string) => {
       '@radix-ui/react-dialog',
       '@radix-ui/react-icons',
       '@radix-ui/react-select',
-      '@radix-ui/react-toggle-group',
     ])
   ) {
     return 'radix-vendor';

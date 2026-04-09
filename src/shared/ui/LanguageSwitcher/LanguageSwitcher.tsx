@@ -1,37 +1,48 @@
-import * as ToggleGroup from '@radix-ui/react-toggle-group';
-
 import { useCommonTranslation } from '@shared/hooks';
 
 import css from './LanguageSwitcher.module.css';
+
+const LANGUAGES = [
+  {
+    value: 'en',
+    label: 'EN',
+    translationKey: 'languageEnglish',
+  },
+  {
+    value: 'uk',
+    label: 'UK',
+    translationKey: 'languageUkrainian',
+  },
+] as const;
 
 const LanguageSwitcher = () => {
   const { i18n, t } = useCommonTranslation();
 
   return (
-    <ToggleGroup.Root
-      type="single"
-      value={i18n.resolvedLanguage}
-      onValueChange={value => value && i18n.changeLanguage(value)}
-      className={css.switcher}
-    >
-      <ToggleGroup.Item
-        value="en"
-        className={css.item}
-        aria-label={t('languageEnglish')}
-        title={t('languageEnglish')}
-      >
-        EN
-      </ToggleGroup.Item>
+    <div className={css.switcher} role="group" aria-label={t('navigationMenu')}>
+      {LANGUAGES.map(({ value, label, translationKey }) => {
+        const isActive = i18n.resolvedLanguage === value;
 
-      <ToggleGroup.Item
-        value="uk"
-        className={css.item}
-        aria-label={t('languageUkrainian')}
-        title={t('languageUkrainian')}
-      >
-        UK
-      </ToggleGroup.Item>
-    </ToggleGroup.Root>
+        return (
+          <button
+            key={value}
+            type="button"
+            className={css.item}
+            data-active={isActive}
+            aria-pressed={isActive}
+            aria-label={t(translationKey)}
+            title={t(translationKey)}
+            onClick={() => {
+              if (!isActive) {
+                void i18n.changeLanguage(value);
+              }
+            }}
+          >
+            {label}
+          </button>
+        );
+      })}
+    </div>
   );
 };
 

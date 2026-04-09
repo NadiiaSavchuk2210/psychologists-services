@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useAuthTranslation, useFirebaseError } from '@shared/hooks';
+import { useAuthTranslation } from '@shared/hooks';
+import { useFirebaseError } from '@shared/hooks/useFirebaseError';
 import { useAuthStore } from '@shared/lib/store/authStore';
 import { toastService } from '@shared/lib/toasts/toastService';
 

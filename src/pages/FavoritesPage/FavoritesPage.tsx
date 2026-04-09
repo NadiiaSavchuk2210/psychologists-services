@@ -18,7 +18,7 @@ import {
   useScrollToTopOnLanguageChange,
 } from '@shared/hooks';
 import { useModalStore } from '@shared/lib/store/modalStore';
-import { Button, EmptyState, ErrorMessage } from '@shared/ui';
+import { Button, EmptyState, ErrorMessage, Loader } from '@shared/ui';
 import PsychologistsList from '@widgets/psychologists-list/ui/PsychologistsList';
 
 import css from './FavoritesPage.module.css';
@@ -105,7 +105,7 @@ const FavoritesPage = () => {
       </main>
 
       {isAppointmentOpen && (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <AppointmentModal
             isOpen={isAppointmentOpen}
             onOpenChange={closeAppointment}

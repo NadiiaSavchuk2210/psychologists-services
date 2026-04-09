@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Psychologists Directory | Ratings, Reviews & Specialties",
+    "description": "Browse 50+ licensed psychologists by specialization: depression, relationships, anxiety. Filter by rating, price, experience.",
+    "ogTitle": "Find Top Psychologists Near You",
+    "ogDescription": "Discover verified therapists with client reviews. Compare rates from $120/hour and book secure appointments online."
+  },
+  "psychologist": "Psychologist",
+  "rating": "Rating: {{rating}}",
+  "reviews": "Reviews",
+  "readMore": "Read more",
+  "collapse": "Collapse",
+  "makeAppointment": "Make an appointment",
+  "loadMore": "Load more",
+  "loadingMore": "Loading...",
+  "noReviews": "No reviews yet",
+  "experience": "<label>Experience:</label> <value>{{experience}}</value>",
+  "license": "<label>License:</label> <value>{{license}}</value>",
+  "specialization": "<label>Specialization:</label> <value>{{specialization}}</value>",
+  "initialConsultation": "<label>Initial consultation:</label> <value>{{consultation}}</value>",
+  "pricePerHour": "Price / 1 hour: <price>{{price}}$</price>",
+  "title": "Psychologists",
+  "listTitle": "Psychologists list",
+  "emptyTitle": "No psychologists found",
+  "emptyDescription": "Try changing the filters or come back later"
+}

@@ -1,19 +1,19 @@
-import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { ThemeSwitcher } from '@features/theme-switcher';
-import LanguageSwitcher from '@shared/ui/LanguageSwitcher/LanguageSwitcher';
-import Toast from '@shared/ui/Toast/Toast';
-import { Header } from '@widgets/header';
+import { ROUTES } from '@app/router/routesConfig';
+
+import DeferredLayoutUtilities from './DeferredLayoutUtilities';
+import LayoutShell from './LayoutShell';
+import LayoutUtilities from './LayoutUtilities';
 
 const MainLayout = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === ROUTES.HOME;
+
   return (
     <>
-      <Header />
-      <Outlet />
-
-      <ThemeSwitcher />
-      <LanguageSwitcher />
-      <Toast />
+      <LayoutShell />
+      {isHomePage ? <DeferredLayoutUtilities /> : <LayoutUtilities />}
     </>
   );
 };

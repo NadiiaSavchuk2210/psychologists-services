@@ -6,8 +6,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { AuthNavigation } from '@features/auth-navigation';
 import { useCommonTranslation } from '@shared/hooks';
 import { useModalStore } from '@shared/lib/store/modalStore';
-import { Icon } from '@shared/ui';
-import { MobileMenu } from '@widgets/mobile-menu';
+import { Icon, Loader } from '@shared/ui';
 import { Navbar } from '@widgets/navbar';
 
 import css from './Header.module.css';
@@ -15,6 +14,7 @@ import css from './Header.module.css';
 const LoginModal = lazy(
   () => import('@features/auth/login/ui/LoginModal/LoginModal')
 );
+const MobileMenu = lazy(() => import('@widgets/mobile-menu/ui/MobileMenu'));
 const RegisterModal = lazy(
   () => import('@features/auth/register/ui/RegisterModal/RegisterModal')
 );
@@ -78,18 +78,20 @@ const Header = () => {
         )}
       </div>
 
-      {isMobile && (
-        <MobileMenu
-          menuId={mobileMenuId}
-          isMenuOpen={isMenuOpen}
-          closeMenu={closeMenu}
-          openLogin={openLogin}
-          openRegister={openRegister}
-        />
+      {isMobile && isMenuOpen && (
+        <Suspense fallback={<Loader />}>
+          <MobileMenu
+            menuId={mobileMenuId}
+            isMenuOpen={isMenuOpen}
+            closeMenu={closeMenu}
+            openLogin={openLogin}
+            openRegister={openRegister}
+          />
+        </Suspense>
       )}
 
       {(isLoginOpen || isRegisterOpen) && (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           {isLoginOpen && (
             <LoginModal isOpen={isLoginOpen} onOpenChange={closeLogin} />
           )}

@@ -27,7 +27,7 @@
   transition: var(--transition-base);
 }
 
-.item[data-state='on'] {
+.item[data-active='true'] {
   color: var(--color-bg);
   background-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(25, 26, 21, 0.15);
@@ -38,6 +38,6 @@
   color: var(--color-primary);
 }
 
-.item[data-state='on']:hover {
+.item[data-active='true']:hover {
   background-color: var(--color-tertiary);
 }

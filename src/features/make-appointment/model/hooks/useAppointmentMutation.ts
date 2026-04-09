@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { createAppointment } from '@features/make-appointment/api/appointmentApi';
-import { useAppointmentTranslation, useFirebaseError } from '@shared/hooks';
+import { useAppointmentTranslation } from '@shared/hooks';
+import { useFirebaseError } from '@shared/hooks/useFirebaseError';
 import { toastService } from '@shared/lib/toasts/toastService';
 
 import type { Appointment } from '../types/appointment';

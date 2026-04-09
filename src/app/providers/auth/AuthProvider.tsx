@@ -1,24 +1,41 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 
-import { auth } from '@shared/lib/config/firebase/auth';
 import { useAuthStore } from '@shared/lib/store/authStore';
-import { Loader } from '@shared/ui';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const AuthProvider = ({ children }: Props) => {
-  const { loading, setUser } = useAuthStore();
+  const { setUser, clearAuth } = useAuthStore();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setUser(user);
-    });
-    return unsubscribe;
-  }, [setUser]);
+    let unsubscribe: (() => void) | undefined;
+    let isMounted = true;
 
-  if (loading) return <Loader />;
+    void import('firebase/auth')
+      .then(async ({ onAuthStateChanged, getAuth }) => {
+        const { app } = await import('@shared/lib/config/firebase/config');
+
+        if (!isMounted) {
+          return;
+        }
+
+        unsubscribe = onAuthStateChanged(getAuth(app), user => {
+          setUser(user);
+        });
+      })
+      .catch(() => {
+        if (isMounted) {
+          clearAuth();
+        }
+      });
+
+    return () => {
+      isMounted = false;
+      unsubscribe?.();
+    };
+  }, [clearAuth, setUser]);
+
   return children;
 };
