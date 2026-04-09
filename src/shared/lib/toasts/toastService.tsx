@@ -1,5 +1,3 @@
-import toast from 'react-hot-toast';
-
 import { TIME } from '@shared/constants/time';
 
 export type ToastType = 'success' | 'error' | 'info';
@@ -10,6 +8,8 @@ export interface ToastOptions {
 }
 
 const debounceMap = new Map<string, ReturnType<typeof setTimeout>>();
+
+const loadToast = () => import('react-hot-toast');
 
 export const toastService = {
   show: (
@@ -23,11 +23,12 @@ export const toastService = {
 
     debounceMap.set(
       key,
-      setTimeout(() => {
+      setTimeout(async () => {
         const config = {
           duration: options?.duration ?? TIME.SECOND * 4,
           icon: options?.icon,
         };
+        const { default: toast } = await loadToast();
 
         switch (type) {
           case 'success':
@@ -82,43 +83,45 @@ export const toastService = {
     tApp: (key: string) => string,
     isAppointment = false
   ) => {
-    toast.custom(tost => (
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-          color: 'white',
-          padding: '16px',
-          borderRadius: '12px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '12px',
-        }}
-      >
-        <span>
-          {!isAppointment
-            ? t('toastAuthRequired')
-            : tApp('toasts.authRequired')}
-        </span>
-        <button
-          onClick={() => {
-            openLogin();
-            toast.dismiss(tost.id);
-          }}
+    void loadToast().then(({ default: toast }) => {
+      toast.custom(tost => (
+        <div
           style={{
-            background: 'rgba(255,255,255,0.2)',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '6px 12px',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
             color: 'white',
-            cursor: 'pointer',
-            fontWeight: 600,
+            padding: '16px',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
           }}
         >
-          {t('toastAuthAction')}
-        </button>
-      </div>
-    ));
+          <span>
+            {!isAppointment
+              ? t('toastAuthRequired')
+              : tApp('toasts.authRequired')}
+          </span>
+          <button
+            onClick={() => {
+              openLogin();
+              toast.dismiss(tost.id);
+            }}
+            style={{
+              background: 'rgba(255,255,255,0.2)',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              color: 'white',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+          >
+            {t('toastAuthAction')}
+          </button>
+        </div>
+      ));
+    });
   },
 
   appointmentSuccess: (t: (key: string) => string) =>

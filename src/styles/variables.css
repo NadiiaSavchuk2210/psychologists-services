@@ -1,5 +1,6 @@
 :root {
-  --font-primary: 'Inter', sans-serif;
+  --font-primary: 'Inter Variable', 'Inter', sans-serif;
+  --font-family: var(--font-primary);
   --color-bg: #fbfbfb;
   --color-bg-gray: rgba(25, 26, 21, 0.6);
   --color-text-primary: #191a15;
