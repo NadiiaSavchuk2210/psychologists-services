@@ -50,17 +50,30 @@ const getManualChunk = (id: string) => {
 
   if (
     hasPackage(id, [
+      'zustand',
+      'clsx',
+    ])
+  ) {
+    return 'ui-core-vendor';
+  }
+
+  if (hasPackage(id, ['usehooks-ts'])) {
+    return 'hooks-vendor';
+  }
+
+  if (hasPackage(id, ['axios'])) {
+    return 'http-vendor';
+  }
+
+  if (
+    hasPackage(id, [
       'framer-motion',
       'motion-dom',
       'motion-utils',
       'react-hot-toast',
-      'usehooks-ts',
-      'zustand',
-      'axios',
-      'clsx',
     ])
   ) {
-    return 'ui-vendor';
+    return 'feedback-vendor';
   }
 
   if (

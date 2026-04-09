@@ -1,27 +1,21 @@
 import clsx from 'clsx';
-import { Suspense, lazy, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMediaQuery } from 'usehooks-ts';
 
 import { AuthNavigation } from '@features/auth-navigation';
-import { useCommonTranslation } from '@shared/hooks';
-import { useModalStore } from '@shared/lib/store/modalStore';
-import { Icon, Loader } from '@shared/ui';
+import { useCommonTranslation, useMediaQuery } from '@shared/hooks';
+import { Icon } from '@shared/ui';
 import { Navbar } from '@widgets/navbar';
 
 import css from './Header.module.css';
+import HeaderAuthModals from './HeaderAuthModals';
+import HeaderMobileMenu from './HeaderMobileMenu';
+import { useHeaderControls } from './useHeaderControls';
 
-const LoginModal = lazy(
-  () => import('@features/auth/login/ui/LoginModal/LoginModal')
-);
-const MobileMenu = lazy(() => import('@widgets/mobile-menu/ui/MobileMenu'));
-const RegisterModal = lazy(
-  () => import('@features/auth/register/ui/RegisterModal/RegisterModal')
-);
+const MOBILE_MEDIA_QUERY = '(max-width: 767px)';
 
 const Header = () => {
   const { t } = useCommonTranslation();
-
+  const isMobile = useMediaQuery(MOBILE_MEDIA_QUERY);
   const {
     isLoginOpen,
     closeLogin,
@@ -29,14 +23,11 @@ const Header = () => {
     closeRegister,
     openLogin,
     openRegister,
-  } = useModalStore();
-
-  const isMobile = useMediaQuery('(max-width: 767px)');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const mobileMenuId = useId();
-
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
+    isMenuOpen,
+    mobileMenuId,
+    openMenu,
+    closeMenu,
+  } = useHeaderControls();
 
   return (
     <header className={css.header}>
@@ -78,31 +69,22 @@ const Header = () => {
         )}
       </div>
 
-      {isMobile && isMenuOpen && (
-        <Suspense fallback={<Loader />}>
-          <MobileMenu
-            menuId={mobileMenuId}
-            isMenuOpen={isMenuOpen}
-            closeMenu={closeMenu}
-            openLogin={openLogin}
-            openRegister={openRegister}
-          />
-        </Suspense>
+      {isMobile && (
+        <HeaderMobileMenu
+          menuId={mobileMenuId}
+          isMenuOpen={isMenuOpen}
+          closeMenu={closeMenu}
+          openLogin={openLogin}
+          openRegister={openRegister}
+        />
       )}
 
-      {(isLoginOpen || isRegisterOpen) && (
-        <Suspense fallback={<Loader />}>
-          {isLoginOpen && (
-            <LoginModal isOpen={isLoginOpen} onOpenChange={closeLogin} />
-          )}
-          {isRegisterOpen && (
-            <RegisterModal
-              isOpen={isRegisterOpen}
-              onOpenChange={closeRegister}
-            />
-          )}
-        </Suspense>
-      )}
+      <HeaderAuthModals
+        isLoginOpen={isLoginOpen}
+        closeLogin={closeLogin}
+        isRegisterOpen={isRegisterOpen}
+        closeRegister={closeRegister}
+      />
     </header>
   );
 };
