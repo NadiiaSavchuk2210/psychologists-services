@@ -5,8 +5,36 @@
   gap: 32px;
 }
 
+.listItem {
+  content-visibility: auto;
+  contain-intrinsic-size: 360px;
+  animation: cardEnter 0.24s ease-out both;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listItem {
+    animation: none;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .psychologistsList {
     margin-bottom: 64px;
+  }
+
+  .listItem {
+    contain-intrinsic-size: 280px;
   }
 }

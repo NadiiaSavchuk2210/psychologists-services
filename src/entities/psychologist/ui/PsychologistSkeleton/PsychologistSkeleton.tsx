@@ -1,25 +1,10 @@
 import clsx from 'clsx';
-import { motion, type Variants } from 'framer-motion';
 
 import css from './PsychologistSkeleton.module.css';
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
-};
-
 const PsychologistSkeleton = () => {
   return (
-    <motion.div
-      className={clsx(css.skeletonCard, 'container')}
-      variants={itemVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <div className={clsx(css.skeletonCard, 'container')}>
       <div className={clsx(css.avatar, css.shimmer)} />
 
       <div className={css.content}>
@@ -47,7 +32,7 @@ const PsychologistSkeleton = () => {
 
         <div className={clsx(css.shimmer, css.readMoreButton)} />
       </div>
-    </motion.div>
+    </div>
   );
 };
 

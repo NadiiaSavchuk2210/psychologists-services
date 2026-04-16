@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 import type { PsychologistUI } from '@entities/psychologist/model/types/psychologist';
 import {
   useAppointmentTranslation,
@@ -42,26 +40,26 @@ const CardDetails = ({
   };
 
   return (
-    <motion.div
+    <div
       id={detailsId}
-      layout
-      initial={false}
-      animate={{ height: isExpanded ? 'auto' : 0 }}
       className={css.details}
+      data-expanded={isExpanded}
       aria-hidden={!isExpanded}
     >
-      <section className={css.section}>
-        <h4 className="visually-hidden">{t('reviews')}</h4>
-        <Reviews psychologist={psychologist} />
-        <Button
-          className={css.btnAppointment}
-          type="button"
-          onClick={makeAppointment}
-        >
-          {t('makeAppointment')}
-        </Button>
-      </section>
-    </motion.div>
+      <div className={css.inner}>
+        <section className={css.section}>
+          <h4 className="visually-hidden">{t('reviews')}</h4>
+          <Reviews psychologist={psychologist} />
+          <Button
+            className={css.btnAppointment}
+            type="button"
+            onClick={makeAppointment}
+          >
+            {t('makeAppointment')}
+          </Button>
+        </section>
+      </div>
+    </div>
   );
 };
 

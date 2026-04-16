@@ -23,6 +23,9 @@ const PsychologistAvatar = ({ psychologist, isAppointment = false }: Props) => {
         src={psychologist?.avatar_url ?? FallbackImg}
         alt={psychologist?.name}
         width={96}
+        height={96}
+        loading={isAppointment ? 'eager' : 'lazy'}
+        decoding="async"
       />
       {!isAppointment && <span className={css.avatarOnlineIndicator}></span>}
     </div>
