@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 
 import App from '@app/App';
 import i18n from '@shared/lib/i18n/i18n';
@@ -18,18 +18,13 @@ const app = (
   </StrictMode>
 );
 const detectedLanguage = i18n.resolvedLanguage ?? i18n.language;
-const canHydratePrerenderedHome =
+const hasPrerenderedHomeMarkup =
   rootElement.hasChildNodes() &&
   window.location.pathname === '/' &&
   detectedLanguage === 'en';
 
-if (canHydratePrerenderedHome) {
-  hydrateRoot(rootElement, app);
-} else {
-  // Fall back to a client render when the prerendered markup may not match.
-  if (rootElement.hasChildNodes()) {
-    rootElement.innerHTML = '';
-  }
-
-  createRoot(rootElement).render(app);
+if (hasPrerenderedHomeMarkup || rootElement.hasChildNodes()) {
+  rootElement.innerHTML = '';
 }
+
+createRoot(rootElement).render(app);
