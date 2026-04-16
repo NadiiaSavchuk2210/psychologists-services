@@ -1,3 +1,4 @@
+import { getOptimizedAvatarUrl } from './getOptimizedAvatarUrl';
 import type { Psychologist } from '../model/types/psychologist';
 import type { Review } from '../model/types/psychologist-review';
 
@@ -49,7 +50,7 @@ export const normalizePsychologist = (
     id: String(value.id ?? fallbackId),
     name: value.name,
     name_ua: value.name_ua,
-    avatar_url: value.avatar_url,
+    avatar_url: getOptimizedAvatarUrl(value.avatar_url),
     experience: value.experience,
     price_per_hour: value.price_per_hour,
     rating: value.rating,
