@@ -21,13 +21,15 @@ const detectedLanguage = i18n.resolvedLanguage ?? i18n.language;
 const canHydratePrerenderedHome =
   rootElement.hasChildNodes() &&
   window.location.pathname === '/' &&
-  window.matchMedia('(min-width: 768px)').matches &&
   detectedLanguage === 'en';
 
 if (canHydratePrerenderedHome) {
   hydrateRoot(rootElement, app);
 } else {
   // Fall back to a client render when the prerendered markup may not match.
-  rootElement.innerHTML = '';
+  if (rootElement.hasChildNodes()) {
+    rootElement.innerHTML = '';
+  }
+
   createRoot(rootElement).render(app);
 }
