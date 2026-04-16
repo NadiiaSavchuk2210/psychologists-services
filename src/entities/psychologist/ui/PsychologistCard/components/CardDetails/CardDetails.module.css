@@ -1,5 +1,33 @@
+.details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.24s ease,
+    opacity 0.18s ease;
+}
+
+.details[data-expanded='true'] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.inner {
+  overflow: hidden;
+}
+
+.section {
+  padding-top: 16px;
+}
+
 .btnAppointment {
   padding: 14px 32px;
   min-width: 227px;
   min-height: 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .details {
+    transition: none;
+  }
 }

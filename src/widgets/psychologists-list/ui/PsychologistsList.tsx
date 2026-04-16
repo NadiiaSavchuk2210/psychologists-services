@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useState, forwardRef } from 'react';
 
 import { PsychologistCard, type PsychologistUI } from '@entities/psychologist';
@@ -20,25 +19,16 @@ const PsychologistsList = forwardRef<HTMLUListElement, Props>(
     }, []);
 
     return (
-      <ul ref={ref} className={css.psychologistsList}>
-        <AnimatePresence>
+        <ul ref={ref} className={css.psychologistsList}>
           {psychologists.map(psychologist => (
-            <motion.li
-              key={psychologist.id}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
+            <li key={psychologist.id} className={css.listItem}>
               <PsychologistCard
                 psychologist={psychologist}
                 isExpanded={expandedIds.includes(psychologist.id)}
                 onToggle={() => toggleCard(psychologist.id)}
               />
-            </motion.li>
+            </li>
           ))}
-        </AnimatePresence>
       </ul>
     );
   }

@@ -8,6 +8,7 @@
   width: 100%;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: skeletonEnter 0.24s ease-out both;
 }
 
 .avatar {
@@ -117,6 +118,25 @@
   }
   100% {
     background-position-x: -200%;
+  }
+}
+
+@keyframes skeletonEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonCard,
+  .shimmer {
+    animation: none;
   }
 }
 
