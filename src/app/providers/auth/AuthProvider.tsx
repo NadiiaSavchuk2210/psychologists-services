@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { ROUTES } from '@app/router/routesConfig';
 import { useAuthStore } from '@shared/lib/store/authStore';
 
 interface Props {
@@ -12,7 +13,7 @@ export const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     let unsubscribe: (() => void) | undefined;
     let isMounted = true;
-    const shouldDeferAuth = window.location.pathname === '/';
+    const shouldDeferAuth = window.location.pathname !== ROUTES.FAVORITES;
     let idleCallbackId: number | undefined;
     let timeoutId: number | undefined;
 

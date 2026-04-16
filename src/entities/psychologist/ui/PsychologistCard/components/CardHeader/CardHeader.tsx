@@ -15,6 +15,7 @@ interface Props {
   psychologist: PsychologistUI;
   detailsId: string;
   isExpanded: boolean;
+  priority?: boolean;
   onToggle: () => void;
 }
 
@@ -22,6 +23,7 @@ const CardHeader = ({
   psychologist,
   detailsId,
   isExpanded,
+  priority = false,
   onToggle,
 }: Props) => {
   const { t } = usePsychologistsTranslation();
@@ -33,7 +35,7 @@ const CardHeader = ({
     <>
       <div className={css.header}>
         <div className={css.headerAvatar}>
-          <PsychologistAvatar psychologist={psychologist} />
+          <PsychologistAvatar psychologist={psychologist} priority={priority} />
         </div>
 
         <div className={css.headerContent}>

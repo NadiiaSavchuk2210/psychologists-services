@@ -7,10 +7,6 @@ import { useAuthStore } from '@shared/lib/store/authStore';
 import { useModalStore } from '@shared/lib/store/modalStore';
 import { toastService } from '@shared/lib/toasts/toastService';
 
-import { addFavorite } from '../api/addFavorite';
-import { fetchFavorites } from '../api/fetchFavorites';
-import { removeFavorite } from '../api/removeFavorite';
-
 export const useFavorites = () => {
   const { user } = useAuthStore();
   const { t } = useAuthTranslation();
@@ -28,7 +24,11 @@ export const useFavorites = () => {
     error,
   } = useQuery<Psychologist[]>({
     queryKey,
-    queryFn: () => fetchFavorites(user!.uid),
+    queryFn: async () => {
+      const { fetchFavorites } = await import('../api/fetchFavorites');
+
+      return fetchFavorites(user!.uid);
+    },
     enabled: !!user,
   });
 
@@ -67,9 +67,13 @@ export const useFavorites = () => {
 
     try {
       if (isFavorite) {
+        const { removeFavorite } = await import('../api/removeFavorite');
+
         await removeFavorite(user.uid, itemId);
         toastService.favoriteRemoved(t);
       } else {
+        const { addFavorite } = await import('../api/addFavorite');
+
         await addFavorite(user.uid, normalizedItem);
         toastService.favoriteAdded(t);
       }

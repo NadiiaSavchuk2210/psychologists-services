@@ -9,11 +9,12 @@ interface Props {
   psychologist: PsychologistUI;
   isExpanded: boolean;
   isFavorite?: boolean;
+  priority?: boolean;
   onToggle: () => void;
 }
 
 const PsychologistCard = memo(
-  ({ psychologist, isExpanded, onToggle }: Props) => {
+  ({ psychologist, isExpanded, priority = false, onToggle }: Props) => {
     const ref = useRef<HTMLElement>(null);
     const detailsId = useId();
 
@@ -29,6 +30,7 @@ const PsychologistCard = memo(
           detailsId={detailsId}
           psychologist={psychologist}
           isExpanded={isExpanded}
+          priority={priority}
           onToggle={onToggle}
         />
       </article>
