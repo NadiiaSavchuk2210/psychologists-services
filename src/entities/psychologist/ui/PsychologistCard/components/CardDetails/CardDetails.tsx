@@ -45,6 +45,7 @@ const CardDetails = ({
       className={css.details}
       data-expanded={isExpanded}
       aria-hidden={!isExpanded}
+      inert={!isExpanded}
     >
       <div className={css.inner}>
         <section className={css.section}>
@@ -53,6 +54,7 @@ const CardDetails = ({
           <Button
             className={css.btnAppointment}
             type="button"
+            disabled={!isExpanded}
             onClick={makeAppointment}
           >
             {t('makeAppointment')}

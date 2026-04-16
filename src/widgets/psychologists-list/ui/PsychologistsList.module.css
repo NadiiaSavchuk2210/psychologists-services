@@ -6,8 +6,6 @@
 }
 
 .listItem {
-  content-visibility: auto;
-  contain-intrinsic-size: 360px;
   animation: cardEnter 0.24s ease-out both;
 }
 
@@ -32,9 +30,5 @@
 @media screen and (min-width: 768px) {
   .psychologistsList {
     margin-bottom: 64px;
-  }
-
-  .listItem {
-    contain-intrinsic-size: 280px;
   }
 }

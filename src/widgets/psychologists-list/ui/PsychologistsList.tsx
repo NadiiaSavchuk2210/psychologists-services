@@ -19,17 +19,16 @@ const PsychologistsList = forwardRef<HTMLUListElement, Props>(
     }, []);
 
     return (
-        <ul ref={ref} className={css.psychologistsList}>
-          {psychologists.map((psychologist, index) => (
-            <li key={psychologist.id} className={css.listItem}>
-              <PsychologistCard
-                psychologist={psychologist}
-                isExpanded={expandedIds.includes(psychologist.id)}
-                priority={index === 0}
-                onToggle={() => toggleCard(psychologist.id)}
-              />
-            </li>
-          ))}
+      <ul ref={ref} className={css.psychologistsList}>
+        {psychologists.map(psychologist => (
+          <li key={psychologist.id} className={css.listItem}>
+            <PsychologistCard
+              psychologist={psychologist}
+              isExpanded={expandedIds.includes(psychologist.id)}
+              onToggle={() => toggleCard(psychologist.id)}
+            />
+          </li>
+        ))}
       </ul>
     );
   }
