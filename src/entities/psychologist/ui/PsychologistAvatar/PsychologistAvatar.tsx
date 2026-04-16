@@ -8,16 +8,12 @@ import FallbackImg from '../../../../assets/images/psychologist-fallback.png';
 interface Props {
   psychologist: PsychologistUI | null;
   isAppointment?: boolean;
-  priority?: boolean;
 }
 
 const PsychologistAvatar = ({
   psychologist,
   isAppointment = false,
-  priority = false,
 }: Props) => {
-  const isEager = isAppointment || priority;
-
   return (
     <div
       className={clsx(
@@ -31,8 +27,8 @@ const PsychologistAvatar = ({
         alt={psychologist?.name}
         width={96}
         height={96}
-        loading={isEager ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
+        loading={isAppointment ? 'eager' : 'lazy'}
+        fetchPriority={isAppointment ? 'high' : 'auto'}
         decoding="async"
       />
       {!isAppointment && <span className={css.avatarOnlineIndicator}></span>}

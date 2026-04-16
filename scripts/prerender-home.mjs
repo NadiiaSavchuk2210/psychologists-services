@@ -6,6 +6,7 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const cwd = path.resolve(scriptDir, '..');
 const distDir = path.join(cwd, 'dist');
 const ssrDir = path.join(cwd, 'dist-ssr');
+const appIndexPath = path.join(distDir, 'app.html');
 const homeLocalePath = path.join(
   cwd,
   'src/shared/lib/i18n/locales/en/home.json'
@@ -101,6 +102,7 @@ const metaTags = [
 ].join('\n    ');
 
 let html = await fs.readFile(distIndexPath, 'utf8');
+await fs.writeFile(appIndexPath, html);
 
 html = html.replace(/<title>[\s\S]*?<\/title>\n?/g, '');
 

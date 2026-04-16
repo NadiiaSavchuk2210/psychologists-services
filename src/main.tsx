@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
 import App from '@app/App';
 import i18n from '@shared/lib/i18n/i18n';
@@ -24,7 +24,12 @@ const hasPrerenderedHomeMarkup =
   detectedLanguage === 'en';
 
 if (hasPrerenderedHomeMarkup || rootElement.hasChildNodes()) {
-  rootElement.innerHTML = '';
+  if (hasPrerenderedHomeMarkup) {
+    hydrateRoot(rootElement, app);
+  } else {
+    rootElement.innerHTML = '';
+    createRoot(rootElement).render(app);
+  }
+} else {
+  createRoot(rootElement).render(app);
 }
-
-createRoot(rootElement).render(app);

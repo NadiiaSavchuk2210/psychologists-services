@@ -6,13 +6,50 @@ import { defineConfig } from 'vite';
 const hasPackage = (id: string, packages: string[]) =>
   packages.some(pkg => id.includes(`/node_modules/${pkg}/`));
 
+const hasModulePath = (id: string, modules: string[]) =>
+  modules.some(modulePath => id.includes(`/node_modules/${modulePath}/`));
+
+const getFirebaseChunk = (id: string) => {
+  if (!hasPackage(id, ['firebase', '@firebase'])) {
+    return undefined;
+  }
+
+  if (
+    hasModulePath(id, [
+      'firebase/auth',
+      '@firebase/auth',
+      '@firebase/auth-interop-types',
+    ])
+  ) {
+    return 'firebase-auth';
+  }
+
+  if (
+    hasModulePath(id, [
+      'firebase/firestore',
+      '@firebase/firestore',
+      '@firebase/webchannel-wrapper',
+    ])
+  ) {
+    return 'firebase-firestore';
+  }
+
+  if (hasModulePath(id, ['firebase/database', '@firebase/database'])) {
+    return 'firebase-database';
+  }
+
+  return 'firebase-core';
+};
+
 const getManualChunk = (id: string) => {
   if (!id.includes('/node_modules/')) {
     return undefined;
   }
 
-  if (hasPackage(id, ['firebase', '@firebase'])) {
-    return 'firebase-vendor';
+  const firebaseChunk = getFirebaseChunk(id);
+
+  if (firebaseChunk) {
+    return firebaseChunk;
   }
 
   if (

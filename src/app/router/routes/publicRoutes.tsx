@@ -13,7 +13,7 @@ const PsychologistsPage = lazy(
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/NotFoundPage'));
 
 const publicRoutes: RouteObject[] = [
-  { index: true, element: SuspenseWrapper(<HomePage />) },
+  { index: true, element: <HomePage /> },
   {
     path: ROUTES.PSYCHOLOGISTS,
     children: [
